@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchCategorias, deleteCategoria, updateCategoria, createCategoria } from "../../../services/adminApi";
 import CategoriaFormModal from "./CategoriaFormModal";
+import './tables.css';
 
 const CategoriaTable = () => {
     const [categorias, setCategorias] = useState([]);
@@ -62,16 +63,16 @@ const CategoriaTable = () => {
     };
 
     return (
-        <div >
-            <div >
-                <h1 >Gestión de Categorías</h1>
-                <button  onClick={handleAdd}>
+        <div className="container">
+            <div className="header">
+                <h1 className="title">Gestión de Categorías</h1>
+                <button className="addButton" onClick={handleAdd}>
                     Nueva Categoría
                 </button>
             </div>
 
-            <div >
-                <table>
+            <div className="tableWrapper">
+                <table className="table">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -92,18 +93,21 @@ const CategoriaTable = () => {
                                         <img 
                                             src={categoria.imagenUrl} 
                                             alt={`Imagen de ${categoria.nombre}`} 
+                                            className="iconImage"
                                             onError={(e) => e.target.style.display = 'none'}
                                         />
                                     )}
                                 </td>
-                                <td data-label="Acciones">
+                                <td data-label="Acciones" className="actions">
                                     <button
+                                        className="actionButton"
                                         onClick={() => handleEditClick(categoria)}
                                         aria-label="Editar"
                                     >
                                         <i className="fa-solid fa-pen"></i>
                                     </button>
                                     <button
+                                        className={`actionButton delete`}
                                         onClick={() => handleDelete(categoria.categoriaId, categoria.nombre)}
                                         aria-label="Eliminar"
                                     >

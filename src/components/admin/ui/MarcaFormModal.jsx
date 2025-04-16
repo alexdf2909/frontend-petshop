@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { uploadImagen } from '../../../services/adminApi'; 
+import './modals.css';
 
 const MarcaFormModal = ({ initialData, onSave, onClose }) => {
     const [marca, setMarca] = useState({
@@ -59,18 +60,18 @@ const MarcaFormModal = ({ initialData, onSave, onClose }) => {
     };
 
     return (
-        <div >
-            <div >
-                <div >
+        <div className='modalOverlay'>
+            <div className='modalContent'>
+                <div className='modalHeader'>
                     <h2>{initialData ? 'Editar Marca' : 'Nueva Marca'}</h2>
-                    <button  onClick={onClose}>
+                    <button className='closeButton' onClick={onClose}>
                         <i className="fas fa-times"></i>
                     </button>
                 </div>
 
-                <div >
-                    <form onSubmit={handleSubmit} >
-                        <div >
+                <div className='scrollContainer'>
+                    <form onSubmit={handleSubmit} className='form'>
+                        <div className='formGroup'>
                             <label>
                                 <span>Nombre</span>
                                 <input
@@ -78,22 +79,24 @@ const MarcaFormModal = ({ initialData, onSave, onClose }) => {
                                     name="nombre"
                                     value={marca.nombre}
                                     onChange={handleChange}
+                                    className='input'
                                     required
                                 />
                             </label>
                         </div>
 
-                        <div >
-                            <label>
+                        <div className="formGroup">
+                            <label className="customFileLabel">
                                 <span>Imagen</span>
                                 <input
                                     type="file"
                                     accept="image/*"
                                     onChange={handleFileChange}
+                                    className="fileInput"
                                 />
                             </label>
                             {(imagenFile || marca.imagenUrl) && (
-                                <div >
+                                <div className="previewContainer">
                                     <img
                                         src={
                                             imagenFile
@@ -101,18 +104,18 @@ const MarcaFormModal = ({ initialData, onSave, onClose }) => {
                                                 : marca.imagenUrl
                                         }
                                         alt="Vista previa"
-                                       
+                                        className="previewImage"
                                         onError={(e) => e.target.style.display = 'none'}
                                     />
                                 </div>
                             )}
                         </div>
 
-                        <div>
-                            <button type="button" onClick={onClose}>
+                        <div className='formActions'>
+                            <button type="button" className='cancelButton' onClick={onClose}>
                                 Cancelar
                             </button>
-                            <button type="submit" disabled={subiendoImagen}>
+                            <button type="submit" className='submitButton' disabled={subiendoImagen}>
                                 {subiendoImagen
                                     ? 'Subiendo...'
                                     : initialData

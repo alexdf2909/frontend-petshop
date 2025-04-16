@@ -62,16 +62,16 @@ const MarcaTable = () => {
     };
 
     return (
-        <div >
-            <div >
-                <h1 >Gestión de Marcas</h1>
-                <button  onClick={handleAdd}>
+        <div className="container">
+            <div className="header">
+                <h1 className="title">Gestión de Marcas</h1>
+                <button className="addButton" onClick={handleAdd}>
                     Nueva Categoría
                 </button>
             </div>
 
-            <div >
-                <table>
+            <div className="tableWrapper">
+                <table className="table">
                     <thead>
                         <tr>
                             <th>ID</th>
@@ -92,18 +92,21 @@ const MarcaTable = () => {
                                         <img 
                                             src={marca.imagenUrl} 
                                             alt={`Imagen de ${marca.nombre}`} 
+                                            className="iconImage"
                                             onError={(e) => e.target.style.display = 'none'}
                                         />
                                     )}
                                 </td>
-                                <td data-label="Acciones">
+                                <td data-label="Acciones" className="actions">
                                     <button
+                                        className="actionButton"
                                         onClick={() => handleEditClick(marca)}
                                         aria-label="Editar"
                                     >
                                         <i className="fa-solid fa-pen"></i>
                                     </button>
                                     <button
+                                        className={`actionButton delete`}
                                         onClick={() => handleDelete(marca.marcaId, marca.nombre)}
                                         aria-label="Eliminar"
                                     >
