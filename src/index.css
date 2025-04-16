@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Akatab:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --primary-font: 'Akatab', sans-serif;
+}
+
+/* Asegura que html, body y #root ocupen el 100% de la pantalla */
+html, body, #root {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--primary-font);
+  background-color: #f7f7f7;
+}
+
+/* Asegura que los elementos ocupen todo el ancho disponible */
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Si deseas que el contenido se expanda pero el footer quede abajo */
+#root {
+  display: flex;
+  flex-direction: column;
+}

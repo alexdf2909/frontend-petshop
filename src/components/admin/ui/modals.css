@@ -1,0 +1,383 @@
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 1rem;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  .modalContent {
+    background: white;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+    flex-shrink: 0;
+  }
+  
+  .modalHeader h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #2d3436;
+  }
+  
+  .scrollContainer {
+    overflow-y: auto;
+    padding: 0 1.5rem 1.5rem;
+  }
+  
+  .closeButton {
+    background: none;
+    border: none;
+    color: #666;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.2s;
+    cursor: pointer;
+    font-size: 1.25rem;
+  }
+  
+  .closeButton:hover {
+    background: #f8f9ff;
+    color: #6c5ce7;
+  }
+  
+  .form {
+    padding: 1rem 0;
+  }
+  
+  .formGroup {
+    margin-bottom: 1.5rem;
+  }
+  
+  .formGroup span {
+    display: block;
+    font-size: 0.9rem;
+    color: #6c5ce7;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s;
+  }
+  
+  .input:focus {
+    border-color: #6c5ce7;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .colorInput {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+  
+  .colorIcon {
+    position: absolute;
+    left: 1rem;
+    color: #666;
+  }
+  
+  .colorPreview {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    margin-left: 1rem;
+    border: 2px solid #eee;
+  }
+  
+  .priceInput {
+    position: relative;
+  }
+  
+  .currency {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    font-weight: 500;
+  }
+  
+  .textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    font-size: 1rem;
+    line-height: 1.5;
+    resize: vertical;
+    min-height: 100px;
+    transition: all 0.2s;
+  }
+  
+  .textarea:focus {
+    border-color: #6c5ce7;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.1);
+  }
+  
+  .imageFields {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  
+  .imageInput {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  
+  .removeImageButton {
+    background: #ffecee;
+    border: none;
+    color: #ff4757;
+    padding: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  
+  .removeImageButton:hover {
+    background: #ff4757;
+    color: white;
+  }
+  
+  .addImageButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: 2px dashed #eee;
+    color: #6c5ce7;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+    margin-top: 0.5rem;
+  }
+  
+  .addImageButton:hover {
+    border-color: #6c5ce7;
+    background: #f8f9ff;
+  }
+  
+  .formActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+  
+  .submitButton {
+    background: black;
+    color: white;
+    border: none;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  
+  .submitButton:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+  }
+  
+  .cancelButton {
+    background: none;
+    border: 2px solid #eee;
+    color: #666;
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .cancelButton:hover {
+    border-color: #6c5ce7;
+    color: #6c5ce7;
+    background: #f8f9ff;
+  }
+  
+  .input, .textarea {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+  }
+  
+  .imageInput {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  
+  .imageInput .input {
+    flex: 1;
+    min-width: 0;
+  }
+  
+  .removeImageButton {
+    flex-shrink: 0;
+    width: 40px;
+  }
+  
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+  
+  .errorMessage {
+      color: #ff4757;
+      font-size: 0.85rem;
+      margin-top: 0.25rem;
+  }
+  
+  .checkboxLabel {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #6c5ce7;
+    font-weight: 600;
+    margin-bottom: 1.5rem; /* Para que tenga la misma separación que otros formGroups */
+  }
+  
+  .checkboxInput {
+    /* Puedes añadir estilos específicos al checkbox si lo deseas */
+    margin-right: 0.5rem; /* Separación del texto */
+  }
+
+  .customFileLabel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 600;
+  }
+  
+  .fileInput {
+    padding: 0.75rem 1rem;
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .fileInput:hover {
+    border-color: #6c5ce7;
+    background-color: #f8f9ff;
+  }
+  
+  .previewContainer {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .previewImage {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 8px;
+    border: 2px solid #eee;
+    object-fit: contain;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .fileInput::file-selector-button {
+
+
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .fileInput::file-selector-button:hover {
+    background-color: #6c5ce7;
+    color: white;
+  }
+  
+  .image-preview {
+    margin-top: 16px;
+    text-align: center;
+  }
+  
+  .image-preview img {
+    max-height: 120px;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  }
+  
+  @media (max-width: 480px) {
+    .modalContent {
+      max-height: 95vh;
+    }
+  
+    .scrollContainer {
+      padding: 0 1rem 1rem;
+    }
+  
+    .formGroup {
+      margin-bottom: 1rem;
+    }
+  
+    .formActions {
+      flex-direction: column-reverse;
+      gap: 0.75rem;
+    }
+  
+    .submitButton,
+    .cancelButton {
+      width: 100%;
+    }
+  }
