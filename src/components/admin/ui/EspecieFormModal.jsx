@@ -2,11 +2,11 @@ import { useState, useEffect } from 'react';
 import { uploadImagen } from '../../../services/adminApi'; 
 import './styles/modals.css';
 
-const MarcaFormModal = ({ initialData, onSave, onClose }) => {
-    const [marca, setMarca] = useState({
+const EspecieFormModal = ({ initialData, onSave, onClose }) => {
+    const [especie, setEspecie] = useState({
         nombre: '',
         imagenUrl: '',
-        marcaId: null
+        especieId: null
     });
 
     const [imagenFile, setImagenFile] = useState(null);
@@ -14,17 +14,17 @@ const MarcaFormModal = ({ initialData, onSave, onClose }) => {
 
     useEffect(() => {
         if (initialData) {
-            setMarca({
+            setEspecie({
                 nombre: initialData.nombre || '',
                 imagenUrl: initialData.imagenUrl || '',
-                marcaId: initialData.marcaId
+                especieId: initialData.especieId
             });
         }
     }, [initialData]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setMarca(prev => ({ ...prev, [name]: value }));
+        setEspecie(prev => ({ ...prev, [name]: value }));
     };
 
     const handleFileChange = (e) => {
@@ -35,7 +35,7 @@ const MarcaFormModal = ({ initialData, onSave, onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        let imagenUrl = marca.imagenUrl;
+        let imagenUrl = especie.imagenUrl;
 
         try {
             if (imagenFile) {
@@ -47,14 +47,14 @@ const MarcaFormModal = ({ initialData, onSave, onClose }) => {
                 setSubiendoImagen(false);
             }
 
-            const formattedMarca = {
-                nombre: marca.nombre,
+            const formattedEspecie = {
+                nombre: especie.nombre,
                 imagenUrl
             };
 
-            await onSave(formattedMarca);
+            await onSave(formattedEspecie);
         } catch (err) {
-            console.error('Error al subir imagen o guardar marca', err);
+            console.error('Error al subir imagen o guardar especie', err);
             setSubiendoImagen(false);
         }
     };
@@ -63,7 +63,7 @@ const MarcaFormModal = ({ initialData, onSave, onClose }) => {
         <div className='modalOverlay'>
             <div className='modalContent'>
                 <div className='modalHeader'>
-                    <h2>{initialData ? 'Editar Marca' : 'Nueva Marca'}</h2>
+                    <h2>{initialData ? 'Editar Especie' : 'Nueva Especie'}</h2>
                     <button className='closeButton' onClick={onClose}>
                         <i className="fas fa-times"></i>
                     </button>
@@ -77,7 +77,7 @@ const MarcaFormModal = ({ initialData, onSave, onClose }) => {
                                 <input
                                     type="text"
                                     name="nombre"
-                                    value={marca.nombre}
+                                    value={especie.nombre}
                                     onChange={handleChange}
                                     className='input'
                                     required
@@ -95,13 +95,13 @@ const MarcaFormModal = ({ initialData, onSave, onClose }) => {
                                     className="fileInput"
                                 />
                             </label>
-                            {(imagenFile || marca.imagenUrl) && (
+                            {(imagenFile || especie.imagenUrl) && (
                                 <div className="previewContainer">
                                     <img
                                         src={
                                             imagenFile
                                                 ? URL.createObjectURL(imagenFile)
-                                                : marca.imagenUrl
+                                                : especie.imagenUrl
                                         }
                                         alt="Vista previa"
                                         className="previewImage"
@@ -120,7 +120,7 @@ const MarcaFormModal = ({ initialData, onSave, onClose }) => {
                                     ? 'Subiendo...'
                                     : initialData
                                     ? 'Guardar Cambios'
-                                    : 'Crear Marca'}
+                                    : 'Crear Especie'}
                             </button>
                         </div>
                     </form>
@@ -130,4 +130,4 @@ const MarcaFormModal = ({ initialData, onSave, onClose }) => {
     );
 };
 
-export default MarcaFormModal;
+export default EspecieFormModal;

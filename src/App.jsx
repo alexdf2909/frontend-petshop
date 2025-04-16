@@ -14,6 +14,7 @@ import { AuthProvider } from './context/AuthContext'; // 👈 Importa el provide
 import ProductosPage from './pages/admin/ProductosPage';
 import CategoriasPage from './pages/admin/CategoriasPage';
 import MarcasPage from './pages/admin/MarcasPage';
+import EspeciesPage from './pages/admin/EspeciesPage';
 
 function App() {
   return (
@@ -47,6 +48,9 @@ function App() {
             </Route>
             <Route element={<AdminRoute />}>
               <Route path="/dashboard/marcas" element={<MarcasPage />} />
+            </Route>
+            <Route element={<AdminRoute />}>
+              <Route path="/dashboard/especies" element={<EspeciesPage />} />
             </Route>
           </Routes>
         </div>

@@ -44,6 +44,12 @@ const DashboardPage = () => {
           <p>Administra tu catálogo de productos</p>
           <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
         </Link>
+        <Link to="/dashboard/especies" className='card'>
+          <i className="fa-solid fa-user"></i>
+          <h3>Gestión de Especies</h3>
+          <p>Administra tu catálogo de productos</p>
+          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
+        </Link>
       </div>
 
     </div>

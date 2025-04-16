@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { uploadImagen } from '../../../services/adminApi';
-import './modals.css';
+import './styles/modals.css';
 
 const CategoriaFormModal = ({ initialData, onSave, onClose }) => {
     const [categoria, setCategoria] = useState({

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchCategorias, deleteCategoria, updateCategoria, createCategoria } from "../../../services/adminApi";
 import CategoriaFormModal from "./CategoriaFormModal";
-import './tables.css';
+import './styles/tables.css';
 
 const CategoriaTable = () => {
     const [categorias, setCategorias] = useState([]);

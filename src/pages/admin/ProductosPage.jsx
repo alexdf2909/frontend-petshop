@@ -1,7 +1,8 @@
+import './admin.css';
 
 const ProductosPage = () => {
   return (
-    <div>
+    <div className='pageContainer'>
       <ProductTable />
     </div>
   );

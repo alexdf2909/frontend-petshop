@@ -1,8 +1,9 @@
 import CategoriaTable from '../../components/admin/ui/CategoriaTable';
+import './admin.css';
 
 const CategoriasPage = () => {
     return (
-        <div className="">
+        <div className="pageContainer">
             <CategoriaTable />
         </div>
     );

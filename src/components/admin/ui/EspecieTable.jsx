@@ -1,73 +1,73 @@
 import { useState, useEffect } from "react";
-import { fetchMarcas, deleteMarca, updateMarca, createMarca } from "../../../services/adminApi";
-import MarcaFormModal from "./MarcaFormModal";
+import { fetchEspecies, deleteEspecie, updateEspecie, createEspecie } from "../../../services/adminApi";
+import EspecieFormModal from "./EspecieFormModal";
 import './styles/tables.css';
 
-const MarcaTable = () => {
-    const [marcas, setMarcas] = useState([]);
+const EspecieTable = () => {
+    const [especies, setEspecies] = useState([]);
     const [showModal, setShowModal] = useState(false);
-    const [currentMarca, setCurrentMarca] = useState(null);
+    const [currentEspecie, setCurrentEspecie] = useState(null);
 
     useEffect(() => {
-        loadMarcas();
+        loadEspecies();
     }, []);
 
-    const loadMarcas = async () => {
+    const loadEspecies = async () => {
         try {
-            const fetchedMarcas = await fetchMarcas();
-            setMarcas(fetchedMarcas);
+            const fetchedEspecies = await fetchEspecies();
+            setEspecies(fetchedEspecies);
         } catch (error) {
-            console.error("Error cargando marcas:", error);
+            console.error("Error cargando especies:", error);
         }
     };
 
     const handleAdd = () => {
-        setCurrentMarca(null);
+        setCurrentEspecie(null);
         setShowModal(true);
     };
 
-    const handleEditClick = (marca) => {
-        setCurrentMarca(marca);
+    const handleEditClick = (especie) => {
+        setCurrentEspecie(especie);
         setShowModal(true);
     };
 
-    const handleDelete = async (marcaId, marcaName) => {
-        const confirmDelete = window.confirm(`¿Estás seguro de eliminar la marca ${marcaName}? Los productos asociados a ella serán desactivados`);
+    const handleDelete = async (especieId, especieName) => {
+        const confirmDelete = window.confirm(`¿Estás seguro de eliminar la especie ${especieName}? Los productos asociados a ella serán desactivados`);
         if (!confirmDelete) return;
         try {
-            await deleteMarca(marcaId);
-            setMarcas((prev) => prev.filter((marca) => marca.marcaId !== marcaId));
-            loadMarcas();
+            await deleteEspecie(especieId);
+            setEspecies((prev) => prev.filter((especie) => especie.especieId !== especieId));
+            loadEspecies();
         } catch (error) {
-            console.error("Error eliminando marca:", error);
+            console.error("Error eliminando especie:", error);
         }
     };
 
-    const handleSave = async (marcaData) => {
+    const handleSave = async (especieData) => {
         try {
-            if (currentMarca) {
-                const updatedMarca = await updateMarca(currentMarca.marcaId, marcaData);
-                setMarcas((prev) =>
-                    prev.map((marca) => (marca.marcaId === updatedMarca.marcaId ? updatedMarca : marca))
+            if (currentEspecie) {
+                const updatedEspecie = await updateEspecie(currentEspecie.especieId, especieData);
+                setEspecies((prev) =>
+                    prev.map((especie) => (especie.especieId === updatedEspecie.especieId ? updatedEspecie : especie))
                 );
             } else {
-                const newMarca = await createMarca(marcaData);
-                setMarcas((prev) => [...prev, newMarca]);
+                const newEspecie = await createEspecie(especieData);
+                setEspecies((prev) => [...prev, newEspecie]);
             }
             setShowModal(false);
-            setCurrentMarca(null);
-            loadMarcas();
+            setCurrentEspecie(null);
+            loadEspecies();
         } catch (error) {
-            console.error("Error guardando marca:", error);
+            console.error("Error guardando especie:", error);
         }
     };
 
     return (
         <div className="container">
             <div className="header">
-                <h1 className="title">Gestión de Marcas</h1>
+                <h1 className="title">Gestión de Especies</h1>
                 <button className="addButton" onClick={handleAdd}>
-                    Nueva Marca
+                    Nueva Especie
                 </button>
             </div>
 
@@ -83,16 +83,16 @@ const MarcaTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {marcas.map((marca) => (
-                            <tr key={marca.id}>
-                                <td data-label="ID">{marca.marcaId}</td>
-                                <td data-label="Nombre">{marca.nombre}</td>
-                                <td data-label="URL">{marca.imagenUrl}</td>
+                        {especies.map((especie) => (
+                            <tr key={especie.id}>
+                                <td data-label="ID">{especie.especieId}</td>
+                                <td data-label="Nombre">{especie.nombre}</td>
+                                <td data-label="URL">{especie.imagenUrl}</td>
                                 <td data-label="Imagen">
-                                    {marca.imagenUrl && (
+                                    {especie.imagenUrl && (
                                         <img 
-                                            src={marca.imagenUrl} 
-                                            alt={`Imagen de ${marca.nombre}`} 
+                                            src={especie.imagenUrl} 
+                                            alt={`Imagen de ${especie.nombre}`} 
                                             className="iconImage"
                                             onError={(e) => e.target.style.display = 'none'}
                                         />
@@ -101,14 +101,14 @@ const MarcaTable = () => {
                                 <td data-label="Acciones" className="actions">
                                     <button
                                         className="actionButton"
-                                        onClick={() => handleEditClick(marca)}
+                                        onClick={() => handleEditClick(especie)}
                                         aria-label="Editar"
                                     >
                                         <i className="fa-solid fa-pen"></i>
                                     </button>
                                     <button
                                         className={`actionButton delete`}
-                                        onClick={() => handleDelete(marca.marcaId, marca.nombre)}
+                                        onClick={() => handleDelete(especie.especieId, especie.nombre)}
                                         aria-label="Eliminar"
                                     >
                                         <i className="fas fa-trash-alt"></i>
@@ -121,12 +121,12 @@ const MarcaTable = () => {
             </div>
 
             {showModal && (
-                <MarcaFormModal
-                    initialData={currentMarca}
+                <EspecieFormModal
+                    initialData={currentEspecie}
                     onSave={handleSave}
                     onClose={() => {
                         setShowModal(false);
-                        setCurrentMarca(null);
+                        setCurrentEspecie(null);
                     }}
                 />
             )}
@@ -134,4 +134,4 @@ const MarcaTable = () => {
     );
 };
 
-export default MarcaTable;
+export default EspecieTable;

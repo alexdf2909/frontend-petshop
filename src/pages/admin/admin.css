@@ -129,6 +129,15 @@
   .fab:hover {
     transform: scale(1.1);
   }
+
+  .pageContainer {
+    padding: 40px;
+  }
+  
+  .title {
+    font-size: 30px;
+    margin-bottom: 20px;
+  }
   
   @media (max-width: 768px) {
     .container {

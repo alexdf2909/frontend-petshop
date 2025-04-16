@@ -131,3 +131,63 @@ export const createMarca = async (marcaData) => {
       throw new Error('Error eliminando marca');
     }
   };
+
+  // ==================== ESPECIES ====================
+export const createEspecie = async (especieData) => {
+    try {
+      const response = await axios.post(`${API_URL}/especie`, especieData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error('Error al crear la especie');
+    }
+  };
+  
+  export const updateEspecie = async (especieId, especieData) => {
+    try {
+      const response = await axios.put(`${API_URL}/especie/${especieId}`, especieData, {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      throw new Error('Error actualizando especie');
+    }
+  };
+  
+  export const fetchEspecies = async () => {
+    try {
+      const response = await axios.get(`${API_URL}/especie`);
+      return response.data;
+    } catch (error) {
+      throw new Error('Error obteniendo especies');
+    }
+  };
+  
+  export const fetchEspecieById = async (especieId) => {
+    try {
+      const response = await axios.get(`${API_URL}/especie/${especieId}`);
+      return response.data;
+    } catch (error) {
+      throw new Error('Error obteniendo especie');
+    }
+  };
+  
+  export const deleteEspecie = async (especieId) => {
+    try {
+      await axios.delete(`${API_URL}/especie/${especieId}`, {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`,
+        },
+      });
+      return true;
+    } catch (error) {
+      throw new Error('Error eliminando especie');
+    }
+  };
