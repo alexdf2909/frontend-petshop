@@ -35,19 +35,28 @@ const DashboardPage = () => {
         <Link to="/dashboard/categorias" className='card'>
           <i className="fa-solid fa-user"></i>
           <h3>Gestión de Categorias</h3>
-          <p>Administra tu catálogo de productos</p>
           <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
         </Link>
         <Link to="/dashboard/marcas" className='card'>
           <i className="fa-solid fa-user"></i>
           <h3>Gestión de Marcas</h3>
-          <p>Administra tu catálogo de productos</p>
           <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
         </Link>
         <Link to="/dashboard/especies" className='card'>
           <i className="fa-solid fa-user"></i>
           <h3>Gestión de Especies</h3>
-          <p>Administra tu catálogo de productos</p>
+          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
+        </Link>
+
+        <Link to="/dashboard/etiquetas" className='card'>
+          <i className="fa-solid fa-user"></i>
+          <h3>Gestión de Etiquetas</h3>
+          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
+        </Link>
+
+        <Link to="/dashboard/tallas" className='card'>
+          <i className="fa-solid fa-user"></i>
+          <h3>Gestión de Tallas</h3>
           <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
         </Link>
       </div>

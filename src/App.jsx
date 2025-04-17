@@ -15,6 +15,8 @@ import ProductosPage from './pages/admin/ProductosPage';
 import CategoriasPage from './pages/admin/CategoriasPage';
 import MarcasPage from './pages/admin/MarcasPage';
 import EspeciesPage from './pages/admin/EspeciesPage';
+import EtiquetasPage from './pages/admin/EtiquetasPage';
+import TallasPage from './pages/admin/TallasPage';
 
 function App() {
   return (
@@ -51,6 +53,12 @@ function App() {
             </Route>
             <Route element={<AdminRoute />}>
               <Route path="/dashboard/especies" element={<EspeciesPage />} />
+            </Route>
+            <Route element={<AdminRoute />}>
+              <Route path="/dashboard/etiquetas" element={<EtiquetasPage />} />
+            </Route>
+            <Route element={<AdminRoute />}>
+              <Route path="/dashboard/tallas" element={<TallasPage/>} />
             </Route>
           </Routes>
         </div>

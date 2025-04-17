@@ -191,3 +191,123 @@ export const createEspecie = async (especieData) => {
       throw new Error('Error eliminando especie');
     }
   };
+
+    // ==================== ETIQUETAS ====================
+export const createEtiqueta = async (etiquetaData) => {
+  try {
+    const response = await axios.post(`${API_URL}/etiqueta`, etiquetaData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error al crear la etiqueta');
+  }
+};
+
+export const updateEtiqueta = async (etiquetaId, etiquetaData) => {
+  try {
+    const response = await axios.put(`${API_URL}/etiqueta/${etiquetaId}`, etiquetaData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error actualizando etiqueta');
+  }
+};
+
+export const fetchEtiquetas = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/etiqueta`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo etiquetas');
+  }
+};
+
+export const fetchEtiquetaById = async (etiquetaId) => {
+  try {
+    const response = await axios.get(`${API_URL}/etiqueta/${etiquetaId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo etiqueta');
+  }
+};
+
+export const deleteEtiqueta = async (etiquetaId) => {
+  try {
+    await axios.delete(`${API_URL}/etiqueta/${etiquetaId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return true;
+  } catch (error) {
+    throw new Error('Error eliminando etiqueta');
+  }
+};
+
+    // ==================== TALLAS ====================
+    export const createTalla = async (tallaData) => {
+      try {
+        const response = await axios.post(`${API_URL}/talla`, tallaData, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        return response.data;
+      } catch (error) {
+        throw new Error('Error al crear la talla');
+      }
+    };
+    
+    export const updateTalla = async (tallaId, tallaData) => {
+      try {
+        const response = await axios.put(`${API_URL}/talla/${tallaId}`, tallaData, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        return response.data;
+      } catch (error) {
+        throw new Error('Error actualizando talla');
+      }
+    };
+    
+    export const fetchTallas = async () => {
+      try {
+        const response = await axios.get(`${API_URL}/talla`);
+        return response.data;
+      } catch (error) {
+        throw new Error('Error obteniendo tallas');
+      }
+    };
+    
+    export const fetchTallaById = async (tallaId) => {
+      try {
+        const response = await axios.get(`${API_URL}/talla/${tallaId}`);
+        return response.data;
+      } catch (error) {
+        throw new Error('Error obteniendo talla');
+      }
+    };
+    
+    export const deleteTalla = async (tallaId) => {
+      try {
+        await axios.delete(`${API_URL}/talla/${tallaId}`, {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+          },
+        });
+        return true;
+      } catch (error) {
+        throw new Error('Error eliminando talla');
+      }
+    };
