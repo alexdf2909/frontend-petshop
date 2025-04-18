@@ -658,6 +658,15 @@ export const fetchVarianteById = async (varianteId) => {
     throw new Error('Error obteniendo variante');
   }
 };
+
+export const fetchVariantesByProducto = async (productoId) => {
+  try {
+    const response = await axios.get(`${API_URL}/variante/producto/${productoId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo variantes');
+  }
+};
         
 export const deleteVariante = async (varianteId) => {
   try {
@@ -776,6 +785,24 @@ export const fetchLoteById = async (loteId) => {
     return response.data;
   } catch (error) {
     throw new Error('Error obteniendo lote');
+  }
+};
+
+export const fetchLotesByVariante = async (varianteId) => {
+  try {
+    const response = await axios.get(`${API_URL}/lote/variante/${varianteId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo lotes');
+  }
+};
+
+export const fetchLotesByCompra = async (compraId) => {
+  try {
+    const response = await axios.get(`${API_URL}/lote/compra/${compraId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo lotes');
   }
 };
         
