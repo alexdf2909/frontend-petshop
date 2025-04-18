@@ -252,62 +252,422 @@ export const deleteEtiqueta = async (etiquetaId) => {
   }
 };
 
-    // ==================== TALLAS ====================
-    export const createTalla = async (tallaData) => {
-      try {
-        const response = await axios.post(`${API_URL}/talla`, tallaData, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
-        return response.data;
-      } catch (error) {
-        throw new Error('Error al crear la talla');
-      }
-    };
+// ==================== TALLAS ====================
+export const createTalla = async (tallaData) => {
+  try {
+    const response = await axios.post(`${API_URL}/talla`, tallaData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error al crear la talla');
+  }
+};
     
-    export const updateTalla = async (tallaId, tallaData) => {
-      try {
-        const response = await axios.put(`${API_URL}/talla/${tallaId}`, tallaData, {
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
-        return response.data;
-      } catch (error) {
-        throw new Error('Error actualizando talla');
-      }
-    };
+export const updateTalla = async (tallaId, tallaData) => {
+  try {
+    const response = await axios.put(`${API_URL}/talla/${tallaId}`, tallaData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error actualizando talla');
+  }
+};
     
-    export const fetchTallas = async () => {
-      try {
-        const response = await axios.get(`${API_URL}/talla`);
-        return response.data;
-      } catch (error) {
-        throw new Error('Error obteniendo tallas');
-      }
-    };
-    
-    export const fetchTallaById = async (tallaId) => {
-      try {
-        const response = await axios.get(`${API_URL}/talla/${tallaId}`);
-        return response.data;
-      } catch (error) {
-        throw new Error('Error obteniendo talla');
-      }
-    };
-    
-    export const deleteTalla = async (tallaId) => {
-      try {
-        await axios.delete(`${API_URL}/talla/${tallaId}`, {
-          headers: {
-            'Authorization': `Bearer ${localStorage.getItem('token')}`,
-          },
-        });
-        return true;
-      } catch (error) {
-        throw new Error('Error eliminando talla');
-      }
-    };
+export const fetchTallas = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/talla`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo tallas');
+  }
+};
+
+export const fetchTallaById = async (tallaId) => {
+  try {
+    const response = await axios.get(`${API_URL}/talla/${tallaId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo talla');
+  }
+};
+
+export const deleteTalla = async (tallaId) => {
+  try {
+    await axios.delete(`${API_URL}/talla/${tallaId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return true;
+  } catch (error) {
+    throw new Error('Error eliminando talla');
+  }
+};
+
+// ==================== PESOS ====================
+export const createPeso = async (pesoData) => {
+  try {
+    const response = await axios.post(`${API_URL}/peso`, pesoData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+ } catch (error) {
+    throw new Error('Error al crear la peso');
+  }
+};
+
+export const updatePeso = async (pesoId, pesoData) => {
+  try {
+    const response = await axios.put(`${API_URL}/peso/${pesoId}`, pesoData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error actualizando peso');
+  }
+};
+        
+export const fetchPesos = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/peso`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo pesos');
+  }
+};
+
+export const fetchPesoById = async (pesoId) => {
+  try {
+    const response = await axios.get(`${API_URL}/peso/${pesoId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo peso');
+  }
+};
+        
+export const deletePeso = async (pesoId) => {
+  try {
+    await axios.delete(`${API_URL}/peso/${pesoId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return true;
+  } catch (error) {
+    throw new Error('Error eliminando peso');
+  }
+};
+
+// ==================== COLORES ====================
+export const createColor = async (colorData) => {
+  try {
+    const response = await axios.post(`${API_URL}/color`, colorData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+ } catch (error) {
+    throw new Error('Error al crear la color');
+  }
+};
+
+export const updateColor = async (colorId, colorData) => {
+  try {
+    const response = await axios.put(`${API_URL}/color/${colorId}`, colorData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error actualizando color');
+  }
+};
+        
+export const fetchColors = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/color`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo colors');
+  }
+};
+
+export const fetchColorById = async (colorId) => {
+  try {
+    const response = await axios.get(`${API_URL}/color/${colorId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo color');
+  }
+};
+        
+export const deleteColor = async (colorId) => {
+  try {
+    await axios.delete(`${API_URL}/color/${colorId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return true;
+  } catch (error) {
+    throw new Error('Error eliminando color');
+  }
+};
+
+// ==================== SERVICIOS ====================
+export const createServicio = async (servicioData) => {
+  try {
+    const response = await axios.post(`${API_URL}/servicio`, servicioData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+ } catch (error) {
+    throw new Error('Error al crear la servicio');
+  }
+};
+
+export const updateServicio = async (servicioId, servicioData) => {
+  try {
+    const response = await axios.put(`${API_URL}/servicio/${servicioId}`, servicioData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error actualizando servicio');
+  }
+};
+        
+export const fetchServicios = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/servicio`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo servicios');
+  }
+};
+
+export const fetchServicioById = async (servicioId) => {
+  try {
+    const response = await axios.get(`${API_URL}/servicio/${servicioId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo servicio');
+  }
+};
+        
+export const deleteServicio = async (servicioId) => {
+  try {
+    await axios.delete(`${API_URL}/servicio/${servicioId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return true;
+  } catch (error) {
+    throw new Error('Error eliminando servicio');
+  }
+};
+
+// ==================== USUARIOS ====================
+export const createUsuario = async (usuarioData) => {
+  try {
+    const response = await axios.post(`${API_URL}/usuario`, usuarioData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+ } catch (error) {
+    throw new Error('Error al crear la usuario');
+  }
+};
+
+export const updateUsuario = async (usuarioId, usuarioData) => {
+  try {
+    const response = await axios.put(`${API_URL}/usuario/${usuarioId}`, usuarioData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error actualizando usuario');
+  }
+};
+        
+export const fetchUsuarios = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/usuario`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo usuarios');
+  }
+};
+
+export const fetchUsuarioById = async (usuarioId) => {
+  try {
+    const response = await axios.get(`${API_URL}/usuario/${usuarioId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo usuario');
+  }
+};
+        
+export const deleteUsuario = async (usuarioId) => {
+  try {
+    await axios.delete(`${API_URL}/usuario/${usuarioId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return true;
+  } catch (error) {
+    throw new Error('Error eliminando usuario');
+  }
+};
+
+// ==================== PRODUCTOS ====================
+export const createProducto = async (productoData) => {
+  try {
+    const response = await axios.post(`${API_URL}/producto`, productoData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+ } catch (error) {
+    throw new Error('Error al crear la producto');
+  }
+};
+
+export const updateProducto = async (productoId, productoData) => {
+  try {
+    const response = await axios.put(`${API_URL}/producto/${productoId}`, productoData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error actualizando producto');
+  }
+};
+        
+export const fetchProductos = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/producto`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo productos');
+  }
+};
+
+export const fetchProductoById = async (productoId) => {
+  try {
+    const response = await axios.get(`${API_URL}/producto/${productoId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo producto');
+  }
+};
+        
+export const deleteProducto = async (productoId) => {
+  try {
+    await axios.delete(`${API_URL}/producto/${productoId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return true;
+  } catch (error) {
+    throw new Error('Error eliminando producto');
+  }
+};
+
+// ==================== VARIANTES ====================
+export const createVariante = async (varianteData) => {
+  try {
+    const response = await axios.post(`${API_URL}/variante`, varianteData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+ } catch (error) {
+    throw new Error('Error al crear la variante');
+  }
+};
+
+export const updateVariante = async (varianteId, varianteData) => {
+  try {
+    const response = await axios.put(`${API_URL}/variante/${varianteId}`, varianteData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error actualizando variante');
+  }
+};
+        
+export const fetchVariantes = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/variante`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo variantes');
+  }
+};
+
+export const fetchVarianteById = async (varianteId) => {
+  try {
+    const response = await axios.get(`${API_URL}/variante/${varianteId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo variante');
+  }
+};
+        
+export const deleteVariante = async (varianteId) => {
+  try {
+    await axios.delete(`${API_URL}/variante/${varianteId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return true;
+  } catch (error) {
+    throw new Error('Error eliminando variante');
+  }
+};

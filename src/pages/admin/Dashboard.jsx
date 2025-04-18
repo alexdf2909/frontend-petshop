@@ -59,6 +59,42 @@ const DashboardPage = () => {
           <h3>Gestión de Tallas</h3>
           <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
         </Link>
+
+        <Link to="/dashboard/pesos" className='card'>
+          <i className="fa-solid fa-user"></i>
+          <h3>Gestión de Pesos</h3>
+          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
+        </Link>
+
+        <Link to="/dashboard/colores" className='card'>
+          <i className="fa-solid fa-user"></i>
+          <h3>Gestión de Colores</h3>
+          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
+        </Link>
+
+        <Link to="/dashboard/servicios" className='card'>
+          <i className="fa-solid fa-user"></i>
+          <h3>Gestión de Servicios</h3>
+          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
+        </Link>
+
+        <Link to="/dashboard/usuarios" className='card'>
+          <i className="fa-solid fa-user"></i>
+          <h3>Gestión de Usuarios</h3>
+          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
+        </Link>
+
+        <Link to="/dashboard/productos" className='card'>
+          <i className="fa-solid fa-user"></i>
+          <h3>Gestión de Productos</h3>
+          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
+        </Link>
+
+        <Link to="/dashboard/variantes" className='card'>
+          <i className="fa-solid fa-user"></i>
+          <h3>Gestión de Variantes</h3>
+          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
+        </Link>
       </div>
 
     </div>

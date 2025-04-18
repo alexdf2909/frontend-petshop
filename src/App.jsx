@@ -17,6 +17,11 @@ import MarcasPage from './pages/admin/MarcasPage';
 import EspeciesPage from './pages/admin/EspeciesPage';
 import EtiquetasPage from './pages/admin/EtiquetasPage';
 import TallasPage from './pages/admin/TallasPage';
+import PesosPage from './pages/admin/PesosPage';
+import ColoresPage from './pages/admin/ColoresPage';
+import ServiciosPage from './pages/admin/ServiciosPage';
+import UsuariosPage from './pages/admin/UsuariosPage';
+import VariantesPage from './pages/admin/VariantesPage';
 
 function App() {
   return (
@@ -35,7 +40,6 @@ function App() {
             {/* Protegidas solo para usuarios autenticados */}
             <Route element={<ProtectedRoute />}>
               <Route path="/favoritos" element={<FavoritoList />} />
-
             </Route>
 
             {/* Protegidas solo para admin */}
@@ -59,6 +63,21 @@ function App() {
             </Route>
             <Route element={<AdminRoute />}>
               <Route path="/dashboard/tallas" element={<TallasPage/>} />
+            </Route>
+            <Route element={<AdminRoute />}>
+              <Route path="/dashboard/pesos" element={<PesosPage/>} />
+            </Route>
+            <Route element={<AdminRoute />}>
+              <Route path="/dashboard/colores" element={<ColoresPage/>} />
+            </Route>
+            <Route element={<AdminRoute />}>
+              <Route path="/dashboard/servicios" element={<ServiciosPage/>} />
+            </Route>
+            <Route element={<AdminRoute />}>
+              <Route path="/dashboard/usuarios" element={<UsuariosPage/>} />
+            </Route>
+            <Route element={<AdminRoute />}>
+              <Route path="/dashboard/variantes" element={<VariantesPage/>} />
             </Route>
           </Routes>
         </div>

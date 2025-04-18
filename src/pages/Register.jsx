@@ -24,7 +24,7 @@ export default function Register() {
       toast.success('Registro exitoso. ¡Bienvenido!');
 
       // Redirigir a la página de login o home después del registro exitoso
-      navigate('/verificacion', { state: { correo: data.correo } });
+      navigate('/verificar', { state: { correo: data.correo } });
     } catch (err) {
         toast.error('Error al registrar el usuario: ' + (err.response?.data?.message || err.message));
     }

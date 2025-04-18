@@ -38,12 +38,15 @@ export default function Login() {
       }
 
     } catch (err) {
-      if (err.response?.data?.message === 'Cuenta no verificada') {
+      const errorMsg = err.response?.data?.message || err.message;
+
+      if (errorMsg === 'Cuenta no verificada') {
         toast.error('Por favor, verifica tu cuenta.');
         navigate('/verificar', { state: { correo: data.correo } });
       } else {
-        toast.error('Error al iniciar sesión: ' + (err.response?.data?.message || err.message));
+        toast.error('Error al iniciar sesión: ' + errorMsg);
       }
+
     }
   };
 
