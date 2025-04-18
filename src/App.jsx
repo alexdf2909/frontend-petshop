@@ -22,6 +22,8 @@ import ColoresPage from './pages/admin/ColoresPage';
 import ServiciosPage from './pages/admin/ServiciosPage';
 import UsuariosPage from './pages/admin/UsuariosPage';
 import VariantesPage from './pages/admin/VariantesPage';
+import ComprasPage from './pages/admin/ComprasPage';
+import LotesPage from './pages/admin/LotesPage';
 
 function App() {
   return (
@@ -78,6 +80,12 @@ function App() {
             </Route>
             <Route element={<AdminRoute />}>
               <Route path="/dashboard/variantes" element={<VariantesPage/>} />
+            </Route>
+            <Route element={<AdminRoute />}>
+              <Route path="/dashboard/compras" element={<ComprasPage/>} />
+            </Route>
+            <Route element={<AdminRoute />}>
+              <Route path="/dashboard/lotes" element={<LotesPage/>} />
             </Route>
           </Routes>
         </div>

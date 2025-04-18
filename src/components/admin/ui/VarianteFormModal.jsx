@@ -139,6 +139,7 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
                                     onChange={handleChange}
                                     className='input'
                                     required
+                                    disabled={!!initialData}
                                 >
                                     <option value="">Selecciona un Producto</option>
                                     {productos.map(c => (
@@ -284,6 +285,20 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
                                 ))}
                             </div>
                         </div>
+
+                        <div className='formGroup'>
+                            <label className='checkboxLabel'>
+                                <input
+                                    type="checkbox"
+                                    name="deleted"
+                                    checked={variante.deleted}
+                                    onChange={handleChange}
+                                    className='checkboxInput'
+                                />
+                                <span>Desactivar</span>
+                            </label>
+                        </div>
+
 
                         <div className='formActions'>
                             <button type="button" className='cancelButton' onClick={onClose}>

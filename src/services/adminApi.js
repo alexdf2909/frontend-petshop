@@ -671,3 +671,123 @@ export const deleteVariante = async (varianteId) => {
     throw new Error('Error eliminando variante');
   }
 };
+
+// ==================== COMPRAS ====================
+export const createCompra = async (compraData) => {
+  try {
+    const response = await axios.post(`${API_URL}/compra`, compraData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+ } catch (error) {
+    throw new Error('Error al crear la compra');
+  }
+};
+
+export const updateCompra = async (compraId, compraData) => {
+  try {
+    const response = await axios.put(`${API_URL}/compra/${compraId}`, compraData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error actualizando compra');
+  }
+};
+        
+export const fetchCompras = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/compra`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo compras');
+  }
+};
+
+export const fetchCompraById = async (compraId) => {
+  try {
+    const response = await axios.get(`${API_URL}/compra/${compraId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo compra');
+  }
+};
+        
+export const deleteCompra = async (compraId) => {
+  try {
+    await axios.delete(`${API_URL}/compra/${compraId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return true;
+  } catch (error) {
+    throw new Error('Error eliminando compra');
+  }
+};
+
+// ==================== LOTES ====================
+export const createLote = async (loteData) => {
+  try {
+    const response = await axios.post(`${API_URL}/lote`, loteData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+ } catch (error) {
+    throw new Error('Error al crear la lote');
+  }
+};
+
+export const updateLote = async (loteId, loteData) => {
+  try {
+    const response = await axios.put(`${API_URL}/lote/${loteId}`, loteData, {
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error actualizando lote');
+  }
+};
+        
+export const fetchLotes = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/lote`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo lotes');
+  }
+};
+
+export const fetchLoteById = async (loteId) => {
+  try {
+    const response = await axios.get(`${API_URL}/lote/${loteId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo lote');
+  }
+};
+        
+export const deleteLote = async (loteId) => {
+  try {
+    await axios.delete(`${API_URL}/lote/${loteId}`, {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
+    return true;
+  } catch (error) {
+    throw new Error('Error eliminando lote');
+  }
+};

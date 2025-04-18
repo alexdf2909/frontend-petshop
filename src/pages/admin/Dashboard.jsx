@@ -95,6 +95,16 @@ const DashboardPage = () => {
           <h3>Gestión de Variantes</h3>
           <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
         </Link>
+        <Link to="/dashboard/compras" className='card'>
+          <i className="fa-solid fa-user"></i>
+          <h3>Gestión de Compras</h3>
+          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
+        </Link>
+        <Link to="/dashboard/lotes" className='card'>
+          <i className="fa-solid fa-user"></i>
+          <h3>Gestión de Lotes</h3>
+          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
+        </Link>
       </div>
 
     </div>

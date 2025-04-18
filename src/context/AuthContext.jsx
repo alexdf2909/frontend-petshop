@@ -1,14 +1,15 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { jwtDecode } from 'jwt-decode';
 
-const AuthContext = createContext(); // 👈 ESTE es el contexto
+const AuthContext = createContext();
 
-// 👇 Este hook debe exportarse, es el que usas con `useAuth()`
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [role, setRole] = useState(null);
+  const [userId, setUserId] = useState(null);
+  const [nombre, setNombre] = useState('');
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -18,10 +19,14 @@ export const AuthProvider = ({ children }) => {
         const decoded = jwtDecode(token);
         setIsLoggedIn(true);
         setRole(decoded.rol || null);
+        setUserId(decoded.id || null);         // 👈 asegúrate que exista
+        setNombre(decoded.nombre || '');       // 👈 asegúrate que exista
       } catch (err) {
         console.error("Token inválido");
         setIsLoggedIn(false);
         setRole(null);
+        setUserId(null);
+        setNombre('');
       }
     }
     setLoading(false);
@@ -33,9 +38,13 @@ export const AuthProvider = ({ children }) => {
       const decoded = jwtDecode(token);
       setIsLoggedIn(true);
       setRole(decoded.rol || null);
+      setUserId(decoded.id || null);
+      setNombre(decoded.nombre || '');
     } catch {
       setIsLoggedIn(false);
       setRole(null);
+      setUserId(null);
+      setNombre('');
     }
   };
 
@@ -43,10 +52,12 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem('token');
     setIsLoggedIn(false);
     setRole(null);
+    setUserId(null);
+    setNombre('');
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, role, login, logout, loading }}>
+    <AuthContext.Provider value={{ isLoggedIn, role, login, logout, loading, userId, nombre }}>
       {children}
     </AuthContext.Provider>
   );
