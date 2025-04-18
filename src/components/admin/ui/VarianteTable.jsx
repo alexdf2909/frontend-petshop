@@ -1,20 +1,23 @@
+// VarianteTable.jsx
 import { useState, useEffect } from "react";
-import { fetchVariantes, deleteVariante, updateVariante, createVariante } from "../../../services/adminApi";
+import { fetchVariantesByProducto, deleteVariante, updateVariante, createVariante } from "../../../services/adminApi";
 import VarianteFormModal from "./VarianteFormModal";
 import './styles/tables.css';
 
-const VarianteTable = () => {
+const VarianteTable = ({ productoId }) => {
     const [variantes, setVariantes] = useState([]);
-    const [showModal, setShowModal] = useState(false);
+    const [showModalvariante, setShowModalvariante] = useState(false);
     const [currentVariante, setCurrentVariante] = useState(null);
 
     useEffect(() => {
-        loadVariantes();
-    }, []);
+        if (productoId) {
+            loadVariantes();
+        }
+    }, [productoId]);
 
     const loadVariantes = async () => {
         try {
-            const fetchedVariantes = await fetchVariantes();
+            const fetchedVariantes = await fetchVariantesByProducto(productoId);
             setVariantes(fetchedVariantes);
         } catch (error) {
             console.error("Error cargando variantes:", error);
@@ -22,21 +25,34 @@ const VarianteTable = () => {
     };
 
     const handleAdd = () => {
+        console.log("Abriendo el modal para crear");
+        console.log(showModalvariante);
         setCurrentVariante(null);
-        setShowModal(true);
+        setShowModalvariante(true);
+        console.log(showModalvariante);
     };
 
     const handleEditClick = (variante) => {
+        console.log("Abriendo el modal para crear");
+        console.log(showModalvariante);
         setCurrentVariante(variante);
-        setShowModal(true);
+        setShowModalvariante(true);
+        console.log(showModalvariante);
     };
 
-    const handleDelete = async (varianteId, varianteName) => {
-        const confirmDelete = window.confirm(`¿Estás seguro de eliminar el variante ${varianteName}? Los variantes asociados a ella serán desactivados`);
+    const handleClose = () => {
+        console.log("Cerrando el modal");
+        console.log(showModalvariante);
+        setShowModalvariante(false);
+        setCurrentVariante(null); // limpia también los datos previos
+        console.log(showModalvariante);
+    };
+
+    const handleDelete = async (varianteId) => {
+        const confirmDelete = window.confirm(`¿Estás seguro de eliminar esta variante?`);
         if (!confirmDelete) return;
         try {
             await deleteVariante(varianteId);
-            setVariantes((prev) => prev.filter((variante) => variante.varianteId !== varianteId));
             loadVariantes();
         } catch (error) {
             console.error("Error eliminando variante:", error);
@@ -46,15 +62,11 @@ const VarianteTable = () => {
     const handleSave = async (varianteData) => {
         try {
             if (currentVariante) {
-                const updatedVariante = await updateVariante(currentVariante.varianteId, varianteData);
-                setVariantes((prev) =>
-                    prev.map((variante) => (variante.varianteId === updatedVariante.varianteId ? updatedVariante : variante))
-                );
+                await updateVariante(currentVariante.varianteId, varianteData);
             } else {
-                const newVariante = await createVariante(varianteData);
-                setVariantes((prev) => [...prev, newVariante]);
+                await createVariante({ ...varianteData, productoId });
             }
-            setShowModal(false);
+            setShowModalvariante(false);
             setCurrentVariante(null);
             loadVariantes();
         } catch (error) {
@@ -63,38 +75,32 @@ const VarianteTable = () => {
     };
 
     return (
-        <div className="container">
+        <div className="">
             <div className="header">
-                <h1 className="title">Gestión de Variantes</h1>
+                <h3 className="">Variantes del producto</h3>
                 <button className="addButton" onClick={handleAdd}>
-                    Nuevo Variante
+                    Nueva Variante
                 </button>
             </div>
 
             <div className="tableWrapper">
-                <table className="table">
+                <table className="table minTable">
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Producto</th>
                             <th>Peso</th>
                             <th>Color</th>
                             <th>Talla</th>
-                            <th>Precio</th>
-                            <th>Desactivado</th>
                             <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
                         {variantes.map((variante) => (
-                            <tr key={variante.id}>
-                                <td data-label="ID">{variante.varianteId}</td>
-                                <td data-label="Producto">{variante.producto.nombre}</td>
-                                <td data-label="Peso">{variante.peso?.valor ?? '-'}</td>
-                                <td data-label="Color">{variante.color?.valor ?? '-'}</td>
-                                <td data-label="Talla">{variante.talla?.valor ?? '-'}</td>
-                                <td data-label="Precio">{variante.precioOferta}</td>
-                                <td data-label="Desactivado">{variante.deleted ? 'Sí' : 'No'}</td>
+                            <tr key={variante.varianteId}>
+                                <td data-label="Id">{variante.varianteId}</td>
+                                <td data-label="Peso">{variante.peso?.valor || '-'}</td>
+                                <td  data-label="Color">{variante.color?.valor || '-'}</td>
+                                <td  data-label="Talla">{variante.talla?.valor || '-'}</td>
                                 <td data-label="Acciones" className="actions">
                                     <button
                                         className="actionButton"
@@ -117,14 +123,13 @@ const VarianteTable = () => {
                 </table>
             </div>
 
-            {showModal && (
+            {showModalvariante && (
                 <VarianteFormModal
+                    showModalvariante={showModalvariante}
                     initialData={currentVariante}
+                    productoId={productoId}
                     onSave={handleSave}
-                    onClose={() => {
-                        setShowModal(false);
-                        setCurrentVariante(null);
-                    }}
+                    onClose={handleClose}
                 />
             )}
         </div>

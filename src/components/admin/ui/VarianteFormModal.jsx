@@ -8,7 +8,7 @@ import {
 } from '../../../services/adminApi';
 import './styles/modals.css';
 
-const VarianteFormModal = ({ initialData, onSave, onClose }) => {
+const VarianteFormModal = ({ showModalvariante, initialData, productoId, onSave, onClose }) => {
     const [variante, setVariante] = useState({
         productoId: '',
         colorId: '',
@@ -30,6 +30,7 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
     const [productos, setProductos] = useState([]);
 
     useEffect(() => {
+    
         if (initialData) {
             setVariante({
                 productoId: initialData.producto.productoId || '',
@@ -42,8 +43,20 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
                 deleted: !!initialData.deleted,
                 varianteId: initialData.varianteId
             });
+        } else {
+            setVariante({
+                productoId: productoId || '',
+                colorId: '',
+                tallaId: '',
+                pesoId: '',
+                precioOriginal: '',
+                precioOferta: '',
+                imagenes: [],
+                deleted: false,
+                varianteId: null
+            });
         }
-    }, [initialData]);
+    }, [initialData, productoId]);
 
     useEffect(() => {
         const loadData = async () => {
@@ -86,7 +99,9 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            let imagenesUrl = [...variante.imagenes]; // Si ya hay imágenes previas
+            let imagenesUrl = variante.imagenes.map(img =>
+                typeof img === 'string' ? img : img.imagenUrl
+            );
 
             if (imagenFiles.length > 0) {
                 setSubiendoImagen(true);
@@ -116,9 +131,12 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
             console.error('Error al subir imagen o guardar variante', err);
             setSubiendoImagen(false);
         }
-    };
+    }; 
+
+    if (!showModalvariante) return false;
 
     return (
+        
         <div className='modalOverlay'>
             <div className='modalContent'>
                 <div className='modalHeader'>
@@ -129,7 +147,7 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
                 </div>
 
                 <div className='scrollContainer'>
-                    <form onSubmit={handleSubmit} className='form'>
+                    <div className='form'>
                         <div className='formGroup'>
                             <label>
                                 <span>Producto</span>
@@ -139,7 +157,7 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
                                     onChange={handleChange}
                                     className='input'
                                     required
-                                    disabled={!!initialData}
+                                    disabled
                                 >
                                     <option value="">Selecciona un Producto</option>
                                     {productos.map(c => (
@@ -304,11 +322,11 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
                             <button type="button" className='cancelButton' onClick={onClose}>
                                 Cancelar
                             </button>
-                            <button type="submit" className='submitButton' disabled={subiendoImagen}>
+                            <button type="button" className='submitButton' onClick={handleSubmit} disabled={subiendoImagen}>
                                 {subiendoImagen ? 'Subiendo...' : initialData ? 'Guardar Cambios' : 'Crear Variante'}
                             </button>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

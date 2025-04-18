@@ -86,7 +86,7 @@ const ProductoTable = () => {
                     </thead>
                     <tbody>
                         {productos.map((producto) => (
-                            <tr key={producto.id}>
+                            <tr key={producto.productoId}>
                                 <td data-label="ID">{producto.productoId}</td>
                                 <td data-label="Nombre">{producto.nombre}</td>
                                 <td data-label="Especie">{producto.especie.nombre}</td>
@@ -120,11 +120,11 @@ const ProductoTable = () => {
                     initialData={currentProducto}
                     onSave={handleSave}
                     onClose={() => {
-                        setShowModal(false);
-                        setCurrentProducto(null);
+                    setShowModal(false);
+                    setCurrentProducto(null);
                     }}
                 />
-            )}
+                )}
         </div>
     );
 };

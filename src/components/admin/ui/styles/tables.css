@@ -59,6 +59,13 @@
     background: white;
     min-width: 800px;
   }
+
+  .minTable {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    min-width: 530px;
+  }
   
   .table th {
     background-color: #f8f9ff;

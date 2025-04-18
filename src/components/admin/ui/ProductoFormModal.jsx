@@ -5,6 +5,7 @@ import {
     fetchMarcas,
     fetchEtiquetas,
 } from '../../../services/adminApi';
+import VarianteTable from './VarianteTable';
 import './styles/modals.css';
 
 const ProductoFormModal = ({ initialData, onSave, onClose }) => {
@@ -109,7 +110,7 @@ const ProductoFormModal = ({ initialData, onSave, onClose }) => {
                 </div>
 
                 <div className='scrollContainer'>
-                    <form onSubmit={handleSubmit} className='form'>
+                <form onSubmit={(e) => e.preventDefault()} className='form'>
                         <div className='formGroup'>
                             <label>
                                 <span>Nombre</span>
@@ -215,6 +216,14 @@ const ProductoFormModal = ({ initialData, onSave, onClose }) => {
                                 )}
                             </label>
                         </div>
+
+                        {producto.productoId && (
+                            <div className='formGroup'>
+                                <label>
+                                    <VarianteTable productoId={producto.productoId} />
+                                </label>
+                            </div>
+                        )}
 
                         <div className='formGroup'>
                             <label className='checkboxLabel'>

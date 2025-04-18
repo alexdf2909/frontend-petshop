@@ -86,7 +86,7 @@ const UsuarioTable = () => {
                     </thead>
                     <tbody>
                         {usuarios.map((usuario) => (
-                            <tr key={usuario.id}>
+                            <tr key={usuario.usuarioId}>
                                 <td data-label="ID">{usuario.usuarioId}</td>
                                 <td data-label="Nombre">{usuario.nombre}</td>
                                 <td data-label="Correo">{usuario.correo}</td>
