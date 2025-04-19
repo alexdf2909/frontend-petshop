@@ -1,0 +1,61 @@
+.sidebar-filtros {
+    width: 130px;
+    padding: 16px;
+  }
+  
+  .filtro-seccion {
+    margin-bottom: 24px;
+  }
+  
+  .filtro-seccion h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  input{
+    accent-color: #ff7b23;
+  }
+
+  .opciones{
+    display: flex;
+    align-items: center;
+  }
+  
+  .checkbox-label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .cantidad {
+    color: rgb(255, 145, 2);
+    font-size: 13px;
+    background-color: #f3f3f3;
+    padding: 1px 8px;
+    border-radius: 12px;
+  }
+  
+  .tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .tag {
+    padding: 6px 12px;
+    background-color: #e0e0e0;
+    border-radius: 16px;
+    font-size: 13px;
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s;
+  }
+  
+  .tag.activa {
+    background-color: #ff9100;
+    color: white;
+  }
+  

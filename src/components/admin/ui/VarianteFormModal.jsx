@@ -86,7 +86,9 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            let imagenesUrl = [...variante.imagenes]; // Si ya hay imágenes previas
+            let imagenesUrl = variante.imagenes.map(img =>
+                typeof img === 'string' ? img : img.imagenUrl
+            );
 
             if (imagenFiles.length > 0) {
                 setSubiendoImagen(true);

@@ -1,114 +1,18 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import './admin.css';
+// DashboardPage.js
+import NavbarAdmin from '../../components/admin/ui/NavbarAdmin';
+import { Outlet } from 'react-router-dom'; // Outlet es donde se cargará el contenido de las rutas secundarias
 
-const DashboardPage = () => {
-
+const Dashboard = () => {
   return (
-    <div className='container'>
-      <div className="header">
-        <div className="statsCard">
-          <div className="statItem">
-            <i className="fas fa-box"></i>
-            <div>
-              <span className="statNumber">152</span>
-              <span className="statLabel">Productos</span>
-            </div>
-          </div>
-          <div className="statItem">
-            <i className="fas fa-shopping-bag"></i>
-            <div>
-              <span className="statNumber">89</span>
-              <span className="statLabel">Pedidos Activos</span>
-            </div>
-          </div>
-          <div className="statItem">
-            <i className="fa-solid fa-user"></i>
-            <div>
-              <span className="statNumber">89</span>
-              <span className="statLabel">Usuarios</span>
-            </div>
-          </div>
-        </div>
+    <div className="dashboard-container">
+      <NavbarAdmin /> {/* Aquí se muestra el NavbarAdmin */}
+
+      <div className="main-content">
+        {/* Outlet es el espacio donde se cargará el contenido de las rutas definidas en App.jsx */}
+        <Outlet />
       </div>
-      <div className='grid'>
-        <Link to="/dashboard/categorias" className='card'>
-          <i className="fa-solid fa-user"></i>
-          <h3>Gestión de Categorias</h3>
-          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
-        </Link>
-        <Link to="/dashboard/marcas" className='card'>
-          <i className="fa-solid fa-user"></i>
-          <h3>Gestión de Marcas</h3>
-          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
-        </Link>
-        <Link to="/dashboard/especies" className='card'>
-          <i className="fa-solid fa-user"></i>
-          <h3>Gestión de Especies</h3>
-          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
-        </Link>
-
-        <Link to="/dashboard/etiquetas" className='card'>
-          <i className="fa-solid fa-user"></i>
-          <h3>Gestión de Etiquetas</h3>
-          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
-        </Link>
-
-        <Link to="/dashboard/tallas" className='card'>
-          <i className="fa-solid fa-user"></i>
-          <h3>Gestión de Tallas</h3>
-          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
-        </Link>
-
-        <Link to="/dashboard/pesos" className='card'>
-          <i className="fa-solid fa-user"></i>
-          <h3>Gestión de Pesos</h3>
-          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
-        </Link>
-
-        <Link to="/dashboard/colores" className='card'>
-          <i className="fa-solid fa-user"></i>
-          <h3>Gestión de Colores</h3>
-          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
-        </Link>
-
-        <Link to="/dashboard/servicios" className='card'>
-          <i className="fa-solid fa-user"></i>
-          <h3>Gestión de Servicios</h3>
-          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
-        </Link>
-
-        <Link to="/dashboard/usuarios" className='card'>
-          <i className="fa-solid fa-user"></i>
-          <h3>Gestión de Usuarios</h3>
-          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
-        </Link>
-
-        <Link to="/dashboard/productos" className='card'>
-          <i className="fa-solid fa-user"></i>
-          <h3>Gestión de Productos</h3>
-          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
-        </Link>
-
-        <Link to="/dashboard/variantes" className='card'>
-          <i className="fa-solid fa-user"></i>
-          <h3>Gestión de Variantes</h3>
-          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
-        </Link>
-        <Link to="/dashboard/compras" className='card'>
-          <i className="fa-solid fa-user"></i>
-          <h3>Gestión de Compras</h3>
-          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
-        </Link>
-        <Link to="/dashboard/lotes" className='card'>
-          <i className="fa-solid fa-user"></i>
-          <h3>Gestión de Lotes</h3>
-          <span className="cardLink">Ver detalles <i className="fas fa-arrow-right"></i></span>
-        </Link>
-      </div>
-
     </div>
   );
 };
 
-export default DashboardPage;
+export default Dashboard;

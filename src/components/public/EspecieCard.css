@@ -1,0 +1,39 @@
+.especie-card {
+    width: 120px;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+  }
+
+  .especie-card .image-background{
+    transition: all 0.2s ease-in-out;
+    background-image: url('../../assets/fondo-card-default.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .especie-card:hover .image-background{
+    background-image: url('../../assets/fondo-card-activo.png');
+  }
+  
+  .especie-card.activa .image-background{
+    background-image: url('../../assets/fondo-card-activo.png');
+  }
+  
+  .especie-imagen {
+    width: 100%;
+    height: 100px;
+    object-fit: contain;
+  }
+  
+  .especie-nombre {
+    margin-top: 4px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  

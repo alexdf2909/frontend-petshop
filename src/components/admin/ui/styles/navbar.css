@@ -1,0 +1,89 @@
+/* NavbarAdmin.css */
+
+/* Contenedor principal de la barra lateral */
+.sidebar {
+    width: 200px;
+    height: 100vh;
+    background-color: #2c3e50;
+    color: white;
+    padding-top: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+  
+  /* Estilo para cada item en la barra lateral */
+  .sidebar-item {
+    padding: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  /* Cambio de color cuando el usuario pasa el mouse por encima */
+  .sidebar-item:hover {
+    background-color: #34495e;
+  }
+  
+  /* Título de las secciones (Usuarios, Compras, Productos, etc.) */
+  .sidebar-item h3 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .sidebar-item .soloPage {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  /* Submenú oculto por defecto */
+  .sub-menu {
+    padding-left: 20px;
+    display: none;
+    margin-top: 10px;
+  }
+  
+  /* Estilo para los enlaces dentro de la barra lateral */
+  .sidebar-item a {
+    display: block;
+    padding: 5px 0;
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+  }
+  
+  /* Cambio de color al pasar el mouse sobre los enlaces */
+  .sidebar-item a:hover {
+    color: #ecf0f1;
+  }
+  
+  /* Estilo para las secciones expandibles (Compras, Productos, Variantes) */
+  .sidebar-item > .sub-menu {
+    display: block;
+  }
+  
+  /* Submenú cuando está expandido */
+  .sidebar-item.open > .sub-menu {
+    display: block;
+  }
+  
+  
+  /* Diseño responsive: cuando la pantalla es pequeña, la barra lateral se oculta */
+  @media (max-width: 768px) {
+    .sidebar {
+      width: 200px;
+      padding-top: 10px;
+    }
+  
+    .sidebar-item h3 {
+      font-size: 16px;
+    }
+  
+    .sidebar-item a {
+      font-size: 14px;
+    }
+  }
+  

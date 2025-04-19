@@ -1,8 +1,9 @@
+// App.jsx
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
-import Dashboard from './pages/admin/Dashboard';
+import Dashboard from './pages/admin/Dashboard'; // Aquí está el Dashboard
 import FavoritoList from './pages/client/FavoritoList';
 import ProductList from './pages/ProductList';
 import ProductDetail from './pages/ProductDetail';
@@ -10,7 +11,7 @@ import Header from './components/Header';
 import Verify from './pages/Verify';
 import ProtectedRoute from './routes/ProtectedRoute';
 import AdminRoute from './routes/AdminRoute';
-import { AuthProvider } from './context/AuthContext'; // 👈 Importa el provider
+import { AuthProvider } from './context/AuthContext';
 import ProductosPage from './pages/admin/ProductosPage';
 import CategoriasPage from './pages/admin/CategoriasPage';
 import MarcasPage from './pages/admin/MarcasPage';
@@ -27,7 +28,7 @@ import LotesPage from './pages/admin/LotesPage';
 
 function App() {
   return (
-    <AuthProvider> {/* 👈 Envuelve todo en el AuthProvider */}
+    <AuthProvider>
       <Router>
         <div>
           <Header />
@@ -39,53 +40,29 @@ function App() {
             <Route path="/productos" element={<ProductList />} />
             <Route path="/producto/:productId" element={<ProductDetail />} />
 
-            {/* Protegidas solo para usuarios autenticados */}
+            {/* Rutas protegidas solo para usuarios autenticados */}
             <Route element={<ProtectedRoute />}>
               <Route path="/favoritos" element={<FavoritoList />} />
             </Route>
 
-            {/* Protegidas solo para admin */}
+            {/* Rutas para el admin */}
             <Route element={<AdminRoute />}>
-              <Route path="/dashboard" element={<Dashboard />} />
-            </Route>
-            <Route element={<AdminRoute />}>
-              <Route path="/dashboard/productos" element={<ProductosPage />} />
-            </Route>
-            <Route element={<AdminRoute />}>
-              <Route path="/dashboard/categorias" element={<CategoriasPage />} />
-            </Route>
-            <Route element={<AdminRoute />}>
-              <Route path="/dashboard/marcas" element={<MarcasPage />} />
-            </Route>
-            <Route element={<AdminRoute />}>
-              <Route path="/dashboard/especies" element={<EspeciesPage />} />
-            </Route>
-            <Route element={<AdminRoute />}>
-              <Route path="/dashboard/etiquetas" element={<EtiquetasPage />} />
-            </Route>
-            <Route element={<AdminRoute />}>
-              <Route path="/dashboard/tallas" element={<TallasPage/>} />
-            </Route>
-            <Route element={<AdminRoute />}>
-              <Route path="/dashboard/pesos" element={<PesosPage/>} />
-            </Route>
-            <Route element={<AdminRoute />}>
-              <Route path="/dashboard/colores" element={<ColoresPage/>} />
-            </Route>
-            <Route element={<AdminRoute />}>
-              <Route path="/dashboard/servicios" element={<ServiciosPage/>} />
-            </Route>
-            <Route element={<AdminRoute />}>
-              <Route path="/dashboard/usuarios" element={<UsuariosPage/>} />
-            </Route>
-            <Route element={<AdminRoute />}>
-              <Route path="/dashboard/variantes" element={<VariantesPage/>} />
-            </Route>
-            <Route element={<AdminRoute />}>
-              <Route path="/dashboard/compras" element={<ComprasPage/>} />
-            </Route>
-            <Route element={<AdminRoute />}>
-              <Route path="/dashboard/lotes" element={<LotesPage/>} />
+              <Route path="/dashboard" element={<Dashboard />}>
+                {/* Aquí las rutas secundarias del admin */}
+                <Route path="productos" element={<ProductosPage />} />
+                <Route path="categorias" element={<CategoriasPage />} />
+                <Route path="marcas" element={<MarcasPage />} />
+                <Route path="especies" element={<EspeciesPage />} />
+                <Route path="etiquetas" element={<EtiquetasPage />} />
+                <Route path="tallas" element={<TallasPage />} />
+                <Route path="pesos" element={<PesosPage />} />
+                <Route path="colores" element={<ColoresPage />} />
+                <Route path="servicios" element={<ServiciosPage />} />
+                <Route path="usuarios" element={<UsuariosPage />} />
+                <Route path="variantes" element={<VariantesPage />} />
+                <Route path="compras" element={<ComprasPage />} />
+                <Route path="lotes" element={<LotesPage />} />
+              </Route>
             </Route>
           </Routes>
         </div>
@@ -95,4 +72,3 @@ function App() {
 }
 
 export default App;
-

@@ -12,7 +12,7 @@ html, body, #root {
   padding: 0;
   box-sizing: border-box;
   font-family: var(--primary-font);
-  background-color: #f7f7f7;
+  background-color: white;
 }
 
 /* Asegura que los elementos ocupen todo el ancho disponible */
