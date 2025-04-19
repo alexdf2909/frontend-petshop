@@ -1,5 +1,5 @@
 import UsuarioTable from '../../components/admin/ui/UsuarioTable';
-import './admin.css';
+import './styles/admin.css';
 
 const UsuariosPage = () => {
   return (

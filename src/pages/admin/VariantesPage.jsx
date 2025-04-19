@@ -1,5 +1,5 @@
 import VarianteTable from '../../components/admin/ui/VarianteTable';
-import './admin.css';
+import './styles/admin.css';
 
 const VariantesPage = () => {
   return (

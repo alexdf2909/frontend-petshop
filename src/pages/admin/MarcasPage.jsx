@@ -1,5 +1,5 @@
 import MarcaTable from '../../components/admin/ui/MarcaTable';
-import './admin.css';
+import './styles/admin.css';
 
 const MarcasPage = () => {
     return (

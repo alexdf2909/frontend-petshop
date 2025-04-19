@@ -1,5 +1,5 @@
 import ProductoTable from '../../components/admin/ui/ProductoTable';
-import './admin.css';
+import './styles/admin.css';
 
 const ProductosPage = () => {
   return (

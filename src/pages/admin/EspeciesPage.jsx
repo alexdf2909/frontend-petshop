@@ -1,5 +1,5 @@
 import EspecieTable from '../../components/admin/ui/EspecieTable';
-import './admin.css';
+import './styles/admin.css';
 
 const EspeciesPage = () => {
     return (

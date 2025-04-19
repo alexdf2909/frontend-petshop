@@ -63,8 +63,8 @@ const CompraTable = () => {
     };
 
     return (
-        <div className="container">
-            <div className="header">
+        <div className="">
+            <div className="headerTable">
                 <h1 className="title">Gestión de Compras</h1>
                 <button className="addButton" onClick={handleAdd}>
                     Nuevo Compra
@@ -86,7 +86,7 @@ const CompraTable = () => {
                     </thead>
                     <tbody>
                         {compras.map((compra) => (
-                            <tr key={compra.id}>
+                            <tr key={compra.compraId}>
                                 <td data-label="ID">{compra.compraId}</td>
                                 <td data-label="Codigo">{compra.codigoComprobante}</td>
                                 <td data-label="FechaCompra">{compra.fechaCompra}</td>

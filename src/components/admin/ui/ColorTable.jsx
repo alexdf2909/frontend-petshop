@@ -63,8 +63,8 @@ const ColorTable = () => {
     };
 
     return (
-        <div className="container">
-            <div className="header">
+        <div className="">
+            <div className="headerTable">
                 <h1 className="title">Gestión de Colores</h1>
                 <button className="addButton" onClick={handleAdd}>
                     Nuevo Color
@@ -82,7 +82,7 @@ const ColorTable = () => {
                     </thead>
                     <tbody>
                         {colors.map((color) => (
-                            <tr key={color.id}>
+                            <tr key={color.colorId}>
                                 <td data-label="ID">{color.colorId}</td>
                                 <td data-label="Valor">{color.valor}</td>
                                 <td data-label="Acciones" className="actions">

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { fetchUsuarios, deleteUsuario, updateUsuario, createUsuario } from "../../../services/adminApi";
 import UsuarioFormModal from "./UsuarioFormModal";
-import './styles/tables.css';
+
 
 const UsuarioTable = () => {
     const [usuarios, setUsuarios] = useState([]);
@@ -63,8 +63,8 @@ const UsuarioTable = () => {
     };
 
     return (
-        <div className="container">
-            <div className="header">
+        <div className="">
+            <div className="headerTable">
                 <h1 className="title">Gestión de Usuarios</h1>
                 <button className="addButton" onClick={handleAdd}>
                     Nuevo Usuario
@@ -86,7 +86,7 @@ const UsuarioTable = () => {
                     </thead>
                     <tbody>
                         {usuarios.map((usuario) => (
-                            <tr key={usuario.id}>
+                            <tr key={usuario.usuarioId}>
                                 <td data-label="ID">{usuario.usuarioId}</td>
                                 <td data-label="Nombre">{usuario.nombre}</td>
                                 <td data-label="Correo">{usuario.correo}</td>

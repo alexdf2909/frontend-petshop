@@ -63,8 +63,8 @@ const TallaTable = () => {
     };
 
     return (
-        <div className="container">
-            <div className="header">
+        <div className="">
+            <div className="headerTable">
                 <h1 className="title">Gestión de Tallas</h1>
                 <button className="addButton" onClick={handleAdd}>
                     Nueva Talla
@@ -82,7 +82,7 @@ const TallaTable = () => {
                     </thead>
                     <tbody>
                         {tallas.map((talla) => (
-                            <tr key={talla.id}>
+                            <tr key={talla.tallaId}>
                                 <td data-label="ID">{talla.tallaId}</td>
                                 <td data-label="Valor">{talla.valor}</td>
                                 <td data-label="Acciones" className="actions">

@@ -64,3 +64,12 @@ export const fetchVariantesByProducto = async (productoId) => {
     throw new Error('Error obteniendo variantes');
   }
 };
+
+export const fetchLotesByVariante = async (varianteId) => {
+  try {
+    const response = await axios.get(`${API_URL}/lote/variante/${varianteId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo lotes');
+  }
+};

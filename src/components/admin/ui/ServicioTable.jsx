@@ -63,8 +63,8 @@ const ServicioTable = () => {
     };
 
     return (
-        <div className="container">
-            <div className="header">
+        <div className="">
+            <div className="headerTable">
                 <h1 className="title">Gestión de Servicios</h1>
                 <button className="addButton" onClick={handleAdd}>
                     Nuevo Servicio
@@ -86,7 +86,7 @@ const ServicioTable = () => {
                     </thead>
                     <tbody>
                         {servicios.map((servicio) => (
-                            <tr key={servicio.id}>
+                            <tr key={servicio.servicioId}>
                                 <td data-label="ID">{servicio.servicioId}</td>
                                 <td data-label="Nombre">{servicio.nombre}</td>
                                 <td data-label="Descripcion">{servicio.descripcion}</td>

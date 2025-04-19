@@ -1,5 +1,5 @@
 import CompraTable from '../../components/admin/ui/CompraTable';
-import './admin.css';
+import './styles/admin.css';
 
 const ComprasPage = () => {
   return (

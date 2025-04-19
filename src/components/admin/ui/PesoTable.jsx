@@ -63,8 +63,8 @@ const PesoTable = () => {
     };
 
     return (
-        <div className="container">
-            <div className="header">
+        <div className="">
+            <div className="headerTable">
                 <h1 className="title">Gestión de Pesos</h1>
                 <button className="addButton" onClick={handleAdd}>
                     Nueva Peso
@@ -82,7 +82,7 @@ const PesoTable = () => {
                     </thead>
                     <tbody>
                         {pesos.map((peso) => (
-                            <tr key={peso.id}>
+                            <tr key={peso.pesoId}>
                                 <td data-label="ID">{peso.pesoId}</td>
                                 <td data-label="Valor">{peso.valor}</td>
                                 <td data-label="Acciones" className="actions">

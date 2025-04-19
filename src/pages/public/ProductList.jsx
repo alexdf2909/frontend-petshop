@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchProductos, fetchCategorias, fetchEspecies, fetchMarcas, fetchEtiquetas } from '../services/api';
+import { fetchProductos, fetchCategorias, fetchEspecies, fetchMarcas, fetchEtiquetas } from '../../services/api';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { useState } from 'react';
-import './ProductList.css';
-import ProductoCard from '../components/public/ProductoCard';
-import EspecieCard from '../components/public/EspecieCard';
-import FiltrosSidebar from '../components/public/FiltrosSidebar';
+import './styles/ProductList.css';
+import ProductoCard from '../../components/public/ProductoCard';
+import EspecieCard from '../../components/public/EspecieCard';
+import FiltrosSidebar from '../../components/public/FiltrosSidebar';
 
 export default function ProductList() {
   const [especieSeleccionada, setEspecieSeleccionada] = useState('todas');
@@ -41,6 +41,14 @@ export default function ProductList() {
     queryFn: fetchEtiquetas,
   });
 
+  const [paginaActual, setPaginaActual] = useState(1);
+  const productosPorPagina = 12;
+
+  const irPrimeraPagina = () => setPaginaActual(1);
+  const irPaginaAnterior = () => setPaginaActual(prev => Math.max(prev - 1, 1));
+  const irPaginaSiguiente = () => setPaginaActual(prev => Math.min(prev + 1, totalPaginas));
+  const irUltimaPagina = () => setPaginaActual(totalPaginas);
+
   if (loadingProductos || loadingCategorias || loadingEspecies || loadingEtiquetas || loadingMarcas) return <div>Cargando productos...</div>;
   if (errorProductos) {
     toast.error('Error al cargar los productos: ' + error.message);
@@ -63,6 +71,29 @@ export default function ProductList() {
     return <div>Hubo un problema al cargar los etiquetas.</div>;
   }
 
+// Primero filtramos los productos
+const productosFiltrados = productos.filter((producto) => {
+  const coincideEspecie = especieSeleccionada === 'todas' || producto.especie?.especieId === especieSeleccionada;
+  const coincideCategoria = filtrosSeleccionados.categorias.length === 0 || filtrosSeleccionados.categorias.includes(producto.categoria?.categoriaId);
+  const coincideMarca = filtrosSeleccionados.marcas.length === 0 || filtrosSeleccionados.marcas.includes(producto.marca?.marcaId);
+  const coincideEtiqueta = filtrosSeleccionados.etiquetas.length === 0 || (
+    producto.etiquetas && producto.etiquetas.some(e => filtrosSeleccionados.etiquetas.includes(e.etiquetaId))
+  );
+  return coincideEspecie && coincideCategoria && coincideMarca && coincideEtiqueta;
+});
+
+// Luego todo lo relacionado con la paginación
+
+const totalPaginas = Math.ceil(productosFiltrados.length / productosPorPagina);
+
+const productosPaginados = productosFiltrados.slice(
+  (paginaActual - 1) * productosPorPagina,
+  paginaActual * productosPorPagina
+);
+
+
+
+
   // Contamos cuántos productos pertenecen a cada categoría y marca
   const categoriasConCantidad = categorias.map((categoria) => {
     const cantidadProductos = productos.filter(producto => producto.categoria?.categoriaId === categoria.categoriaId).length;
@@ -84,19 +115,12 @@ export default function ProductList() {
     });
   };
 
-  // Filtrar productos según categoría seleccionada
-  const productosFiltrados = productos.filter((producto) => {
-    const coincideEspecie = especieSeleccionada === 'todas' || producto.especie?.especieId === especieSeleccionada;
-    const coincideCategoria = filtrosSeleccionados.categorias.length === 0 || filtrosSeleccionados.categorias.includes(producto.categoria?.categoriaId);
-    const coincideMarca = filtrosSeleccionados.marcas.length === 0 || filtrosSeleccionados.marcas.includes(producto.marca?.marcaId);
-    const coincideEtiqueta = filtrosSeleccionados.etiquetas.length === 0 || (
-      producto.etiquetas && producto.etiquetas.some(e => filtrosSeleccionados.etiquetas.includes(e.etiquetaId))
-    );
-    return coincideEspecie && coincideCategoria && coincideMarca && coincideEtiqueta;
-  });
+  
+
+
 
   return (
-    <div className="product-list-container">
+    <div className="product-list-container containerPage">
       {/* Sidebar lateral */}
       <FiltrosSidebar
         categorias={categoriasConCantidad}  
@@ -125,17 +149,13 @@ export default function ProductList() {
           <p className="no-productos">No hay productos que coincidan con los filtros.</p>
         ) : (
           
-          productosFiltrados.map((producto) => (
+          productosPaginados.map((producto) => (
             <Link
               key={producto.productoId}
               to={`/producto/${producto.productoId}`}
               className="product-link"
             >
-              <ProductoCard
-              key={producto.productoId}
-              producto={producto}
-            />
-              
+              <ProductoCard producto={producto} />
             </Link>
           ))
           
@@ -143,6 +163,14 @@ export default function ProductList() {
         
         }
         </div>
+        <div className="paginacion">
+          <button onClick={irPrimeraPagina} disabled={paginaActual === 1}>« Primero</button>
+          <button onClick={irPaginaAnterior} disabled={paginaActual === 1}>‹ Anterior</button>
+          <span>Página {paginaActual} de {totalPaginas}</span>
+          <button onClick={irPaginaSiguiente} disabled={paginaActual === totalPaginas}>Siguiente ›</button>
+          <button onClick={irUltimaPagina} disabled={paginaActual === totalPaginas}>Última »</button>
+        </div>
+
       </div>
     </div>
   );

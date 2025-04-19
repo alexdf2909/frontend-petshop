@@ -1,5 +1,5 @@
 import ServicioTable from '../../components/admin/ui/ServicioTable';
-import './admin.css';
+import './styles/admin.css';
 
 const ServiciosPage = () => {
     return (

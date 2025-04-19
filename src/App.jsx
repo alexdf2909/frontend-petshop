@@ -1,14 +1,14 @@
 // App.jsx
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Home from './pages/Home';
+import Login from './pages/public/Login';
+import Register from './pages/public/Register';
+import Home from './pages//public/Home';
 import Dashboard from './pages/admin/Dashboard'; // Aquí está el Dashboard
 import FavoritoList from './pages/client/FavoritoList';
-import ProductList from './pages/ProductList';
-import ProductDetail from './pages/ProductDetail';
-import Header from './components/Header';
-import Verify from './pages/Verify';
+import ProductList from './pages//public/ProductList';
+import ProductDetail from './pages//public/ProductDetail';
+import Header from './components/shared/Header';
+import Verify from './pages//public/Verify';
 import ProtectedRoute from './routes/ProtectedRoute';
 import AdminRoute from './routes/AdminRoute';
 import { AuthProvider } from './context/AuthContext';

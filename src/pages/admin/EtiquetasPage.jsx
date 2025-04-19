@@ -1,5 +1,5 @@
 import EtiquetaTable from '../../components/admin/ui/EtiquetaTable';
-import './admin.css';
+import './styles/admin.css';
 
 const EtiquetasPage = () => {
     return (

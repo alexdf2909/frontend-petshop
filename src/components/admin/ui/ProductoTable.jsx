@@ -63,8 +63,8 @@ const ProductoTable = () => {
     };
 
     return (
-        <div className="container">
-            <div className="header">
+        <div className="">
+            <div className="headerTable">
                 <h1 className="title">Gestión de Productos</h1>
                 <button className="addButton" onClick={handleAdd}>
                     Nuevo Producto
@@ -86,7 +86,7 @@ const ProductoTable = () => {
                     </thead>
                     <tbody>
                         {productos.map((producto) => (
-                            <tr key={producto.id}>
+                            <tr key={producto.productoId}>
                                 <td data-label="ID">{producto.productoId}</td>
                                 <td data-label="Nombre">{producto.nombre}</td>
                                 <td data-label="Especie">{producto.especie.nombre}</td>

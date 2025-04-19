@@ -1,5 +1,5 @@
 import LoteTable from '../../components/admin/ui/LoteTable';
-import './admin.css';
+import './styles/admin.css';
 
 const LotesPage = () => {
   return (

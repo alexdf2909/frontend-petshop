@@ -63,8 +63,8 @@ const MarcaTable = () => {
     };
 
     return (
-        <div className="container">
-            <div className="header">
+        <div className="">
+            <div className="headerTable">
                 <h1 className="title">Gestión de Marcas</h1>
                 <button className="addButton" onClick={handleAdd}>
                     Nueva Marca
@@ -84,7 +84,7 @@ const MarcaTable = () => {
                     </thead>
                     <tbody>
                         {marcas.map((marca) => (
-                            <tr key={marca.id}>
+                            <tr key={marca.marcaId}>
                                 <td data-label="ID">{marca.marcaId}</td>
                                 <td data-label="Nombre">{marca.nombre}</td>
                                 <td data-label="URL">{marca.imagenUrl}</td>

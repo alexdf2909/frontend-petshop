@@ -1,5 +1,5 @@
 import TallaTable from '../../components/admin/ui/TallaTable';
-import './admin.css';
+import './styles/admin.css';
 
 const TallasPage = () => {
     return (

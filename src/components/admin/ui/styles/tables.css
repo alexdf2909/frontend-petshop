@@ -8,7 +8,7 @@
     margin: 2rem auto;
   }
   
-  .header {
+  .headerTable {
     display: flex;
     justify-content: space-between;
     align-items: center;

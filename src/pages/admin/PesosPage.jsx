@@ -1,5 +1,5 @@
 import PesoTable from '../../components/admin/ui/PesoTable';
-import './admin.css';
+import './styles/admin.css';
 
 const PesosPage = () => {
     return (

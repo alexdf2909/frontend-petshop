@@ -63,8 +63,8 @@ const CategoriaTable = () => {
     };
 
     return (
-        <div className="container">
-            <div className="header">
+        <div className="">
+            <div className="headerTable">
                 <h1 className="title">Gestión de Categorías</h1>
                 <button className="addButton" onClick={handleAdd}>
                     Nueva Categoría
@@ -84,7 +84,7 @@ const CategoriaTable = () => {
                     </thead>
                     <tbody>
                         {categorias.map((categoria) => (
-                            <tr key={categoria.id}>
+                            <tr key={categoria.categoriaId}>
                                 <td data-label="ID">{categoria.categoriaId}</td>
                                 <td data-label="Nombre">{categoria.nombre}</td>
                                 <td data-label="URL">{categoria.imagenUrl}</td>

@@ -63,8 +63,8 @@ const EspecieTable = () => {
     };
 
     return (
-        <div className="container">
-            <div className="header">
+        <div className="">
+            <div className="headerTable">
                 <h1 className="title">Gestión de Especies</h1>
                 <button className="addButton" onClick={handleAdd}>
                     Nueva Especie
@@ -84,7 +84,7 @@ const EspecieTable = () => {
                     </thead>
                     <tbody>
                         {especies.map((especie) => (
-                            <tr key={especie.id}>
+                            <tr key={especie.especieId}>
                                 <td data-label="ID">{especie.especieId}</td>
                                 <td data-label="Nombre">{especie.nombre}</td>
                                 <td data-label="URL">{especie.imagenUrl}</td>

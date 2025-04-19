@@ -1,5 +1,5 @@
 import ColorTable from '../../components/admin/ui/ColorTable';
-import './admin.css';
+import './styles/admin.css';
 
 const ColoresPage = () => {
     return (

@@ -63,8 +63,8 @@ const LoteTable = () => {
     };
 
     return (
-        <div className="container">
-            <div className="header">
+        <div className="">
+            <div className="headerTable">
                 <h1 className="title">Gestión de Lotes</h1>
                 <button className="addButton" onClick={handleAdd}>
                     Nuevo Lote

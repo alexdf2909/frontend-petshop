@@ -63,8 +63,8 @@ const EtiquetaTable = () => {
     };
 
     return (
-        <div className="container">
-            <div className="header">
+        <div className="">
+            <div className="headerTable">
                 <h1 className="title">Gestión de Etiquetas</h1>
                 <button className="addButton" onClick={handleAdd}>
                     Nueva Etiqueta
@@ -82,7 +82,7 @@ const EtiquetaTable = () => {
                     </thead>
                     <tbody>
                         {etiquetas.map((etiqueta) => (
-                            <tr key={etiqueta.id}>
+                            <tr key={etiqueta.etiquetaId}>
                                 <td data-label="ID">{etiqueta.etiquetaId}</td>
                                 <td data-label="Nombre">{etiqueta.nombre}</td>
                                 <td data-label="Acciones" className="actions">

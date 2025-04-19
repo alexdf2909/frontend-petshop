@@ -1,5 +1,6 @@
-/* ProductList.css */
-
+.containerPage{
+  margin-top: 100px;
+}
 /* Contenedor principal */
 .product-list-container {
     display: flex;
@@ -47,4 +48,38 @@
   
   .product-link:hover{
 text-decoration: none;
+  }
+
+  .grilla-productos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
+    gap: 16px;
+    padding: 16px;
+  }
+  
+  /* Paginación */
+  .paginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .paginacion button {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .paginacion button:disabled {
+    background-color: #a5b4fc;
+    cursor: not-allowed;
+  }
+  
+  .paginacion span {
+    font-weight: bold;
   }

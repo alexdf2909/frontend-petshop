@@ -63,8 +63,8 @@ const VarianteTable = () => {
     };
 
     return (
-        <div className="container">
-            <div className="header">
+        <div className="">
+            <div className="headerTable">
                 <h1 className="title">Gestión de Variantes</h1>
                 <button className="addButton" onClick={handleAdd}>
                     Nuevo Variante
@@ -87,7 +87,7 @@ const VarianteTable = () => {
                     </thead>
                     <tbody>
                         {variantes.map((variante) => (
-                            <tr key={variante.id}>
+                            <tr key={variante.varianteId}>
                                 <td data-label="ID">{variante.varianteId}</td>
                                 <td data-label="Producto">{variante.producto.nombre}</td>
                                 <td data-label="Peso">{variante.peso?.valor ?? '-'}</td>
