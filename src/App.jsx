@@ -38,7 +38,7 @@ function App() {
             <Route path="/registro" element={<Register />} />
             <Route path="/verificar" element={<Verify />} />
             <Route path="/productos" element={<ProductList />} />
-            <Route path="/producto/:productId" element={<ProductDetail />} />
+            <Route path="/producto/:productoId" element={<ProductDetail />} />
 
             {/* Rutas protegidas solo para usuarios autenticados */}
             <Route element={<ProtectedRoute />}>

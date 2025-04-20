@@ -5,7 +5,7 @@
   background-color: #ffffff;
   color: #343434;
   position: fixed;
-  top: 70px; /* Debajo del header */
+  top: 60px; /* Debajo del header */
   left: 0;
   overflow-y: auto;
   z-index: 1000;
