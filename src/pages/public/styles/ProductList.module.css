@@ -1,0 +1,114 @@
+.contenedor{
+  width: 100%;
+  padding: 0px 10%;
+}
+
+.contenedorEspecies{
+  padding: 32px 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.contenedorProductos{
+  padding: 32px 0 16px;
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.especiesHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.especiesNav {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.especiesNav button {
+  background-color: black;
+  border: none;
+  height: 25px;
+  width: 25px;
+  cursor: pointer;
+  font-size: 12px;
+  color: white;
+  padding: 2px 0 0;
+  border-radius: 50%;
+}
+
+.especiesNav button:disabled {
+  background-color: #ccc;
+  cursor:auto;
+}
+
+.filtroEspecies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2%;
+  margin-bottom: 20px;
+}
+
+  /* Productos */
+  .productList {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .productList a{
+    text-decoration: none;
+  }
+  
+  .productList .noProductos {
+    font-size: 16px;
+    color: #888;
+  }
+  
+  .grillaProductos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    width: 100%;
+  }
+  
+  /* Paginación */
+  .paginacion {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .paginacion button {
+    background-color: white;
+    border: 1px solid var(--primary-color);
+    color: black;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 3ms ease-in-out;
+  }
+
+  .paginacion button:not(:disabled):hover {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+  }
+  
+  .paginacion button:disabled {
+    background-color: var(--background-color);
+    border: none;
+    cursor: auto;
+  }
+  
+  .paginacion span {
+    font-weight: bold;
+  }

@@ -1,10 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-    fetchCategorias,
-    fetchEspecies,
-    fetchMarcas,
-    fetchEtiquetas,
-} from '../../../services/adminApi';
+import { fetchCategorias, fetchEspecies, fetchMarcas, fetchEtiquetas } from '../../../services/api';
 import './styles/modals.css';
 
 const ProductoFormModal = ({ initialData, onSave, onClose }) => {

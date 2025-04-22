@@ -1,0 +1,49 @@
+.especieCard {
+    width: 15%;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: end;
+  }
+
+  .especieCard .imagenFondo{
+    transition: all 0.2s ease-in-out;
+    background-image: url('../../../assets/fondo-card-default.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .especieImagen{
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .especieCard:hover .especieImagen{
+    
+    scale: 1.1;
+  }
+  
+  .especieCard.activa .imagenFondo{
+    background-image: url('../../../assets/fondo-card-activo.png');
+  }
+  
+  .especieCard.activa .especieNombre{
+    transition: color 0.3s ease-in-out;
+    font-weight: 700;
+    color: var(--primary-color);
+  }
+  .especieImagen {
+    width: 100%;
+    height: 150px;
+    object-fit: contain;
+  }
+  
+  .especieNombre {
+    margin-top: 4px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchCategorias, deleteCategoria, updateCategoria, createCategoria } from "../../../services/adminApi";
+import { deleteCategoria, updateCategoria, createCategoria } from "../../../services/adminApi";
+import { fetchCategorias } from "../../../services/api";
 import CategoriaFormModal from "./CategoriaFormModal";
 import './styles/tables.css';
 

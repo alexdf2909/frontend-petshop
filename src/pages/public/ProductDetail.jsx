@@ -2,13 +2,16 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { fetchProductoById, fetchVariantesByProducto, fetchLotesByVariante } from '../../services/api';
 import { useState, useEffect } from 'react';
-import './styles/ProductDetail.css';
+import styles from './styles/ProductDetail.module.css';
+import Banner from '../../components/public/Banner';
+import ImagenesModal from '../../components/public/ImagenesModal';
 
 export default function ProductDetail() {
   const { productoId } = useParams();
   const [imagenSeleccionada, setImagenSeleccionada] = useState(null);
   const [seleccion, setSeleccion] = useState({ peso: '', talla: '', color: '' });
   const [varianteActual, setVarianteActual] = useState(null);
+  const [modalAbierto, setModalAbierto] = useState(false);
 
   const { data: producto, isLoading: cargandoProducto } = useQuery({
     queryKey: ['producto', productoId],
@@ -76,10 +79,19 @@ export default function ProductDetail() {
   useEffect(() => {
     if (variantes && variantes.length > 0) {
       setSeleccion({ peso: '', talla: '', color: '' });
-      setVarianteActual(null);
-
       const primeraImagen = variantes.find(v => v.imagenes?.length > 0)?.imagenes[0]?.imagenUrl || null;
-    setImagenSeleccionada(primeraImagen);
+      setImagenSeleccionada(primeraImagen);
+
+      if (variantes.length === 1) {
+        const unica = variantes[0];
+        setSeleccion({
+          peso: unica.peso?.valor || '',
+          talla: unica.talla?.valor || '',
+          color: unica.color?.valor || ''
+        });
+        setVarianteActual(unica);
+        setImagenSeleccionada(unica.imagenes?.[0]?.imagenUrl || null);
+      }
     }
   }, [variantes]);
 
@@ -96,95 +108,109 @@ export default function ProductDetail() {
   const { min: precioMin, max: precioMax } = getRangoPrecios();
 
   return (
-    <div className="product-detail-container containerPage">
-      <div className="images-section">
-        <div className="thumbnails">
-          {imagenesPorMostrar.map((url, idx) => (
-            <img
-              key={idx}
-              src={url}
-              alt="miniatura"
-              className={`thumbnail ${imagenSeleccionada === url ? 'active' : ''}`}
-              onClick={() => setImagenSeleccionada(url)}
-            />
-          ))}
-        </div>
-        <div className="main-image">
-          {imagenSeleccionada ? (
-            <img src={imagenSeleccionada} alt="principal" />
-          ) : (
-            <div className="no-image">Selecciona una combinación para ver imagen</div>
-          )}
-        </div>
-      </div>
+    <div className={styles.containerPage}>
+      <Banner />
+      <div className={styles.contenedor}>
+        <div className={styles.contenedorProducto}>
+        <div className={styles.imagesSection}>
+          <div className={styles.thumbnails}>
+            {imagenesPorMostrar.slice(0, 4).map((url, idx) => (
+              <img
+                key={idx}
+                src={url}
+                alt="miniatura"
+                className={`${styles.thumbnail} ${imagenSeleccionada === url ? styles.active : ''}`}
+                onClick={() => setImagenSeleccionada(url)}
+              />
+            ))}
+            {imagenesPorMostrar.length > 4 && (
+              <button className={styles.verMasBtn} onClick={() => setModalAbierto(true)}>Ver más</button>
+            )}
+          </div>
 
-      <div className="info-section">
+          {modalAbierto && (
+            <ImagenesModal
+              imagenes={imagenesPorMostrar}
+              onClose={() => setModalAbierto(false)}
+              onSelect={(url) => setImagenSeleccionada(url)}
+            />
+          )}
+          <div className={styles.mainImage}>
+            {imagenSeleccionada ? (
+              <img src={imagenSeleccionada} alt="principal" />
+            ) : (
+              <div className={styles.noImage}>Selecciona una combinación para ver imagen</div>
+            )}
+          </div>
+        </div>
+
+      <div className={styles.infoSection}>
         <h2>{producto.nombre}</h2>
         <p>{producto.descripcion}</p>
-        <img src={producto.marca?.imagenUrl} alt={producto.marca?.nombre} className='imagen-marca'/>
-        <div className='info-contain-tag'>
-        
-            <p className='label-categoria'> {producto.categoria?.nombre}</p>
-            <p className='label-especie'>{producto.especie?.nombre}</p>
+        <img src={producto.marca?.imagenUrl} alt={producto.marca?.nombre} className={styles.imagenMarca} />
+
+        <div className={styles.infoContainTag}>
+          <p className={styles.labelCategoria}>{producto.categoria?.nombre}</p>
+          <p className={styles.labelEspecie}>{producto.especie?.nombre}</p>
         </div>
-        
-        {varianteActual ? (
+
+        {varianteActual && (
           <>
-            
             {varianteActual?.peso && <p><strong>Peso:</strong> {varianteActual.peso.valor}</p>}
             {varianteActual?.talla && <p><strong>Talla:</strong> {varianteActual.talla.valor}</p>}
             {varianteActual?.color && <p><strong>Color:</strong> {varianteActual.color.valor}</p>}
           </>
-        ) : (
-          <>
-            
-          </>
         )}
-        <div className="variant-buttons">
+
+        <div className={styles.variantButtons}>
           {['color', 'talla', 'peso'].map((campo) => {
             const opciones = generarOpciones(campo);
             if (opciones.length === 0) return null;
 
             return (
-              <div key={campo} className="variant-group">
+              <div key={campo} className={styles.variantGroup}>
                 <label>{campo.charAt(0).toUpperCase() + campo.slice(1)}</label>
-                <div className="variant-options">
+                <div className={styles.variantOptions}>
                   {opciones.map(({ valor, habilitado }) => (
                     <button
-                    key={valor}
-                    disabled={!habilitado && seleccion[campo] !== valor}
-                    className={`variant-button ${seleccion[campo] === valor ? 'selected' : ''}`}
-                    onClick={() =>
-                      actualizarSeleccion(seleccion[campo] === valor ? '' : valor, campo)
-                    }
-                  >
-                    {campo === 'color' ? (
-                      <span
-                        className="color-square"
-                        style={{ backgroundColor: valor }}
-                        title={valor}
-                      />
-                    ) : (
-                      valor
-                    )}
-                  </button>
+                      key={valor}
+                      disabled={!habilitado && seleccion[campo] !== valor}
+                      className={`${styles.variantButton} ${seleccion[campo] === valor ? styles.selected : ''}`}
+                      onClick={() =>
+                        actualizarSeleccion(seleccion[campo] === valor ? '' : valor, campo)
+                      }
+                    >
+                      {campo === 'color' ? (
+                        <span
+                          className={styles.colorSquare}
+                          style={{ backgroundColor: valor }}
+                          title={valor}
+                        />
+                      ) : (
+                        valor
+                      )}
+                    </button>
                   ))}
                 </div>
               </div>
             );
           })}
         </div>
+
         {varianteActual ? (
           <>
-
             <p><strong>Stock:</strong> {stockDisponible}</p>
-            <p className='precio-original'> S/ {varianteActual?.precioOriginal?.toFixed(2)}</p>
-            <p className='precio-oferta'> S/ {varianteActual?.precioOferta?.toFixed(2)}</p>
+            <p className={styles.precioOriginal}>S/ {varianteActual?.precioOriginal?.toFixed(2)}</p>
+            <p className={styles.precioOferta}>S/ {varianteActual?.precioOferta?.toFixed(2)}</p>
           </>
-        ) : <>
-        <p className='precio-oferta'>S/ {precioMin.toFixed(2)} - S/ {precioMax.toFixed(2)}</p>
-        </>}
+        ) : (
+          <p className={styles.precioOferta}>S/ {precioMin.toFixed(2)} - S/ {precioMax.toFixed(2)}</p>
+        )}
       </div>
+        </div>
+      
     </div>
+    </div>
+  
   );
 }

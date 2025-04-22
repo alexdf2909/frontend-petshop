@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchUsuarios, deleteUsuario, updateUsuario, createUsuario } from "../../../services/adminApi";
+import { deleteUsuario, updateUsuario, createUsuario } from "../../../services/adminApi";
+import { fetchUsuarios } from "../../../services/api";
 import UsuarioFormModal from "./UsuarioFormModal";
 
 

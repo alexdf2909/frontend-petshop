@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query';
-import './ProductoCard.css';
+import './styles/ProductoCard.css';
 import { fetchVariantesByProducto } from '../../services/api';
 
 const ProductoCard = ({ producto }) => {

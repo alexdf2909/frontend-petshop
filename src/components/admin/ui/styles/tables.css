@@ -40,7 +40,7 @@
   
   .addButton:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+    box-shadow: 0 4px 12px rgba(92, 141, 231, 0.3);
   }
   
   .icon {
@@ -61,8 +61,8 @@
   }
   
   .table th {
-    background-color: #f8f9ff;
-    color: #6c5ce7;
+    background-color: var(--subbackground-color);
+    color: var(--primary-color);
     font-weight: 600;
     padding: 1rem;
     text-align: left;
@@ -107,7 +107,7 @@
   }
   
   .actionButton:hover {
-    background: #6c5ce7;
+    background: var(--secondary-color);
     color: white;
   }
   
@@ -135,7 +135,7 @@
       content: attr(data-label);
       float: left;
       font-weight: 600;
-      color: #6c5ce7;
+      color: var(--secondary-color);
       margin-right: 0.5rem;
     }
   

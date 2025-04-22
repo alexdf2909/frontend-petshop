@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchProductos, deleteProducto, updateProducto, createProducto } from "../../../services/adminApi";
+import { deleteProducto, updateProducto, createProducto } from "../../../services/adminApi";
+import { fetchProductos } from "../../../services/api";
 import ProductoFormModal from "./ProductoFormModal";
 import './styles/tables.css';
 

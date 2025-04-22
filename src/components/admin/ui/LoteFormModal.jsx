@@ -1,9 +1,5 @@
 import { useState, useEffect } from 'react';
-import {
-    fetchCompras,
-    fetchProductos,
-    fetchVariantes
-} from '../../../services/adminApi';
+import { fetchCompras, fetchProductos, fetchVariantes } from '../../../services/api';
 import './styles/modals.css';
 
 const LoteFormModal = ({ initialData, onSave, onClose }) => {

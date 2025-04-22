@@ -1,10 +1,11 @@
 .product-card {
     display: flex;
-    width: 250px;
+    width: 100%;
     flex-direction: column;
     border-radius: 16px;
     background-color: white;
     transition: box-shadow 0.3s ease;
+    border: 1px solid var(--background-color);
   }
   
   .product-card:hover {
@@ -20,7 +21,7 @@
   }
   .product-card img{
     border-radius: 16px 16px 0 0;
-    height: 200px;
+    height: 250px;
   }
   .product-card h3 {
     font-size: 18px;

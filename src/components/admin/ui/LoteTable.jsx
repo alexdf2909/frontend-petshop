@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchLotes, deleteLote, updateLote, createLote } from "../../../services/adminApi";
+import { deleteLote, updateLote, createLote } from "../../../services/adminApi";
+import { fetchLotes } from "../../../services/api";
 import LoteFormModal from "./LoteFormModal";
 import './styles/tables.css';
 

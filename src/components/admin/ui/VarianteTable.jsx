@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchVariantes, deleteVariante, updateVariante, createVariante } from "../../../services/adminApi";
+import { deleteVariante, updateVariante, createVariante } from "../../../services/adminApi";
+import { fetchVariantes } from "../../../services/api";
 import VarianteFormModal from "./VarianteFormModal";
 import './styles/tables.css';
 

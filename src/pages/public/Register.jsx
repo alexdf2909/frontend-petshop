@@ -1,20 +1,15 @@
+//src/pages/public/Register.jsx
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as Yup from 'yup';
+import { registerSchema } from '../../validations/schemas';
 import { registerUser } from '../../services/auth';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import './styles/Register.css'; // 👈 Importa el CSS
 
-const schema = Yup.object({
-  nombre: Yup.string().required('El nombre es obligatorio'),
-  correo: Yup.string().email('Correo inválido').required('El correo electrónico es obligatorio'),
-  contrasena: Yup.string().min(4, 'La contraseña debe tener al menos 4 caracteres').required('La contraseña es obligatoria'),
-});
-
 export default function Register() {
   const { register, handleSubmit, formState: { errors } } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(registerSchema),
   });
   const navigate = useNavigate();
 
@@ -46,6 +41,11 @@ export default function Register() {
         <div className="form-group">
           <input {...register('contrasena')} type="password" placeholder="Contraseña" className="form-input" />
           <p className="form-error">{errors.contrasena?.message}</p>
+        </div>
+
+        <div className="form-group">
+          <input {...register('confirmarContrasena')} type="password" placeholder="Confirmar contraseña" className="form-input" />
+          <p className="form-error">{errors.confirmarContrasena?.message}</p>
         </div>
 
         <button type="submit" className="form-button">

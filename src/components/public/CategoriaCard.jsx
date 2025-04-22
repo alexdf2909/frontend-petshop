@@ -1,18 +1,20 @@
-// 📁 src/components/CategoriaCard.jsx
-import './CategoriaCard.css';
+// 📁 src/components/public/CategoriaCard.jsx
+import styles from './styles/CategoriaCard.module.css';
 
-export default function CategoriaCard({ categoria, activa, onClick }) {
+export default function CategoriaCard({ categoria, productos}) {
   return (
-    <div
-      className={`categoria-card ${activa ? 'activa' : ''}`}
-      onClick={() => onClick(categoria.categoriaId)}
-    >
+    <div className={styles.categoriaCard}>
       <img
         src={categoria.imagenUrl}
         alt={categoria.nombre}
-        className="categoria-imagen"
+        className={styles.categoriaImagen}
       />
-      <h4 className="categoria-nombre">{categoria.nombre}</h4>
+      <div className={styles.categoriaInfo}>
+      <h4 className={styles.categoriaNombre}>{categoria.nombre} <i className="fa-solid fa-arrow-right"></i></h4>
+      <span>{productos} productos</span>
+      </div>
+      
+
     </div>
   );
 }

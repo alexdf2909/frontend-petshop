@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchColors, deleteColor, updateColor, createColor } from "../../../services/adminApi";
+import { deleteColor, updateColor, createColor } from "../../../services/adminApi";
+import { fetchColors} from "../../../services/api";
 import ColorFormModal from "./ColorFormModal";
 import './styles/tables.css';
 

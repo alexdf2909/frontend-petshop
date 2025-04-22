@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchMarcas, deleteMarca, updateMarca, createMarca } from "../../../services/adminApi";
+import { deleteMarca, updateMarca, createMarca } from "../../../services/adminApi";
+import { fetchMarcas } from "../../../services/api";
 import MarcaFormModal from "./MarcaFormModal";
 import './styles/tables.css';
 

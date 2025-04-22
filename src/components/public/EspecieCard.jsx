@@ -1,23 +1,23 @@
 // 📁 src/components/EspecieCard.jsx
-import './EspecieCard.css';
+import styles from './styles/EspecieCard.module.css';
 
 export default function EspecieCard({ especie, activa, onClick }) {
   return (
     
     <div
-      className={`especie-card ${activa ? 'activa' : ''}`}
+      className={`${styles.especieCard} ${activa ? styles.activa : ''}`}
       onClick={() => onClick(especie.especieId)}
     >
-        <div className='image-background'>
+        <div className={styles.imagenFondo}>
 
             <img
                 src={especie.imagenUrl}
                 alt={especie.nombre}
-                className="especie-imagen"
+                className={styles.especieImagen}
             />
       
         </div>
-        <h4 className="especie-nombre">{especie.nombre}</h4>
+        <h4 className={styles.especieNombre}>{especie.nombre}</h4>
     </div>
   );
 }

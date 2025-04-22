@@ -1,12 +1,9 @@
-.containerPage{
-    margin-top: 80px;
-}
 
 .register-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding-top: 8em;
   }
   
   .register-form {

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchPesos, deletePeso, updatePeso, createPeso } from "../../../services/adminApi";
+import { deletePeso, updatePeso, createPeso } from "../../../services/adminApi";
+import { fetchPesos } from "../../../services/api";
 import PesoFormModal from "./PesoFormModal";
 import './styles/tables.css';
 

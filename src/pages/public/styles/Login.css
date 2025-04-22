@@ -1,11 +1,8 @@
-.containerPage{
-    margin-top: 80px;
-}
 .login-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2rem;
+    padding-top: 8em;
   }
   
   .login-form {

@@ -1,28 +1,28 @@
-.sidebar-filtros {
-    width: 130px;
-    padding: 16px;
+.sidebarFiltros {
+    width:20%;
   }
   
-  .filtro-seccion {
+  .filtroSeccion {
     margin-bottom: 24px;
   }
   
-  .filtro-seccion h4 {
+  .filtroSeccion h4 {
     font-size: 16px;
     margin-bottom: 10px;
     font-weight: 600;
   }
 
-  input{
-    accent-color: #ff7b23;
+  .opciones input{
+    accent-color: #0088ff;
   }
 
   .opciones{
     display: flex;
     align-items: center;
+    gap: 4px;
   }
   
-  .checkbox-label {
+  .checkboxLabel {
     display: block;
     margin-bottom: 8px;
     font-size: 14px;
@@ -31,14 +31,14 @@
   }
   
   .cantidad {
-    color: rgb(2, 124, 255);
+    color: #0088ff;
     font-size: 13px;
     background-color: #f3f3f3;
     padding: 1px 8px;
     border-radius: 12px;
   }
   
-  .tags-container {
+  .tagsContainer {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
@@ -46,7 +46,7 @@
   
   .tag {
     padding: 6px 12px;
-    background-color: #e0e0e0;
+    background-color: #f3f3f3;
     border-radius: 16px;
     font-size: 13px;
     cursor: pointer;
@@ -54,8 +54,20 @@
     transition: background-color 0.2s;
   }
   
-  .tag.activa {
+  .tagActiva {
     background-color: #0088ff;
     color: white;
   }
   
+  .sliderContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .sliderLabels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: #555;
+  }

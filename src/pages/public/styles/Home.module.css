@@ -1,0 +1,66 @@
+.contenedor{
+    width: 100%;
+    padding: 0px 10%;
+}
+
+.contenedorCategorias, .contenedorNuevos{
+    padding: 32px 0 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.categoriasHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .categoriasNav {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  
+  .categoriasNav button {
+    background-color: black;
+    border: none;
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+    font-size: 12px;
+    color: white;
+    padding: 2px 0 0;
+    border-radius: 50%;
+  }
+  
+  .categoriasNav button:disabled {
+    background-color: #ccc;
+    cursor:auto;
+  }
+
+.grillaCategorias{
+    display: flex;
+    gap: 4%;
+    width: 100%;
+}
+
+.contenedorNuevos h2{
+text-align: center;
+}
+
+.grillaNuevos{
+    display: flex;
+    gap: 4%;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.grillaNuevos a{
+    width: calc((100% - 8%) / 3);
+}
+
+.grillaNuevos a:hover{
+    text-decoration: none;
+}

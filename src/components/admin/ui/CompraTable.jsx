@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchCompras, deleteCompra, updateCompra, createCompra } from "../../../services/adminApi";
+import {  deleteCompra, updateCompra, createCompra } from "../../../services/adminApi";
+import { fetchCompras } from "../../../services/api";
 import CompraFormModal from "./CompraFormModal";
 import './styles/tables.css';
 

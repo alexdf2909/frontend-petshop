@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchTallas, deleteTalla, updateTalla, createTalla } from "../../../services/adminApi";
+import { deleteTalla, updateTalla, createTalla } from "../../../services/adminApi";
+import { fetchTallas} from "../../../services/api";
 import TallaFormModal from "./TallaFormModal";
 import './styles/tables.css';
 

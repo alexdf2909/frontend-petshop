@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchEspecies, deleteEspecie, updateEspecie, createEspecie } from "../../../services/adminApi";
+import { deleteEspecie, updateEspecie, createEspecie } from "../../../services/adminApi";
+import { fetchEspecies} from "../../../services/api";
 import EspecieFormModal from "./EspecieFormModal";
 import './styles/tables.css';
 

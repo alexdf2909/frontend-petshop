@@ -25,6 +25,11 @@ import UsuariosPage from './pages/admin/UsuariosPage';
 import VariantesPage from './pages/admin/VariantesPage';
 import ComprasPage from './pages/admin/ComprasPage';
 import LotesPage from './pages/admin/LotesPage';
+import Historial from './pages/client/Historial';
+import Pedido from './pages/client/Pedido';
+import ServiciosList from './pages/public/ServiciosList';
+import ServicioDetail from './pages/public/ServicioDetail';
+
 
 function App() {
   return (
@@ -39,10 +44,14 @@ function App() {
             <Route path="/verificar" element={<Verify />} />
             <Route path="/productos" element={<ProductList />} />
             <Route path="/producto/:productoId" element={<ProductDetail />} />
+            <Route path="/servicios" element={<ServiciosList />} />
+            <Route path="/servicio/:servicioId" element={<ServicioDetail />} />
 
             {/* Rutas protegidas solo para usuarios autenticados */}
             <Route element={<ProtectedRoute />}>
               <Route path="/favoritos" element={<FavoritoList />} />
+              <Route path="/historial" element={<Historial />} />
+              <Route path="/pedido" element={<Pedido />} />
             </Route>
 
             {/* Rutas para el admin */}

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchEtiquetas, deleteEtiqueta, updateEtiqueta, createEtiqueta } from "../../../services/adminApi";
+import { deleteEtiqueta, updateEtiqueta, createEtiqueta } from "../../../services/adminApi";
+import { fetchEtiquetas } from "../../../services/api";
 import EtiquetaFormModal from "./EtiquetaFormModal";
 import './styles/tables.css';
 

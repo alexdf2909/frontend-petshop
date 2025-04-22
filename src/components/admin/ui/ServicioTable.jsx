@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { fetchServicios, deleteServicio, updateServicio, createServicio } from "../../../services/adminApi";
+import { deleteServicio, updateServicio, createServicio } from "../../../services/adminApi";
+import { fetchServicios } from "../../../services/api";
 import ServicioFormModal from "./ServicioFormModal";
 import './styles/tables.css';
 

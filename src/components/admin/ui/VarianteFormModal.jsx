@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react';
 import { uploadImagen } from '../../../services/adminApi'; // Asegúrate de tener esta función correctamente configurada
-import {
-    fetchPesos,
-    fetchColors,
-    fetchTallas,
-    fetchProductos
-} from '../../../services/adminApi';
+import { fetchPesos, fetchColors, fetchTallas, fetchProductos } from '../../../services/api';
 import './styles/modals.css';
 
 const VarianteFormModal = ({ initialData, onSave, onClose }) => {

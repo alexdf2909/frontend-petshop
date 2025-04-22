@@ -1,5 +1,6 @@
 /* Contenedor principal de la barra lateral */
 .sidebar {
+  position: fixed;
   width: 220px;
   height: calc(100vh - 60px); /* Ajustado por el header */
   background-color: #ffffff;
@@ -8,14 +9,13 @@
   top: 60px; /* Debajo del header */
   left: 0;
   overflow-y: auto;
-  z-index: 1000;
+  z-index: 100;
   padding: 10px 0;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
 }
 
 /* Estilo para cada item del menú */
 .sidebar-item {
-  padding: 8px 16px;
+  padding: 4px 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   display: block; /* Para hacer que cada item sea un bloque que ocupe toda la línea */
@@ -40,7 +40,7 @@
   display: block;
   text-decoration: none;
   color: inherit;
-  padding: 10px 0; /* Espaciado superior e inferior para facilitar la selección */
+  padding: 4px 0; /* Espaciado superior e inferior para facilitar la selección */
 }
 
 .sidebar-item .soloPage:hover {
@@ -68,7 +68,6 @@
 .sub-menu a:hover {
   color: #ffffff;
   background-color: #d3d3d3;
-  border-left: 3px solid #1abc9c;
 }
 
 /* Responsive */
@@ -108,15 +107,15 @@
 /* Cambio de color al pasar el mouse sobre los enlaces */
 .sidebar-item a:hover {
   color: #424242;
-  background-color: #edf3ff;
-  border-left: 3px solid #1a78bc;
+  background-color: var(--subbackground-color);
+  border-left: 3px solid var(--primary-color);
 }
 
 /* Estilo para el enlace activo */
 .sidebar-item a.active {
-  background-color: #edf3ff;
+  background-color: var(--subbackground-color);
   color: #2c3e50;
-  border-left: 3px solid #1a78bc; /* Un color distintivo */
+  border-left: 3px solid var(--primary-color); /* Un color distintivo */
 }
 
 /* Estilo para los íconos de expandir y colapsar */

@@ -2,6 +2,11 @@
 
 :root {
   --primary-font: 'Akatab', sans-serif;
+  --primary-color: #024f69;
+  --secondary-color: #279fbc;
+  --background-color: #F8F9FA;
+  --subtitle-color: #888888;
+  --subbackground-color: #e9f8ff;
 }
 
 /* Asegura que html, body y #root ocupen el 100% de la pantalla */
@@ -25,4 +30,10 @@ body {
 #root {
   display: flex;
   flex-direction: column;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
