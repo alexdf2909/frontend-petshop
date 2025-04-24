@@ -7,7 +7,7 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { jwtDecode } from 'jwt-decode';
-import './styles/Login.css'; // 👈 Importa el CSS
+import styles from './styles/Login.module.css'
 
 export default function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -38,30 +38,30 @@ export default function Login() {
   };
 
   return (
-    <div className="login-container">
-      <form onSubmit={handleSubmit(onSubmit)} className="login-form">
-        <h2 className="login-title">Iniciar sesión</h2>
+    <div className={styles.loginContainer}>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.loginForm}>
+        <h2 className={styles.loginTitle}>Iniciar sesión</h2>
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <input
             {...register('correo')}
             placeholder="Correo"
-            className="form-input"
+            className={styles.formInput}
           />
-          <p className="form-error">{errors.correo?.message}</p>
+          <p className={styles.formError}>{errors.correo?.message}</p>
         </div>
 
-        <div className="form-group">
+        <div className={styles.formGroup}>
           <input
             {...register('contrasena')}
             type="password"
             placeholder="Contraseña"
-            className="form-input"
+            className={styles.formInput}
           />
-          <p className="form-error">{errors.contrasena?.message}</p>
+          <p className={styles.formError}>{errors.contrasena?.message}</p>
         </div>
 
-        <button type="submit" className="form-button">
+        <button type="submit" className={styles.formButton}>
           Iniciar sesión
         </button>
       </form>

@@ -78,6 +78,14 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
         setImagenFiles(prev => prev.filter((_, i) => i !== index));
     };
 
+    const handleRemoveExistingImage = (index) => {
+        setVariante(prev => ({
+            ...prev,
+            imagenes: prev.imagenes.filter((_, i) => i !== index)
+        }));
+    };
+    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -248,38 +256,39 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
                             </div>
 
                             <div className='imageGrid'>
-                                {imagenFiles.map((img, index) => (
-                                    <div key={index} className='imageItem'>
-                                        <img
-                                            src={URL.createObjectURL(img)}
-                                            alt={`Imagen ${index + 1}`}
-                                            className='imagePreview'
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={() => handleRemoveImage(index)}
-                                            className='removeButton'
-                                        >
-                                            x
-                                        </button>
-                                    </div>
-                                ))}
-                                {variante.imagenes.map((img, index) => (
-                                    <div key={index} className='imageItem'>
-                                        <img
-                                            src={typeof img === 'string' ? img : img.imagenUrl}
-                                            alt={`Imagen ${index + 1}`}
-                                            className='imagePreview'
-                                        />
-                                        <button
-                                            type="button"
-                                            onClick={() => handleRemoveImage(index)}
-                                            className='removeButton'
-                                        >
-                                            x
-                                        </button>
-                                    </div>
-                                ))}
+                            {imagenFiles.map((img, index) => (
+                                <div key={`file-${index}`} className='imageItem'>
+                                    <img
+                                        src={URL.createObjectURL(img)}
+                                        alt={`Imagen nueva ${index + 1}`}
+                                        className='imagePreview'
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => handleRemoveImage(index)}
+                                        className='removeButton'
+                                    >
+                                        x
+                                    </button>
+                                </div>
+                            ))}
+
+                            {variante.imagenes.map((img, index) => (
+                                <div key={`existing-${index}`} className='imageItem'>
+                                    <img
+                                        src={typeof img === 'string' ? img : img.imagenUrl}
+                                        alt={`Imagen guardada ${index + 1}`}
+                                        className='imagePreview'
+                                    />
+                                    <button
+                                        type="button"
+                                        onClick={() => handleRemoveExistingImage(index)}
+                                        className='removeButton'
+                                    >
+                                        x
+                                    </button>
+                                </div>
+                            ))}
                             </div>
                         </div>
 

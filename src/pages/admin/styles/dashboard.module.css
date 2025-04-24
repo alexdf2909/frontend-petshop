@@ -1,0 +1,58 @@
+/* Estilo del layout general */
+.adminLayout {
+  display: flex;
+  width: 100%;
+  position: relative;
+  padding: 0 10%;
+}
+
+.adminContent {
+  width: 80%;
+}
+
+/* Botón de hamburguesa */
+.toggleButton {
+  display: none; /* Inicialmente oculto */
+  position: fixed;
+  top: 100px;
+  left: 0;
+  z-index: 999;
+  font-size: 24px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 0 50% 50% 0;
+  padding: 8px 16px 8px 8px;
+  cursor: pointer;
+}
+
+/* Mostrar el botón de hamburguesa solo en mobile */
+@media (max-width: 768px) {
+  .toggleButton {
+    display: block; /* Solo visible en mobile */
+  }
+
+  /* Asegura que el sidebar ocupe toda la pantalla en mobile */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background: white;
+    z-index: 998;
+    transform: translateX(-100%);
+    width: 70%;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .sidebar.visible {
+    transform: translateX(0);
+  }
+
+  .close-button {
+    text-align: right;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+  }
+}

@@ -88,7 +88,7 @@ const LoteTable = () => {
                     </thead>
                     <tbody>
                         {lotes.map((lote) => (
-                            <tr key={lote.id}>
+                            <tr key={lote.loteId}>
                                 <td data-label="ID">{lote.loteId}</td>
                                 <td data-label="Compra">{lote.compra.codigoComprobante}</td>
                                 <td data-label="Producto">

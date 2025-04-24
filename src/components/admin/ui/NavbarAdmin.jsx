@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { FaCaretDown, FaCaretUp } from 'react-icons/fa'; // Importamos los íconos
 import './styles/navbar.css';
 
-const NavbarAdmin = () => {
+const NavbarAdmin = ({ visible, onClose }) => {
   const [comprasExpanded, setComprasExpanded] = useState(true);
   const [productosExpanded, setProductosExpanded] = useState(true);
   const [variantesExpanded, setVariantesExpanded] = useState(true);
@@ -13,7 +13,8 @@ const NavbarAdmin = () => {
   const isActive = (path) => location.pathname === path;
 
   return (
-    <div className="sidebar">
+    <div className={`sidebar ${visible ? "visible" : ""}`}>
+      <div className="close-button" onClick={onClose}>✕</div>
       <div className="sidebar-item">
         <Link 
           to="/dashboard/usuarios" 

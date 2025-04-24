@@ -1,16 +1,12 @@
-/* Contenedor principal de la barra lateral */
 .sidebar {
-  position: fixed;
-  width: 220px;
-  height: calc(100vh - 60px); /* Ajustado por el header */
   background-color: #ffffff;
   color: #343434;
-  position: fixed;
-  top: 60px; /* Debajo del header */
-  left: 0;
   overflow-y: auto;
-  z-index: 100;
   padding: 10px 0;
+  border-right: 1px solid #e0e0e0;
+  width: 20%;
+  min-width: 200px;
+  transition: transform 0.3s ease;
 }
 
 /* Estilo para cada item del menú */
@@ -70,29 +66,6 @@
   background-color: #d3d3d3;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-    top: 0;
-    padding-top: 60px;
-  }
-
-  .sidebar-item {
-    padding: 10px;
-  }
-
-  .sidebar-item h3 {
-    font-size: 15px;
-  }
-
-  .sub-menu a {
-    font-size: 13px;
-  }
-}
-
 /* Estilo para los enlaces dentro de la barra lateral */
 .sidebar-item a {
   display: block;
@@ -138,4 +111,42 @@
 
 .sidebar-item h3 .expand-icon {
   transform: rotate(180deg);
+}
+
+
+/* Responsive para mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background: white;
+    z-index: 998;
+    transform: translateX(-100%);
+    width: 70%;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
+  }
+
+  .sidebar.visible {
+    transform: translateX(0);
+  }
+
+  .close-button {
+    text-align: right;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+  }
+}
+
+.close-button {
+  display: none; /* Oculta por defecto (desktop) */
+}
+
+@media (max-width: 768px) {
+  .close-button {
+    display: block; /* Solo se muestra en mobile */
+  }
 }
