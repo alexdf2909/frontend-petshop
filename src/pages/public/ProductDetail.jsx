@@ -154,13 +154,6 @@ export default function ProductDetail() {
           <p className={styles.labelEspecie}>{producto.especie?.nombre}</p>
         </div>
 
-        {varianteActual && (
-          <>
-            {varianteActual?.peso && <p><strong>Peso:</strong> {varianteActual.peso.valor}</p>}
-            {varianteActual?.talla && <p><strong>Talla:</strong> {varianteActual.talla.valor}</p>}
-            {varianteActual?.color && <p><strong>Color:</strong> {varianteActual.color.valor}</p>}
-          </>
-        )}
 
         <div className={styles.variantButtons}>
           {['color', 'talla', 'peso'].map((campo) => {
