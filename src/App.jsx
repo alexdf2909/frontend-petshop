@@ -1,9 +1,8 @@
-// App.jsx
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './pages/public/Login';
 import Register from './pages/public/Register';
 import Home from './pages//public/Home';
-import Dashboard from './pages/admin/Dashboard'; // Aquí está el Dashboard
+import Dashboard from './pages/admin/Dashboard';
 import FavoritoList from './pages/client/FavoritoList';
 import ProductList from './pages//public/ProductList';
 import ProductDetail from './pages//public/ProductDetail';

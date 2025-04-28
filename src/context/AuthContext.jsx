@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }) => {
 
     events.forEach((event) => window.addEventListener(event, resetTimer));
 
-    checkTokenAndRefresh(); // ejecuta la primera vez
+    checkTokenAndRefresh();
 
     return () => {
       events.forEach((event) => window.removeEventListener(event, resetTimer));

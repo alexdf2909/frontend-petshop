@@ -3,6 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import styles from "./styles/Header.module.css";
 import logo from "../../assets/yoshipets-logo.png";
 import { useEffect, useState } from "react";
+import UserAvatar from "./UserAvatar/UserAvatar";
 
 export default function Header() {
   const { isLoggedIn, logout, role } = useAuth();
@@ -31,6 +32,8 @@ export default function Header() {
             <img src={logo} alt="PetShop" className={styles.logoImg} />
           </Link>
         </div>
+
+        <UserAvatar />
 
         {/* Botón Hamburguesa */}
         <button className={styles.burger} onClick={() => setIsMenuOpen(!isMenuOpen)}>
