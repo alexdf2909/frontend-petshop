@@ -376,3 +376,31 @@ export const deleteLote = async (loteId) => {
     throw new Error('Error eliminando lote');
   }
 };
+
+// ==================== RAZAS ====================
+export const createRaza = async (razaData) => {
+  try {
+    const response = await axios.post(`${API_URL}/raza`, razaData);
+    return response.data;
+ } catch (error) {
+    throw new Error('Error al crear la raza');
+  }
+};
+
+export const updateRaza = async (razaId, razaData) => {
+  try {
+    const response = await axios.put(`${API_URL}/raza/${razaId}`, razaData);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error actualizando raza');
+  }
+};
+        
+export const deleteRaza = async (razaId) => {
+  try {
+    await axios.delete(`${API_URL}/raza/${razaId}`);
+    return true;
+  } catch (error) {
+    throw new Error('Error eliminando raza');
+  }
+};

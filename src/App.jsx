@@ -28,6 +28,7 @@ import Historial from './pages/client/Historial';
 import Pedido from './pages/client/Pedido';
 import ServiciosList from './pages/public/ServiciosList';
 import ServicioDetail from './pages/public/ServicioDetail';
+import RazasPage from './pages/admin/RazasPage';
 
 
 function App() {
@@ -70,6 +71,7 @@ function App() {
                 <Route path="variantes" element={<VariantesPage />} />
                 <Route path="compras" element={<ComprasPage />} />
                 <Route path="lotes" element={<LotesPage />} />
+                <Route path="razas" element={<RazasPage />} />
               </Route>
             </Route>
           </Routes>

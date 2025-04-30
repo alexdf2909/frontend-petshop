@@ -287,3 +287,23 @@ export const fetchLotesByCompra = async (compraId) => {
     throw new Error('Error obteniendo lotes');
   }
 };
+
+/* ******** RAZAS ********** */
+
+export const fetchRazas = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/raza`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo razas');
+  }
+};
+
+export const fetchRazaById = async (razaId) => {
+  try {
+    const response = await axios.get(`${API_URL}/raza/${razaId}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo raza');
+  }
+};

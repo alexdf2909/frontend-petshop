@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './styles/modals.css';
+import { uploadImagen } from '../../../services/adminApi';
 
 const UsuarioFormModal = ({ initialData, onSave, onClose }) => {
     const [usuario, setUsuario] = useState({
@@ -8,6 +9,7 @@ const UsuarioFormModal = ({ initialData, onSave, onClose }) => {
         contrasena: '',
         rol: '',
         deleted: false,
+        imagenPerfil: '',
         usuarioId: null
     });
 
@@ -19,10 +21,19 @@ const UsuarioFormModal = ({ initialData, onSave, onClose }) => {
                 contrasena: '',
                 rol: initialData.rol || '',
                 deleted: !!initialData.deleted,
+                imagenPerfil: initialData.imagenPerfil || '',
                 usuarioId: initialData.usuarioId
             });
         }
     }, [initialData]);
+
+    const [imagenFile, setImagenFile] = useState(null);
+    const [subiendoImagen, setSubiendoImagen] = useState(false);
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) setImagenFile(file);
+    };
 
     const handleChange = (e) => {
         const { name, type, checked, value } = e.target;
@@ -32,18 +43,33 @@ const UsuarioFormModal = ({ initialData, onSave, onClose }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+    
+        let imagenPerfil = usuario.imagenPerfil;
+    
         try {
+            if (imagenFile) {
+                setSubiendoImagen(true);
+                const formData = new FormData();
+                formData.append('file', imagenFile);
+                const url = await uploadImagen(formData);
+                imagenPerfil = url;
+                setSubiendoImagen(false);
+            }
+    
             const formattedUsuario = {
                 nombre: usuario.nombre,
                 correo: usuario.correo,
                 contrasena: usuario.contrasena,
                 rol: usuario.rol,
                 deleted: !!usuario.deleted,
+                imagenPerfil,
                 usuarioId: usuario.usuarioId
             };
+    
             await onSave(formattedUsuario);
         } catch (err) {
-            console.error('Error al guardar usuario', err);
+            console.error('Error al subir imagen o guardar usuario', err);
+            setSubiendoImagen(false);
         }
     };
 
@@ -120,6 +146,33 @@ const UsuarioFormModal = ({ initialData, onSave, onClose }) => {
                             </label>
                         </div>
 
+                        <div className="formGroup">
+                            <label className="customFileLabel">
+                                <span>Imagen</span>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={handleFileChange}
+                                    className="fileInput"
+                                />
+                            </label>
+
+                            {(imagenFile || usuario.imagenPerfil) && (
+                                <div className="previewContainer">
+                                    <img
+                                        src={
+                                            imagenFile
+                                                ? URL.createObjectURL(imagenFile)
+                                                : usuario.imagenPerfil
+                                        }
+                                        alt="Vista previa"
+                                        className="previewImage"
+                                        onError={(e) => (e.target.style.display = 'none')}
+                                    />
+                                </div>
+                            )}
+                        </div>
+
                         <div className='formGroup'>
                             <label className='checkboxLabel'>
                                 <input
@@ -133,14 +186,13 @@ const UsuarioFormModal = ({ initialData, onSave, onClose }) => {
                             </label>
                         </div>
 
-                        <div className='formActions'>
-                            <button type="button" className='cancelButton' onClick={onClose}>
-                                Cancelar
-                            </button>
-                            <button type="submit" className='submitButton'>
-                                {initialData ? 'Guardar Cambios' : 'Crear Usuario'}
-                            </button>
-                        </div>
+                        <button type="submit" className='submitButton' disabled={subiendoImagen}>
+                            {subiendoImagen
+                                ? 'Subiendo...'
+                                : initialData
+                                ? 'Guardar Cambios'
+                                : 'Crear Usuario'}
+                        </button>
                     </form>
                 </div>
             </div>
