@@ -1,0 +1,19 @@
+
+.userAvatar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .avatarImg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .userName {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+  }
