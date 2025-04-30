@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import styles from './styles/ProductDetail.module.css';
 import Banner from '../../components/public/Banner';
 import ImagenesModal from '../../components/public/ImagenesModal';
+import { useCarrito } from '../../context/CarritoContext';
 
 export default function ProductDetail() {
   const { productoId } = useParams();
@@ -12,6 +13,8 @@ export default function ProductDetail() {
   const [seleccion, setSeleccion] = useState({ peso: '', talla: '', color: '' });
   const [varianteActual, setVarianteActual] = useState(null);
   const [modalAbierto, setModalAbierto] = useState(false);
+  const [cantidad, setCantidad] = useState(1);
+const { carrito, agregarAlCarrito, quitarDelCarrito } = useCarrito(); // Hook del carrito
 
   const { data: producto, isLoading: cargandoProducto } = useQuery({
     queryKey: ['producto', productoId],
@@ -75,6 +78,38 @@ export default function ProductDetail() {
     const max = Math.max(...precios);
     return { min, max };
   };
+
+  const productoEnCarrito = carrito.find(item => item.varianteId === varianteActual?.varianteId);
+
+const handleAgregarAlCarrito = () => {
+  if (varianteActual && cantidad > 0 && cantidad <= stockDisponible) {
+    if (!productoEnCarrito) {  // Solo agregar si no está en el carrito
+      agregarAlCarrito({
+        productoId: producto.productoId,
+        varianteId: varianteActual.varianteId,
+        nombre: producto.nombre,
+        imagen: varianteActual.imagenes[0],
+        precioUnitario: varianteActual.precioOferta,
+        cantidad
+      });
+    }
+  }
+};
+  
+  const handleQuitarDelCarrito = () => {
+    if (varianteActual) {
+      quitarDelCarrito(varianteActual.varianteId);
+    }
+  };
+
+  const handleCantidadChange = (e) => {
+    let value = parseInt(e.target.value, 10);
+    if (isNaN(value) || value < 1) value = 1;
+    if (value > stockDisponible) value = stockDisponible;
+    setCantidad(value);
+  };
+  
+  
 
   useEffect(() => {
     if (variantes && variantes.length > 0) {
@@ -192,9 +227,39 @@ export default function ProductDetail() {
 
         {varianteActual ? (
           <>
+          <p className={styles.precioOriginal}>S/ {varianteActual?.precioOriginal?.toFixed(2)}</p>
+          <p className={styles.precioOferta}>S/ {varianteActual?.precioOferta?.toFixed(2)}</p>
             <p><strong>Stock:</strong> {stockDisponible}</p>
-            <p className={styles.precioOriginal}>S/ {varianteActual?.precioOriginal?.toFixed(2)}</p>
-            <p className={styles.precioOferta}>S/ {varianteActual?.precioOferta?.toFixed(2)}</p>
+            {varianteActual && stockDisponible > 0 && (
+  <div className={styles.compraSection}>
+    <div className={styles.cantidadControl}>
+      <label>Cantidad:</label>
+      <input
+        type="number"
+        min="1"
+        max={stockDisponible}
+        value={cantidad}
+        onChange={(e) => setCantidad(Math.min(Math.max(1, Number(e.target.value)), stockDisponible))}
+      />
+    </div>
+    <p><strong>Total:</strong> S/ {(varianteActual.precioOferta * cantidad).toFixed(2)}</p>
+
+    {productoEnCarrito ? (
+      <button className={styles.botonQuitar} onClick={handleQuitarDelCarrito}>
+        Quitar del Carrito
+      </button>
+    ) : (
+      <button className={styles.botonAgregar} onClick={handleAgregarAlCarrito}>
+        Agregar al Carrito
+      </button>
+    )}
+  </div>
+)}
+{varianteActual && stockDisponible === 0 && (
+  <p className={styles.sinStock}>Sin stock disponible</p>
+)}
+            
+            
           </>
         ) : (
           <p className={styles.precioOferta}>S/ {precioMin.toFixed(2)} - S/ {precioMax.toFixed(2)}</p>

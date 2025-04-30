@@ -55,7 +55,10 @@ export default function Header() {
           ) : (
             <div className={styles.accesosUsuario}>
               <i className="fa-solid fa-heart"></i>
-              <i className="fa-solid fa-cart-shopping"></i>
+              <Link to="/carrito"><i className="fa-solid fa-cart-shopping">
+                
+                </i></Link>
+              
               <button onClick={logout} className={styles.logoutBtn}>Logout</button>
             </div>
           )}

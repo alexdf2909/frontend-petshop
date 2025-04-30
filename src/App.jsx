@@ -29,11 +29,14 @@ import Historial from './pages/client/Historial';
 import Pedido from './pages/client/Pedido';
 import ServiciosList from './pages/public/ServiciosList';
 import ServicioDetail from './pages/public/ServicioDetail';
+import { CarritoProvider } from './context/CarritoContext';
+import Carrito from './pages/public/Carrito';
 
 
 function App() {
   return (
     <AuthProvider>
+      <CarritoProvider>
       <Router>
         <div>
           <Header />
@@ -42,6 +45,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/registro" element={<Register />} />
             <Route path="/verificar" element={<Verify />} />
+            <Route path="/carrito" element={<Carrito />} />
             <Route path="/productos" element={<ProductList />} />
             <Route path="/producto/:productoId" element={<ProductDetail />} />
             <Route path="/servicios" element={<ServiciosList />} />
@@ -76,6 +80,7 @@ function App() {
           </Routes>
         </div>
       </Router>
+      </CarritoProvider>
     </AuthProvider>
   );
 }
