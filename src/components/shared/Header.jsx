@@ -33,8 +33,6 @@ export default function Header() {
           </Link>
         </div>
 
-        <UserAvatar />
-
         {/* Botón Hamburguesa */}
         <button className={styles.burger} onClick={() => setIsMenuOpen(!isMenuOpen)}>
           <i className="fa-solid fa-bars"></i>
@@ -59,6 +57,13 @@ export default function Header() {
             <div className={styles.accesosUsuario}>
               <i className="fa-solid fa-heart"></i>
               <i className="fa-solid fa-cart-shopping"></i>
+              <UserAvatar />
+
+              {/* 👇 Enlace a editar perfil */}
+              <Link to="/perfil" className={styles.perfilLink}>
+                Editar Perfil
+              </Link>
+
               <button onClick={logout} className={styles.logoutBtn}>Logout</button>
             </div>
           )}

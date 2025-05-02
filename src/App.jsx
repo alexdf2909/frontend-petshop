@@ -29,6 +29,7 @@ import Pedido from './pages/client/Pedido';
 import ServiciosList from './pages/public/ServiciosList';
 import ServicioDetail from './pages/public/ServicioDetail';
 import RazasPage from './pages/admin/RazasPage';
+import EditarPerfil from "./pages/client/EditarPerfil";
 
 
 function App() {
@@ -44,6 +45,10 @@ function App() {
             <Route path="/verificar" element={<Verify />} />
             <Route path="/productos" element={<ProductList />} />
             <Route path="/producto/:productoId" element={<ProductDetail />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/perfil" element={<EditarPerfil />} />
+            </Route>
+
             <Route path="/servicios" element={<ServiciosList />} />
             <Route path="/servicio/:servicioId" element={<ServicioDetail />} />
 

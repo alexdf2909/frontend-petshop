@@ -17,3 +17,15 @@
     font-weight: 500;
     color: #333;
   }
+  
+  .perfilLink {
+    font-size: 13px;
+    color: #007bff;
+    text-decoration: underline;
+    margin-left: 4px;
+    cursor: pointer;
+  }
+  
+  .perfilLink:hover {
+    color: #0056b3;
+  }
