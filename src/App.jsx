@@ -31,6 +31,7 @@ import ServiciosList from './pages/public/ServiciosList';
 import ServicioDetail from './pages/public/ServicioDetail';
 import { CarritoProvider } from './context/CarritoContext';
 import Carrito from './pages/public/Carrito';
+import Pago from './pages/client/Pago';
 
 
 function App() {
@@ -56,6 +57,7 @@ function App() {
               <Route path="/favoritos" element={<FavoritoList />} />
               <Route path="/historial" element={<Historial />} />
               <Route path="/pedido" element={<Pedido />} />
+              <Route path="/pago" element={<Pago/>}/>
             </Route>
 
             {/* Rutas para el admin */}

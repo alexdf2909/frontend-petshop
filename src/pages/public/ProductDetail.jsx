@@ -88,7 +88,7 @@ const handleAgregarAlCarrito = () => {
         productoId: producto.productoId,
         varianteId: varianteActual.varianteId,
         nombre: producto.nombre,
-        imagen: varianteActual.imagenes[0],
+        imagen: varianteActual.imagenes[0]?.imagenUrl || '',
         precioUnitario: varianteActual.precioOferta,
         cantidad
       });

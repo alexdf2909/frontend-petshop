@@ -1,14 +1,12 @@
 import styles from './styles/Carrito.module.css';
 import { useNavigate } from 'react-router-dom';
+import { useCarrito } from '../../context/CarritoContext'; // Ajusta la ruta si es diferente
 
-export default function Carrito({ carrito = [], setCarrito }) {
+export default function Carrito() {
   const navigate = useNavigate();
+  const { carrito, quitarDelCarrito } = useCarrito();
 
-  const eliminarDelCarrito = (varianteId) => {
-    setCarrito(carrito.filter(item => item.varianteId !== varianteId));
-  };
-
-  const subtotal = carrito.reduce((acc, item) => acc + item.precio * item.cantidad, 0); // carrito siempre es un array ahora
+  const subtotal = carrito.reduce((acc, item) => acc + item.precioUnitario * item.cantidad, 0);
 
   const irAPagar = () => {
     navigate('/pago', { state: { carrito, subtotal } });
@@ -28,9 +26,9 @@ export default function Carrito({ carrito = [], setCarrito }) {
                 <div>
                   <h4>{item.nombre}</h4>
                   <p>Cantidad: {item.cantidad}</p>
-                  <p>Precio unitario: S/ {item.precio.toFixed(2)}</p>
-                  <p>Subtotal: S/ {(item.precio * item.cantidad).toFixed(2)}</p>
-                  <button onClick={() => eliminarDelCarrito(item.varianteId)}>Eliminar</button>
+                  <p>Precio unitario: S/ {item.precioUnitario.toFixed(2)}</p>
+                  <p>Subtotal: S/ {(item.precioUnitario * item.cantidad).toFixed(2)}</p>
+                  <button onClick={() => quitarDelCarrito(item.varianteId)}>Eliminar</button>
                 </div>
               </li>
             ))}
