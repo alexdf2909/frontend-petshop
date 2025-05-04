@@ -46,6 +46,10 @@
     width: 100%;
 }
 
+.categoriaItem{
+  width: 22%;
+}
+
 .contenedorNuevos h2{
 text-align: center;
 }
@@ -54,13 +58,13 @@ text-align: center;
     display: flex;
     gap: 4%;
     width: 100%;
-    justify-content: space-between;
 }
 
 .grillaNuevos a{
-    width: calc((100% - 8%) / 3);
+    width: 22%;
 }
 
 .grillaNuevos a:hover{
     text-decoration: none;
 }
+

@@ -16,7 +16,10 @@ const UsuarioTable = () => {
     const loadUsuarios = async () => {
         try {
             const fetchedUsuarios = await fetchUsuarios();
-            setUsuarios(fetchedUsuarios);
+            const sortedUsuarios = fetchedUsuarios.sort((a, b) =>
+                a.nombre.localeCompare(b.nombre)
+            );
+            setUsuarios(sortedUsuarios);
         } catch (error) {
             console.error("Error cargando usuarios:", error);
         }
