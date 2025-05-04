@@ -36,7 +36,6 @@ import EditarPerfil from "./pages/client/EditarPerfil";
 function App() {
   return (
     <AuthProvider>
-      <Router>
         <div>
           <Header />
           <Routes>
@@ -85,7 +84,6 @@ function App() {
             </Route>
           </Routes>
         </div>
-      </Router>
     </AuthProvider>
   );
 }
