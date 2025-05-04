@@ -1,3 +1,59 @@
+.userAvatarContainer {
+  position: relative;
+  display: inline-block;
+}
+
+.userAvatar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.avatarImg {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.userName {
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  min-width: 180px;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdownMenu a,
+.dropdownMenu button {
+  padding: 10px 15px;
+  text-align: left;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+}
+
+.dropdownMenu a:hover,
+.dropdownMenu button:hover {
+  background-color: #f0f0f0;
+}
+
 
 .userAvatar {
     display: flex;

@@ -404,3 +404,58 @@ export const deleteRaza = async (razaId) => {
     throw new Error('Error eliminando raza');
   }
 };
+
+// ==================== MASCOTAS ====================
+export const createMascota = async (mascotaData, token) => {
+  try {
+    console.log("Datos que se envían al backend:", mascotaData);
+    const response = await axios.post(`${API_URL}/mascota`, mascotaData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error al crear la mascota:', error.response?.data || error.message);
+    throw new Error('Error al crear la mascota');
+  }
+};
+
+export const updateMascota = async (mascotaId, mascotaData, token) => {
+  try {
+    const response = await axios.put(`${API_URL}/mascota/${mascotaId}`, mascotaData, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error actualizando mascota');
+  }
+};
+
+export const deleteMascota = async (mascotaId, token) => {
+  try {
+    await axios.delete(`${API_URL}/mascota/${mascotaId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return true;
+  } catch (error) {
+    throw new Error('Error eliminando mascota');
+  }
+};
+
+export const getMisMascotas = async (token) => {
+  try {
+    const response = await axios.get(`${API_URL}/mascota/mis-mascotas`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error al obtener las mascotas del usuario');
+  }
+};

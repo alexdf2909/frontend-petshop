@@ -26,6 +26,7 @@ import ComprasPage from './pages/admin/ComprasPage';
 import LotesPage from './pages/admin/LotesPage';
 import Historial from './pages/client/Historial';
 import Pedido from './pages/client/Pedido';
+import MisMascotas from './pages/client/MisMascotas';
 import ServiciosList from './pages/public/ServiciosList';
 import ServicioDetail from './pages/public/ServicioDetail';
 import RazasPage from './pages/admin/RazasPage';
@@ -47,6 +48,9 @@ function App() {
             <Route path="/producto/:productoId" element={<ProductDetail />} />
             <Route element={<ProtectedRoute />}>
               <Route path="/perfil" element={<EditarPerfil />} />
+            </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/mascotas" element={<MisMascotas />} />
             </Route>
 
             <Route path="/servicios" element={<ServiciosList />} />

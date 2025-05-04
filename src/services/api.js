@@ -307,3 +307,20 @@ export const fetchRazaById = async (razaId) => {
     throw new Error('Error obteniendo raza');
   }
 };
+
+
+
+
+export const fetchRazasByEspecie = async (especieId, token) => {
+  try {
+    const response = await axios.get(`${API_URL}/raza/especie/${especieId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo razas por especie');
+  }
+  return response.json();
+};
