@@ -1,7 +1,7 @@
 // 📁 src/components/public/CategoriaCard.jsx
 import styles from './styles/CategoriaCard.module.css';
 
-export default function CategoriaCard({ categoria, productos}) {
+export default function CategoriaCard({ categoria}) {
   return (
     <div className={styles.categoriaCard}>
       <img
@@ -11,7 +11,6 @@ export default function CategoriaCard({ categoria, productos}) {
       />
       <div className={styles.categoriaInfo}>
       <h4 className={styles.categoriaNombre}>{categoria.nombre} <i className="fa-solid fa-arrow-right"></i></h4>
-      <span>{productos} productos</span>
       </div>
       
 

@@ -404,3 +404,21 @@ export const deleteRaza = async (razaId) => {
     throw new Error('Error eliminando raza');
   }
 };
+
+export const mostrarMascotas = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/mascota/mis-mascotas`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error mostrar mascota');
+  }
+};
+
+export const productosRecomendados = async (idMascota) => {
+  try {
+    const response = await axios.get(`${API_URL}/recomendaciones/mascota/${idMascota}`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error recomendados');
+  }
+};
