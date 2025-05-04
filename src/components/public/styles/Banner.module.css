@@ -3,72 +3,86 @@
     width: 100%;
     flex-direction: column;
     justify-content: space-between;
-    padding: 0.5rem 10%;
-    background-color: whitesmoke;
+    padding: 0.5rem 0;
+    position: relative;
+    background-image: url('https://i.pinimg.com/originals/b8/d9/fd/b8d9fd40eba47d93896ada1b947c8d28.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: white;
+    /* border-radius: 8px; */
 }
 
-.header{
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-}
-
-.contacto{
-    display: flex;
-    gap: 5%;
-    flex-wrap: wrap;
-    width: 100%;
-}
-
-
-.contacto:last-child{
-    justify-content: end;
-}
-.contactoInfo{
-    display: flex;
-    font-size: 12px;
-    align-items: center;
-    gap: 4px;
+.banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    /* border-radius: 8px; */
+    z-index: 0;
 }
 
 .bannerContenido{
-    margin-top: 128px;
-    height: auto;
-}
-
-.bannerContenido{
-    width: 50%;
+    margin-top: 0;
+    height: 300px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 8px;
     margin-bottom: 24px;
+    position: relative;
+    border-radius: 8px;
+    color: white;
+    background: none;
+    justify-content: center;
+    padding-left: 40px;
+    text-align: left;
 }
+
+.bannerContenido > * {
+    position: relative;
+    z-index: 1;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+}
+
 .bannerContenido span{
     color: var(--primary-color);
-    font-weight: 700;
+    font-weight: 800;
+    font-size: 20px;
 }
 
 .bannerContenido h1{
     font-weight: 900;
-    font-size: 36px;
+    font-size: 48px;
 }
 
 .bannerContenido p{
-    font-size: 12px;
-    color: var(--subtitle-color);
+    font-size: 18px;
+    color: white;
 }
 
 .bannerContenido a{
-    background-color: black;
+    background-color: var(--secondary-color);
     color: white;
     text-decoration: none;
-    padding: 8px 32px;
+    font-size: 16px;
     border-radius: 16px;
-    width:min-content;
+    width: min-content;
+    margin-left: 0px;
+    padding-left: 15px;
+    padding-right: 15px;
+    display: inline-block;
 }
 
 .bannerContenido a:hover{
-    background-color: var(--secondary-color);
+    background-color: white;
+    color: var(--secondary-color);
 }
 
 @media (max-width: 768px) {
