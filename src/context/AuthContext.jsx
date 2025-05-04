@@ -2,7 +2,6 @@ import { createContext, useContext, useState, useEffect, useCallback } from 'rea
 import { jwtDecode } from 'jwt-decode';
 import { refreshAccessToken } from '../services/auth';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';  // Importa useNavigate
 
 const AuthContext = createContext();
 
@@ -13,9 +12,9 @@ export const AuthProvider = ({ children }) => {
   const [role, setRole] = useState(null);
   const [userId, setUserId] = useState(null);
   const [nombre, setNombre] = useState('');
+  const [imagenPerfil, setImagenPerfil] = useState('');
   const [loading, setLoading] = useState(true);
   const [lastActivity, setLastActivity] = useState(Date.now());
-  const navigate = useNavigate();  // Declara el hook navigate
 
   const logout = useCallback(() => {
     localStorage.removeItem('accessToken');
@@ -24,8 +23,8 @@ export const AuthProvider = ({ children }) => {
     setRole(null);
     setUserId(null);
     setNombre('');
-    navigate('/login');  // Redirige al login después del logout
-  }, [navigate]);
+    setImagenPerfil('');
+  }, []);
 
   const handleTokenRefresh = useCallback(async () => {
     try {
@@ -34,15 +33,15 @@ export const AuthProvider = ({ children }) => {
       setRole(decoded.rol);
       setUserId(decoded.id);
       setNombre(decoded.nombre);
+      setImagenPerfil(decoded.imagenPerfil || '');
     } catch (err) {
       toast.error('Tu sesión ha expirado. Por favor, inicia sesión nuevamente.', {
         position: 'top-center',
         autoClose: 4000,
       });
-      logout(); // cerramos sesión
+      logout();
     }
   }, [logout]);
-  
 
   const checkTokenAndRefresh = useCallback(() => {
     const token = localStorage.getItem('accessToken');
@@ -51,8 +50,8 @@ export const AuthProvider = ({ children }) => {
     const decoded = jwtDecode(token);
     const expTime = decoded.exp * 1000;
     const now = Date.now();
-    const inactive = now - lastActivity > 60 * 60 * 1000; // 1 hora
-    const timeUntilExpire = expTime - now - 10 * 1000; // 10s de margen
+    const inactive = now - lastActivity > 60 * 60 * 1000;
+    const timeUntilExpire = expTime - now - 10 * 1000;
 
     if (timeUntilExpire <= 0) {
       if (inactive) {
@@ -65,15 +64,11 @@ export const AuthProvider = ({ children }) => {
     }
   }, [lastActivity, handleTokenRefresh, logout]);
 
-  // ⏱ Inactividad
   useEffect(() => {
     const events = ['mousemove', 'keydown', 'click'];
     const resetTimer = () => setLastActivity(Date.now());
-
     events.forEach((event) => window.addEventListener(event, resetTimer));
-
-    checkTokenAndRefresh(); // ejecuta la primera vez
-
+    checkTokenAndRefresh();
     return () => {
       events.forEach((event) => window.removeEventListener(event, resetTimer));
     };
@@ -88,6 +83,7 @@ export const AuthProvider = ({ children }) => {
         setRole(decoded.rol || null);
         setUserId(decoded.id || null);
         setNombre(decoded.nombre || '');
+        setImagenPerfil(decoded.imagenPerfil || '');
       } catch {
         logout();
       }
@@ -95,18 +91,40 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, [logout]);
 
-  const login = (accessToken, refreshToken) => {
+  // ✅ login actualizado para aceptar datos de usuario
+  const login = (accessToken, refreshToken, userData = null) => {
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
-    const decoded = jwtDecode(accessToken);
+
+    if (userData) {
+      setNombre(userData.nombre || '');
+      setUserId(userData.usuarioId || null);
+      setRole(userData.rol || null);
+      setImagenPerfil(userData.imagenPerfil || '');
+    } else {
+      const decoded = jwtDecode(accessToken);
+      setNombre(decoded.nombre || '');
+      setUserId(decoded.id || null);
+      setRole(decoded.rol || null);
+      setImagenPerfil(decoded.imagenPerfil || '');
+    }
+
     setIsLoggedIn(true);
-    setRole(decoded.rol || null);
-    setUserId(decoded.id || null);
-    setNombre(decoded.nombre || '');
   };
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, role, login, logout, loading, userId, nombre }}>
+    <AuthContext.Provider
+      value={{
+        isLoggedIn,
+        role,
+        login,
+        logout,
+        loading,
+        userId,
+        nombre,
+        imagenPerfil,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
