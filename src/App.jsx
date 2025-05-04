@@ -38,7 +38,6 @@ function App() {
   return (
     <AuthProvider>
       <CarritoProvider>
-      <Router>
         <div>
           <Header />
           <Routes>
@@ -81,7 +80,6 @@ function App() {
             </Route>
           </Routes>
         </div>
-      </Router>
       </CarritoProvider>
     </AuthProvider>
   );

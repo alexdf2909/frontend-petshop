@@ -1,8 +1,8 @@
-// src/context/AuthContext.jsx
 import { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { jwtDecode } from 'jwt-decode';
 import { refreshAccessToken } from '../services/auth';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';  // Importa useNavigate
 
 const AuthContext = createContext();
 
@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
   const [nombre, setNombre] = useState('');
   const [loading, setLoading] = useState(true);
   const [lastActivity, setLastActivity] = useState(Date.now());
+  const navigate = useNavigate();  // Declara el hook navigate
 
   const logout = useCallback(() => {
     localStorage.removeItem('accessToken');
@@ -23,7 +24,8 @@ export const AuthProvider = ({ children }) => {
     setRole(null);
     setUserId(null);
     setNombre('');
-  }, []);
+    navigate('/login');  // Redirige al login después del logout
+  }, [navigate]);
 
   const handleTokenRefresh = useCallback(async () => {
     try {

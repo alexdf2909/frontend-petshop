@@ -22,3 +22,4 @@ export async function generarPreferencia(carrito) {
 
   return data;  // El ID de la preferencia
 }
+
