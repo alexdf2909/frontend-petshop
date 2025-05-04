@@ -25,7 +25,7 @@ const ProductoCard = ({ producto }) => {
     <div className="product-card">
         <img src={variantes[0].imagenes[0].imagenUrl} alt={producto.nombre} />
         <div className='product-data'>
-        <p className="product-brand">{producto.marca.nombre || 'Sin marca'}</p>
+        <p className="product-brand">{producto.categoria.nombre || 'Sin categoría'}</p>
         <h3>{producto.nombre} <i className="fa-regular fa-heart"></i></h3>
         <p className='product-precio'>
                 S/. {precioMinimo === precioMaximo ? precioMinimo : `${precioMinimo} - ${precioMaximo}`}
