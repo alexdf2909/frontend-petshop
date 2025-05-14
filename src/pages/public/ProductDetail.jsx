@@ -187,6 +187,11 @@ const handleAgregarAlCarrito = () => {
         <div className={styles.infoContainTag}>
           <p className={styles.labelCategoria}>{producto.categoria?.nombre}</p>
           <p className={styles.labelEspecie}>{producto.especie?.nombre}</p>
+          {producto.etiquetas?.map((etiqueta, index) => (
+            <p key={index} className={styles.labelEtiqueta}>
+              {etiqueta.nombre}
+            </p>
+          ))}
         </div>
 
 

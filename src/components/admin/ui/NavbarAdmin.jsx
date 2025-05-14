@@ -34,6 +34,15 @@ const NavbarAdmin = ({ visible, onClose }) => {
       </div>
 
       <div className="sidebar-item">
+        <Link 
+          to="/dashboard/razas" 
+          className={`soloPage ${isActive("/dashboard/razas") ? 'active' : ''}`}
+        >
+           <h3>Razas</h3>
+        </Link>
+      </div>
+
+      <div className="sidebar-item">
         <h3 onClick={() => setComprasExpanded(!comprasExpanded)}>
           Compras
           {comprasExpanded ? <FaCaretUp className="expand-icon" /> : <FaCaretDown className="expand-icon" />}

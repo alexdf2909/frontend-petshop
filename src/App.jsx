@@ -1,9 +1,8 @@
-// App.jsx
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './pages/public/Login';
 import Register from './pages/public/Register';
 import Home from './pages//public/Home';
-import Dashboard from './pages/admin/Dashboard'; // Aquí está el Dashboard
+import Dashboard from './pages/admin/Dashboard';
 import FavoritoList from './pages/client/FavoritoList';
 import ProductList from './pages//public/ProductList';
 import ProductDetail from './pages//public/ProductDetail';
@@ -27,11 +26,14 @@ import ComprasPage from './pages/admin/ComprasPage';
 import LotesPage from './pages/admin/LotesPage';
 import Historial from './pages/client/Historial';
 import Pedido from './pages/client/Pedido';
-import ServiciosList from './pages/public/ServiciosList';
+import MisMascotas from './pages/client/MisMascotas';
+import ServicioList from './pages/public/ServicioList';
 import ServicioDetail from './pages/public/ServicioDetail';
 import { CarritoProvider } from './context/CarritoContext';
 import Carrito from './pages/public/Carrito';
 import Pago from './pages/client/Pago';
+import RazasPage from './pages/admin/RazasPage';
+import EditarPerfil from "./pages/client/EditarPerfil";
 
 
 function App() {
@@ -48,7 +50,14 @@ function App() {
             <Route path="/carrito" element={<Carrito />} />
             <Route path="/productos" element={<ProductList />} />
             <Route path="/producto/:productoId" element={<ProductDetail />} />
-            <Route path="/servicios" element={<ServiciosList />} />
+            <Route element={<ProtectedRoute />}>
+              <Route path="/perfil" element={<EditarPerfil />} />
+            </Route>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/mascotas" element={<MisMascotas />} />
+            </Route>
+
+            <Route path="/servicios" element={<ServicioList />} />
             <Route path="/servicio/:servicioId" element={<ServicioDetail />} />
 
             {/* Rutas protegidas solo para usuarios autenticados */}
@@ -76,6 +85,7 @@ function App() {
                 <Route path="variantes" element={<VariantesPage />} />
                 <Route path="compras" element={<ComprasPage />} />
                 <Route path="lotes" element={<LotesPage />} />
+                <Route path="razas" element={<RazasPage />} />
               </Route>
             </Route>
           </Routes>

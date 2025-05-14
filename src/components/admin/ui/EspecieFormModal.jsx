@@ -6,6 +6,10 @@ const EspecieFormModal = ({ initialData, onSave, onClose }) => {
     const [especie, setEspecie] = useState({
         nombre: '',
         imagenUrl: '',
+        pesoPequeno: '',
+        pesoMediano: '',
+        edadCachorro: '',
+        edadAdulto: '',
         especieId: null
     });
 
@@ -17,6 +21,10 @@ const EspecieFormModal = ({ initialData, onSave, onClose }) => {
             setEspecie({
                 nombre: initialData.nombre || '',
                 imagenUrl: initialData.imagenUrl || '',
+                pesoPequeno: initialData.pesoPequeno || '',
+                pesoMediano: initialData.pesoMediano || '',
+                edadCachorro: initialData.edadCachorro || '',
+                edadAdulto: initialData.edadAdulto || '',
                 especieId: initialData.especieId
             });
         }
@@ -49,6 +57,10 @@ const EspecieFormModal = ({ initialData, onSave, onClose }) => {
 
             const formattedEspecie = {
                 nombre: especie.nombre,
+                pesoPequeno: especie.pesoPequeno,
+                pesoMediano: especie.pesoMediano,
+                edadCachorro: especie.edadCachorro,
+                edadAdulto: especie.edadAdulto,
                 imagenUrl
             };
 
@@ -81,6 +93,66 @@ const EspecieFormModal = ({ initialData, onSave, onClose }) => {
                                     onChange={handleChange}
                                     className='input'
                                     required
+                                />
+                            </label>
+                        </div>
+
+                        <div className='formGroup'>
+                            <label>
+                                <span>Máx. Peso Pequeño (Kg)</span>
+                                    <input
+                                        type="number"
+                                        step="0.01"
+                                        name="pesoPequeno"
+                                        value={especie.pesoPequeno}
+                                        onChange={handleChange}
+                                        className='input'
+                                        required
+                                        min="0.01"
+                                    />
+                            </label>
+                        </div>
+                        <div className='formGroup'>
+                            <label>
+                                <span>Máx. Peso Mediano (Kg)</span>
+                                    <input
+                                        type="number"
+                                        step="0.01"
+                                        name="pesoMediano"
+                                        value={especie.pesoMediano}
+                                        onChange={handleChange}
+                                        className='input'
+                                        required
+                                        min="0.01"
+                                    />
+                            </label>
+                        </div>
+                        <div className='formGroup'>
+                            <label>
+                                <span>Máx Edad Cachorro</span>
+                                <input
+                                    type="number"
+                                    name="edadCachorro"
+                                    value={especie.edadCachorro}
+                                    onChange={handleChange}
+                                    className='input'
+                                    required
+                                    min={1}
+                                />
+                            </label>
+                        </div>
+
+                        <div className='formGroup'>
+                            <label>
+                                <span>Máx Edad Adulto</span>
+                                <input
+                                    type="number"
+                                    name="edadAdulto"
+                                    value={especie.edadAdulto}
+                                    onChange={handleChange}
+                                    className='input'
+                                    required
+                                    min={1}
                                 />
                             </label>
                         </div>

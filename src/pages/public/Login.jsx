@@ -1,4 +1,3 @@
-//src/pages/public/Login.jsx
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { loginSchema } from '../../validations/schemas';
@@ -7,7 +6,8 @@ import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import { jwtDecode } from 'jwt-decode';
-import styles from './styles/Login.module.css'
+import axios from 'axios'; // 👈 asegúrate de tener esto
+import styles from './styles/Login.module.css';
 
 export default function Login() {
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -20,9 +20,16 @@ export default function Login() {
   const onSubmit = async (data) => {
     try {
       const { accessToken, refreshToken } = await loginUser(data);
-      login(accessToken, refreshToken);
-      const decoded = jwtDecode(accessToken);
-      const rol = decoded.rol;
+
+      // 🔧 Aquí usamos la URL completa al backend
+      const perfilResponse = await axios.get("http://localhost:8080/usuario/perfil", {
+        headers: { Authorization: `Bearer ${accessToken}` }
+      });
+
+      console.log("Datos del usuario:", perfilResponse.data);
+
+      // 👇 Pasamos token + datos al AuthContext
+      login(accessToken, refreshToken, perfilResponse.data);
 
       toast.success('Inicio de sesión exitoso');
       navigate('/');

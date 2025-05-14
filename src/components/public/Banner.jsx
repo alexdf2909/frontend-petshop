@@ -9,7 +9,7 @@ const Banner = () => {
         <div className={styles.bannerContenido}>
             <span>Yoshi Pets</span>
             <h1>La petshop que necesitas</h1>
-            <p>Reiciendis architecto perspiciatis, nobis fugit sapiente porro mollitia dicta sunt ducimus</p>
+            <p>¡Todo para tu mascota en un solo lugar! Calidad, amor y cuidado garantizado.</p>
             <Link to="/productos">Comprar</Link>
         </div>
     </div>

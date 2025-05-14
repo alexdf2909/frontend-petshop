@@ -3,6 +3,7 @@ import { useAuth } from "../../context/AuthContext";
 import styles from "./styles/Header.module.css";
 import logo from "../../assets/yoshipets-logo.png";
 import { useEffect, useState } from "react";
+import UserAvatar from "./UserAvatar/UserAvatar";
 
 export default function Header() {
   const { isLoggedIn, logout, role } = useAuth();
@@ -43,6 +44,7 @@ export default function Header() {
           <nav className={styles.mainNav}>
             <Link to="/">Home</Link>
             <Link to="/productos">Productos</Link>
+            <Link to="/servicios">Servicios</Link>
             {isLoggedIn && role === "ADMIN" && <Link to="/dashboard">Dashboard</Link>}
           </nav>
           
@@ -54,12 +56,9 @@ export default function Header() {
             </div>
           ) : (
             <div className={styles.accesosUsuario}>
-              <i className="fa-solid fa-heart"></i>
-              <Link to="/carrito"><i className="fa-solid fa-cart-shopping">
-                
-                </i></Link>
-              
-              <button onClick={logout} className={styles.logoutBtn}>Logout</button>
+              {/* <i className="fa-solid fa-heart"></i>
+              <i className="fa-solid fa-cart-shopping"></i> */}
+              <UserAvatar />
             </div>
           )}
         </div>

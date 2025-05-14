@@ -78,7 +78,10 @@ const EspecieTable = () => {
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
-                            <th>URL</th>
+                            <th>Peso Pequeño</th>
+                            <th>Peso Mediano</th>
+                            <th>Edad Chachorro</th>
+                            <th>Edad Adulto</th>
                             <th>Imagen</th>
                             <th>Acciones</th>
                         </tr>
@@ -88,7 +91,10 @@ const EspecieTable = () => {
                             <tr key={especie.especieId}>
                                 <td data-label="ID">{especie.especieId}</td>
                                 <td data-label="Nombre">{especie.nombre}</td>
-                                <td data-label="URL">{especie.imagenUrl}</td>
+                                <td data-label="Pequeno">{especie.pesoPequeno}</td>
+                                <td data-label="Mediano">{especie.pesoMediano}</td>
+                                <td data-label="Cachorro">{especie.edadCachorro}</td>
+                                <td data-label="Adulto">{especie.edadAdulto}</td>
                                 <td data-label="Imagen">
                                     {especie.imagenUrl && (
                                         <img 

@@ -17,6 +17,7 @@ export default function ProductList() {
     marcas: [],
     etiquetas: [],
   });
+  const [busquedaNombre, setBusquedaNombre] = useState('');
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const especiesPorPagina = 6;
@@ -119,21 +120,22 @@ export default function ProductList() {
 
   const productosFiltrados = productosUnicos.filter((producto) => {
     const variantesDelProducto = variantesPorProducto[producto.productoId] || [];
-
+  
     const coincideEspecie = especieSeleccionada === 'todas' || producto.especie?.especieId === especieSeleccionada;
     const coincideCategoria = filtrosSeleccionados.categorias.length === 0 || filtrosSeleccionados.categorias.includes(producto.categoria?.categoriaId);
     const coincideMarca = filtrosSeleccionados.marcas.length === 0 || filtrosSeleccionados.marcas.includes(producto.marca?.marcaId);
     const coincideEtiqueta = filtrosSeleccionados.etiquetas.length === 0 || (
       producto.etiquetas && producto.etiquetas.some(e => filtrosSeleccionados.etiquetas.includes(e.etiquetaId))
     );
-
     const aplicarFiltroPrecio = precioSeleccionado[0] !== rangoPrecio[0] || precioSeleccionado[1] !== rangoPrecio[1];
     const coincidePrecio = !aplicarFiltroPrecio || variantesDelProducto.some(v =>
       v.precioOferta >= precioSeleccionado[0] && v.precioOferta <= precioSeleccionado[1]
     );
-
-    return coincideEspecie && coincideCategoria && coincideMarca && coincideEtiqueta && coincidePrecio;
+    const coincideNombre = producto.nombre.toLowerCase().includes(busquedaNombre.toLowerCase());
+  
+    return coincideEspecie && coincideCategoria && coincideMarca && coincideEtiqueta && coincidePrecio && coincideNombre;
   });
+  
 
   const totalPaginas = Math.ceil(productosFiltrados.length / productosPorPagina);
 
@@ -192,6 +194,16 @@ export default function ProductList() {
             ))}
           </div>
         </div>
+
+        <div className={styles.barraBusqueda}>
+            <input
+              type="text"
+              placeholder="Buscar por nombre..."
+              value={busquedaNombre}
+              onChange={(e) => setBusquedaNombre(e.target.value)}
+              className={styles.inputBusqueda}
+            />
+          </div>
 
         <div className={styles.contenedorProductos}>
           <FiltrosSidebar
