@@ -2,6 +2,12 @@ import { useState, useEffect } from 'react';
 import { uploadImagen } from '../../../services/adminApi'; // Asegúrate de tener esta función correctamente configurada
 import { fetchPesos, fetchColors, fetchTallas, fetchProductos } from '../../../services/api';
 import './styles/modals.css';
+import PesoFormModal from "./PesoFormModal";
+import TallaFormModal from "./TallaFormModal";
+import ColorFormModal from "./ColorFormModal";
+import { createPeso } from '../../../services/adminApi';
+import { createTalla } from '../../../services/adminApi';
+import { createColor } from '../../../services/adminApi';
 
 const VarianteFormModal = ({ initialData, onSave, onClose }) => {
     const [variante, setVariante] = useState({
@@ -23,6 +29,45 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
     const [colors, setColors] = useState([]);
     const [tallas, setTallas] = useState([]);
     const [productos, setProductos] = useState([]);
+
+        // Estado para controlar modales
+    const [mostrarPesoModal, setMostrarPesoModal] = useState(false);
+    const [mostrarTallaModal, setMostrarTallaModal] = useState(false);
+    const [mostrarColorModal, setMostrarColorModal] = useState(false);
+
+    // Manejo de guardado de datos desde los modales
+    const handlePesoSave = async (data) => {
+        try {
+            const pesoGuardada = await createPeso(data);
+            setPesos(prev => [...prev, pesoGuardada]);
+            setVariante(prev => ({ ...prev, pesoId: pesoGuardada.pesoId }));
+            setMostrarPesoModal(false);  
+        } catch (error) {
+            console.error('Error al guardar la peso desde Producto:', error);
+        }
+    };
+
+    const handleTallaSave = async (data) => {
+        try {
+            const tallaGuardada = await createTalla(data);
+            setTallas(prev => [...prev, tallaGuardada]);
+            setVariante(prev => ({ ...prev, tallaId: tallaGuardada.tallaId }));
+            setMostrarTallaModal(false);
+        } catch (error) {
+            console.error('Error al guardar la categoría desde Producto:', error);
+        }
+    };
+
+    const handleColorSave = async (data) => {
+        try {
+            const colorGuardada = await createColor(data);
+            setColors(prev => [...prev, colorGuardada]);
+            setVariante(prev => ({ ...prev, colorId: colorGuardada.colorId }));
+            setMostrarColorModal(false);
+        } catch (error) {
+            console.error('Error al guardar la color desde Producto:', error);
+        }
+    };
 
     useEffect(() => {
         if (initialData) {
@@ -156,52 +201,70 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
 
                         <div className='formGroup'>
                             <label>
-                                <span>Peso</span>
-                                <select
-                                    name="pesoId"
-                                    value={variante.pesoId || ''}
-                                    onChange={handleChange}
-                                    className='input'
-                                >
-                                    <option value="">Selecciona un Peso</option>
-                                    {pesos.map(c => (
-                                        <option key={c.pesoId} value={c.pesoId}>{c.valor}</option>
-                                    ))}
-                                </select>
+                                <span>Talla</span>
+                                <div className='inputWithButton'>
+                                    <select
+                                        name="tallaId"
+                                        value={variante.tallaId}
+                                        onChange={handleChange}
+                                        className='input'
+                                        required
+                                    >
+                                        <option value="">Selecciona una Talla</option>
+                                        {tallas.map(c => (
+                                        <option key={c.tallaId} value={c.tallaId}>{c.valor}</option>
+                                        ))}
+                                    </select>
+                                    <button type="button" onClick={() => setMostrarTallaModal(true)} className="miniButton">
+                                        <i className="fa-solid fa-plus"></i>
+                                    </button>
+                                </div>
                             </label>
                         </div>
 
                         <div className='formGroup'>
                             <label>
                                 <span>Color</span>
-                                <select
-                                    name="colorId"
-                                    value={variante.colorId || ''}
-                                    onChange={handleChange}
-                                    className='input'
-                                >
-                                    <option value="">Selecciona una Color</option>
-                                    {colors.map(e => (
+                                <div className='inputWithButton'>
+                                    <select
+                                        name="colorId"
+                                        value={variante.colorId}
+                                        onChange={handleChange}
+                                        className='input'
+                                        required
+                                    >
+                                        <option value="">Selecciona una Color</option>
+                                        {colors.map(e => (
                                         <option key={e.colorId} value={e.colorId}>{e.valor}</option>
-                                    ))}
-                                </select>
+                                        ))}
+                                    </select>
+                                    <button type="button" onClick={() => setMostrarColorModal(true)} className="miniButton">
+                                        <i className="fa-solid fa-plus"></i>
+                                    </button>
+                                </div>
                             </label>
                         </div>
 
                         <div className='formGroup'>
                             <label>
-                                <span>Talla</span>
-                                <select
-                                    name="tallaId"
-                                    value={variante.tallaId || ''}
-                                    onChange={handleChange}
-                                    className='input'
-                                >
-                                    <option value="">Selecciona una Talla</option>
-                                    {tallas.map(m => (
-                                        <option key={m.tallaId} value={m.tallaId}>{m.valor}</option>
-                                    ))}
-                                </select>
+                                <span>Peso</span>
+                                <div className='inputWithButton'>
+                                    <select
+                                        name="pesoId"
+                                        value={variante.pesoId}
+                                        onChange={handleChange}
+                                        className='input'
+                                        required
+                                    >
+                                        <option value="">Selecciona una Peso</option>
+                                        {pesos.map(m => (
+                                            <option key={m.pesoId} value={m.pesoId}>{m.valor}</option>
+                                        ))}
+                                    </select>
+                                    <button type="button" onClick={() => setMostrarPesoModal(true)} className="miniButton">
+                                    <i className="fa-solid fa-plus"></i>
+                                    </button>
+                                </div>
                             </label>
                         </div>
 
@@ -317,6 +380,29 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
                     </form>
                 </div>
             </div>
+            {mostrarPesoModal && (
+            <PesoFormModal
+                initialData={null}
+                onSave={handlePesoSave}
+                onClose={() => setMostrarPesoModal(false)}
+            />
+            )}
+
+            {mostrarTallaModal && (
+            <TallaFormModal
+                initialData={null}
+                onSave={handleTallaSave}
+                onClose={() => setMostrarTallaModal(false)}
+            />
+            )}
+
+            {mostrarColorModal && (
+            <ColorFormModal
+                initialData={null}
+                onSave={handleColorSave}
+                onClose={() => setMostrarColorModal(false)}
+            />
+            )}
         </div>
     );
 };

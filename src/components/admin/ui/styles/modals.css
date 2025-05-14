@@ -373,6 +373,7 @@
 
   .checkboxLabel {
     display: flex;
+    
     align-items: center;
     gap: 0.5rem;
     font-size: 0.9rem;
@@ -390,7 +391,7 @@
   
   .checkboxAttributeLabel span{
     margin-bottom: 0;
-    color: var(--primary-color);
+    color: #666;
   }
   
   
@@ -497,3 +498,27 @@
       width: 100%;
     }
   }
+
+  .inputWithButton {
+    display: flex;
+    gap: 0.5rem;
+    align-items:center;
+    justify-content: space-between;
+}
+
+
+.miniButton {
+  background: none;
+  border: 2px solid #eee;
+  color: #666;
+  padding: 0.5rem 0.7rem;
+  font-size: 20px;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.miniButton:hover {
+  color: var(--secondary-color);
+}

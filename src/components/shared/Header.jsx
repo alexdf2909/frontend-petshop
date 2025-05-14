@@ -44,6 +44,7 @@ export default function Header() {
           <nav className={styles.mainNav}>
             <Link to="/">Home</Link>
             <Link to="/productos">Productos</Link>
+            <Link to="/servicios">Servicios</Link>
             {isLoggedIn && role === "ADMIN" && <Link to="/dashboard">Dashboard</Link>}
           </nav>
           
