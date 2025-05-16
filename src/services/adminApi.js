@@ -321,6 +321,7 @@ export const deleteVariante = async (varianteId) => {
   }
 };
 
+//src/services/adminApi.js
 // ==================== COMPRAS ====================
 export const createCompra = async (compraData) => {
   try {
@@ -356,6 +357,15 @@ export const createLote = async (loteData) => {
     return response.data;
  } catch (error) {
     throw new Error('Error al crear la lote');
+  }
+};
+
+export const listarLotePorCompra = async (compraId) => {
+  try {
+    const response = await axios.get(`${API_URL}/lote/compra/${compraId}`);
+    return response.data;
+ } catch (error) {
+    throw new Error('Error al listar lotes por compra');
   }
 };
 

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {  deleteCompra, updateCompra, createCompra } from "../../../services/adminApi";
+import {  deleteCompra, updateCompra, createCompra, createLote  } from "../../../services/adminApi";
 import { fetchCompras } from "../../../services/api";
 import CompraFormModal from "./CompraFormModal";
 import './styles/tables.css';
@@ -8,20 +8,27 @@ const CompraTable = () => {
     const [compras, setCompras] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const [currentCompra, setCurrentCompra] = useState(null);
+    const [searchTerm, setSearchTerm] = useState("");
 
     useEffect(() => {
         loadCompras();
     }, []);
 
     const loadCompras = async () => {
-        try {
-            const fetchedCompras = await fetchCompras();
-            setCompras(fetchedCompras);
-        } catch (error) {
-            console.error("Error cargando compras:", error);
-        }
-    };
+    try {
+        const fetchedCompras = await fetchCompras();
+        const sortedCompras = fetchedCompras.sort((a, b) =>
+            new Date(b.fechaRegistro) - new Date(a.fechaRegistro)
+        );
+        setCompras(sortedCompras);
+    } catch (error) {
+        console.error("Error cargando compras:", error);
+    }
+};
 
+const filteredCompras = compras.filter((compra) =>
+    compra.codigoComprobante.toLowerCase().includes(searchTerm.toLowerCase())
+);
     const handleAdd = () => {
         setCurrentCompra(null);
         setShowModal(true);
@@ -44,17 +51,26 @@ const CompraTable = () => {
         }
     };
 
-    const handleSave = async (compraData) => {
-        try {
-            if (currentCompra) {
-                const updatedCompra = await updateCompra(currentCompra.compraId, compraData);
-                setCompras((prev) =>
-                    prev.map((compra) => (compra.compraId === updatedCompra.compraId ? updatedCompra : compra))
-                );
-            } else {
-                const newCompra = await createCompra(compraData);
-                setCompras((prev) => [...prev, newCompra]);
+const handleSave = async (compraData) => {
+    try {
+        if (currentCompra) {
+            // Actualización de compra: según tu lógica puedes o no permitir editar lotes
+            const updatedCompra = await updateCompra(currentCompra.compraId, compraData);
+            setCompras((prev) =>
+                prev.map((compra) => (compra.compraId === updatedCompra.compraId ? updatedCompra : compra))
+            );
+        } else {
+            // Crear compra
+            const { lotes, ...compraInfo } = compraData;
+            const newCompra = await createCompra(compraInfo); // Aquí se obtiene compraId
+
+            // Ahora sí puedes registrar los lotes con el compraId
+            for (const lote of lotes) {
+                await createLote({ ...lote, compraId: newCompra.compraId }); // Asocia el lote a la compra
             }
+
+            setCompras((prev) => [...prev, newCompra]);
+        }
             setShowModal(false);
             setCurrentCompra(null);
             loadCompras();
@@ -70,9 +86,22 @@ const CompraTable = () => {
                 <button className="addButton" onClick={handleAdd}>
                     Nuevo Compra
                 </button>
+
+                
             </div>
 
+            <div className="searchWrapper">
+    <input
+        type="text"
+        placeholder="Buscar por código de comprobante"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="searchInput"
+    />
+</div>
+
             <div className="tableWrapper">
+                
                 <table className="table">
                     <thead>
                         <tr>
@@ -86,7 +115,7 @@ const CompraTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {compras.map((compra) => (
+                        {filteredCompras.map((compra) => (
                             <tr key={compra.compraId}>
                                 <td data-label="ID">{compra.compraId}</td>
                                 <td data-label="Codigo">{compra.codigoComprobante}</td>
@@ -104,7 +133,7 @@ const CompraTable = () => {
                                     </button>
                                     <button
                                         className={`actionButton delete`}
-                                        onClick={() => handleDelete(compra.compraId, compra.nombre)}
+                                        onClick={() => handleDelete(compra.compraId, compra.codigoComprobante)}
                                         aria-label="Eliminar"
                                     >
                                         <i className="fas fa-trash-alt"></i>

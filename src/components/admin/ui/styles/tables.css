@@ -154,3 +154,16 @@
       justify-content: flex-end;
     }
   }
+
+  .searchWrapper {
+    margin-bottom: 10px;
+    text-align: right;
+}
+
+.searchInput {
+    padding: 6px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 250px;
+}

@@ -76,21 +76,27 @@ const LoteFormModal = ({ initialData, onSave, onClose }) => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const formattedLote = {
-                compraId: parseInt(lote.compraId, 10),
-                varianteId: parseInt(lote.varianteId, 10),
-                fechaVencimiento: lote.fechaVencimiento,
-                fechaFabricacion: lote.fechaFabricacion,
-                stock: parseInt(lote.stock, 10),
-                deleted: lote.deleted,
-                loteId: lote.loteId
-            };
-            await onSave(formattedLote);
-        } catch (err) {
-            console.error('Error al guardar lote', err);
-        }
+    e.preventDefault();
+    try {
+        const producto = productos.find(p => p.productoId === parseInt(productoId));
+        const variante = variantes.find(v => v.varianteId === parseInt(lote.varianteId));
+
+        const formattedLote = {
+            compraId: parseInt(lote.compraId, 10),
+            varianteId: parseInt(lote.varianteId, 10),
+            fechaVencimiento: lote.fechaVencimiento,
+            fechaFabricacion: lote.fechaFabricacion,
+            stock: parseInt(lote.stock, 10),
+            deleted: lote.deleted,
+            loteId: lote.loteId,
+            productoNombre: producto?.nombre || '',
+            varianteNombre: `${variante?.color?.valor || ''} ${variante?.talla?.valor || ''} ${variante?.peso?.valor || ''}`.trim()
+        };
+
+        await onSave(formattedLote);
+    } catch (err) {
+        console.error('Error al guardar lote', err);
+    }
     };
 
     const variantesFiltradas = productoId
@@ -118,8 +124,7 @@ const LoteFormModal = ({ initialData, onSave, onClose }) => {
                                     value={lote.compraId}
                                     onChange={handleChange}
                                     className='input'
-                                    required
-                                    disabled={!!initialData}
+                                    disabled
                                 >
                                     <option value="">Selecciona una Compra</option>
                                     {compras.map(c => (
