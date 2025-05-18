@@ -17,6 +17,14 @@ const NavbarAdmin = ({ visible, onClose }) => {
       <div className="close-button" onClick={onClose}>✕</div>
       <div className="sidebar-item">
         <Link 
+          to="/dashboard" 
+          className={`soloPage ${isActive("/dashboard") ? 'active' : ''}`}
+        >
+         <h3>Panel</h3>
+        </Link>
+      </div>
+      <div className="sidebar-item">
+        <Link 
           to="/dashboard/usuarios" 
           className={`soloPage ${isActive("/dashboard/usuarios") ? 'active' : ''}`}
         >

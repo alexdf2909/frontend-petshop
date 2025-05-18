@@ -5,10 +5,12 @@ import { fetchVariantesByProducto } from '../../services/api';
 
 const ProductoCard = ({ producto }) => {
 
-    const { data: variantes, isLoading: loadingVariantes, isError: errorVariantes } = useQuery({
+    const { data: variantesRaw, isLoading: loadingVariantes, isError: errorVariantes } = useQuery({
         queryKey: ['variantes', producto.productoId], // Clave de la consulta con el productoId
         queryFn: () => fetchVariantesByProducto(producto.productoId), // Función que obtiene las variantes
     });
+
+    const variantes = (variantesRaw || []).filter(v => !v.deleted && !v.producto?.deleted);
 
     if (loadingVariantes) return <div>Cargando variantes...</div>;
     if (errorVariantes) {

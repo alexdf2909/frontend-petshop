@@ -6,8 +6,14 @@ import styles from './styles/ProductDetail.module.css';
 import Banner from '../../components/public/Banner';
 import ImagenesModal from '../../components/public/ImagenesModal';
 import { useCarrito } from '../../context/CarritoContext';
+import { toast } from 'react-toastify';
+import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from "../../context/AuthContext";
 
 export default function ProductDetail() {
+  const { isLoggedIn } = useAuth();
+  const navigate = useNavigate();
   const { productoId } = useParams();
   const [imagenSeleccionada, setImagenSeleccionada] = useState(null);
   const [seleccion, setSeleccion] = useState({ peso: '', talla: '', color: '' });
@@ -21,10 +27,12 @@ const { carrito, agregarAlCarrito, quitarDelCarrito } = useCarrito(); // Hook de
     queryFn: () => fetchProductoById(productoId),
   });
 
-  const { data: variantes, isLoading: cargandoVariantes } = useQuery({
+  const { data: variantesRaw, isLoading: cargandoVariantes } = useQuery({
     queryKey: ['variantes', productoId],
     queryFn: () => fetchVariantesByProducto(productoId),
   });
+
+  const variantes = (variantesRaw || []).filter(v => !v.deleted && !v.producto?.deleted);
 
   const { data: lotes } = useQuery({
     queryKey: ['lotes', varianteActual?.varianteId],
@@ -82,6 +90,11 @@ const { carrito, agregarAlCarrito, quitarDelCarrito } = useCarrito(); // Hook de
   const productoEnCarrito = carrito.find(item => item.varianteId === varianteActual?.varianteId);
 
 const handleAgregarAlCarrito = () => {
+    if (!isLoggedIn) {
+      toast.info('Debes iniciar sesión para agregar productos al carrito');
+      navigate('/login'); // Redirige al login
+      return;
+    }
   if (varianteActual && cantidad > 0 && cantidad <= stockDisponible) {
     if (!productoEnCarrito) {  // Solo agregar si no está en el carrito
       agregarAlCarrito({
@@ -92,15 +105,21 @@ const handleAgregarAlCarrito = () => {
         precioUnitario: varianteActual.precioOferta,
         cantidad
       });
+      toast.success(`Producto ${producto.nombre} agregado al carrito`);
+    } else {
+      toast.info(`El producto"${producto.nombre} ya está en el carrito`);
     }
+  } else {
+    toast.error('Cantidad inválida o stock insuficiente');
   }
 };
-  
-  const handleQuitarDelCarrito = () => {
-    if (varianteActual) {
-      quitarDelCarrito(varianteActual.varianteId);
-    }
-  };
+
+const handleQuitarDelCarrito = () => {
+  if (varianteActual) {
+    quitarDelCarrito(varianteActual.varianteId);
+    toast.warn(`Producto ${producto.nombre} removido del carrito`);
+  }
+};
 
   const handleCantidadChange = (e) => {
     let value = parseInt(e.target.value, 10);
@@ -111,24 +130,33 @@ const handleAgregarAlCarrito = () => {
   
   
 
-  useEffect(() => {
-    if (variantes && variantes.length > 0) {
+const isSeleccionInicializada = useRef(false);
+
+useEffect(() => {
+  if (!isSeleccionInicializada.current && variantes && variantes.length > 0) {
+    if (seleccion.peso || seleccion.talla || seleccion.color || varianteActual) {
+      isSeleccionInicializada.current = true; // Ya está inicializado
+      return;
+    }
+
+    if (variantes.length === 1) {
+      const unica = variantes[0];
+      setSeleccion({
+        peso: unica.peso?.valor || '',
+        talla: unica.talla?.valor || '',
+        color: unica.color?.valor || ''
+      });
+      setVarianteActual(unica);
+      setImagenSeleccionada(unica.imagenes?.[0]?.imagenUrl || null);
+    } else {
       setSeleccion({ peso: '', talla: '', color: '' });
       const primeraImagen = variantes.find(v => v.imagenes?.length > 0)?.imagenes[0]?.imagenUrl || null;
       setImagenSeleccionada(primeraImagen);
-
-      if (variantes.length === 1) {
-        const unica = variantes[0];
-        setSeleccion({
-          peso: unica.peso?.valor || '',
-          talla: unica.talla?.valor || '',
-          color: unica.color?.valor || ''
-        });
-        setVarianteActual(unica);
-        setImagenSeleccionada(unica.imagenes?.[0]?.imagenUrl || null);
-      }
     }
-  }, [variantes]);
+    isSeleccionInicializada.current = true;
+  }
+}, [variantes, seleccion, varianteActual]);
+
 
   const stockDisponible = (lotes || [])
     .filter(l => new Date(l.fechaVencimiento) > new Date())
@@ -240,12 +268,18 @@ const handleAgregarAlCarrito = () => {
     <div className={styles.cantidadControl}>
       <label>Cantidad:</label>
       <input
-        type="number"
-        min="1"
-        max={stockDisponible}
-        value={cantidad}
-        onChange={(e) => setCantidad(Math.min(Math.max(1, Number(e.target.value)), stockDisponible))}
-      />
+  type="number"
+  min="1"
+  max={stockDisponible}
+  value={cantidad}
+  onChange={(e) => {
+    let val = parseInt(e.target.value, 10);
+    if (isNaN(val) || val < 1) val = 1;
+    if (val > stockDisponible) val = stockDisponible;
+    setCantidad(val);
+  }}
+  disabled={!varianteActual || cantidad < 1 || cantidad > stockDisponible}
+/>
     </div>
     <p><strong>Total:</strong> S/ {(varianteActual.precioOferta * cantidad).toFixed(2)}</p>
 
@@ -254,9 +288,13 @@ const handleAgregarAlCarrito = () => {
         Quitar del Carrito
       </button>
     ) : (
-      <button className={styles.botonAgregar} onClick={handleAgregarAlCarrito}>
-        Agregar al Carrito
-      </button>
+      <button
+  className={styles.botonAgregar}
+  onClick={handleAgregarAlCarrito}
+  disabled={cantidad < 1 || cantidad > stockDisponible}
+>
+  Agregar al Carrito
+</button>
     )}
   </div>
 )}

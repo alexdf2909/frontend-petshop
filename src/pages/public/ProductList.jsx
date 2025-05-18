@@ -28,10 +28,12 @@ export default function ProductList() {
   const [rangoPrecio, setRangoPrecio] = useState([0, 0]);
   const [precioSeleccionado, setPrecioSeleccionado] = useState([0, 0]);
 
-  const { data: variantes, isLoading: loadingVariantes, isError: errorVariantes, error } = useQuery({
-    queryKey: ['variantes'],
-    queryFn: fetchVariantes,
-  });
+const { data: variantesRaw, isLoading: loadingVariantes, isError: errorVariantes, error } = useQuery({
+  queryKey: ['variantes'],
+  queryFn: fetchVariantes,
+});
+
+
 
   const { data: categorias, isLoading: loadingCategorias, isError: errorCategorias } = useQuery({
     queryKey: ['categorias'],
@@ -58,16 +60,25 @@ export default function ProductList() {
   const irPaginaSiguiente = () => setPaginaActual(prev => Math.min(prev + 1, totalPaginas));
   const irUltimaPagina = () => setPaginaActual(totalPaginas);
 
+const variantes = (variantesRaw || []).filter(v => !v.deleted && !v.producto?.deleted);
   useEffect(() => {
-    if (!variantes || variantes.length === 0) return;
+  if (!variantes || variantes.length === 0) return;
 
-    const todosPrecios = variantes.map(v => v.precioOferta);
-    const min = Math.min(...todosPrecios);
-    const max = Math.max(...todosPrecios);
+  const todosPrecios = variantes.map(v => v.precioOferta);
+  const min = Math.min(...todosPrecios);
+  const max = Math.max(...todosPrecios);
+  const nuevoRango = [min, max];
 
-    setRangoPrecio([min, max]);
-    setPrecioSeleccionado([min, max]);
-  }, [variantes]);
+  // Solo actualizar si el valor es diferente
+  if (
+    rangoPrecio[0] !== nuevoRango[0] ||
+    rangoPrecio[1] !== nuevoRango[1]
+  ) {
+    setRangoPrecio(nuevoRango);
+    setPrecioSeleccionado(nuevoRango);
+  }
+}, [variantes]);
+
 
   if (loadingVariantes || loadingCategorias || loadingEspecies || loadingEtiquetas || loadingMarcas) return <div>Cargando productos...</div>;
   if (errorVariantes) {
@@ -90,6 +101,8 @@ export default function ProductList() {
     toast.error('Error al cargar los etiquetas: ' + error.message);
     return <div>Hubo un problema al cargar los etiquetas.</div>;
   }
+
+  
 
   const totalEspecies = especies?.length || 0;
 

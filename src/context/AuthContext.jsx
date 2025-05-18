@@ -19,15 +19,17 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();  // Declara el hook navigate
 
   const logout = useCallback(() => {
-    localStorage.removeItem('accessToken');
-    localStorage.removeItem('refreshToken');
-    setIsLoggedIn(false);
-    setRole(null);
-    setUserId(null);
-    setNombre('');
-    setImagenPerfil('');
-    navigate('/login');  // Redirige al login después del logout
-  }, [navigate]);
+  localStorage.removeItem('accessToken');
+  localStorage.removeItem('refreshToken');
+  localStorage.removeItem('carrito');
+  setIsLoggedIn(false);
+  setRole(null);
+  setUserId(null);
+  setNombre('');
+  setImagenPerfil('');
+  window.dispatchEvent(new Event('logout')); // <--- evento para limpiar carrito
+  navigate('/login');
+}, [navigate]);
     
 
   const handleTokenRefresh = useCallback(async () => {

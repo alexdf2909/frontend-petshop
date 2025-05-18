@@ -201,3 +201,101 @@
   font-size: 0.85rem;
   color: #0077aa;
 }
+
+/* Sección de compra */
+.compraSection {
+  margin-top: 1.8rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.2rem;
+  background: #fafafa;
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  box-shadow: 0 0 10px rgb(0 0 0 / 0.05);
+}
+
+/* Control cantidad */
+.cantidadControl {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-width: 140px;
+}
+
+.cantidadControl label {
+  font-weight: 600;
+  color: #444;
+  user-select: none;
+}
+
+/* Input cantidad */
+.cantidadControl input[type="number"] {
+  width: 70px;
+  padding: 0.35rem 0.6rem;
+  font-size: 1rem;
+  border-radius: 0.5rem;
+  border: 1.8px solid #ccc;
+  text-align: center;
+  transition: border-color 0.3s ease;
+}
+
+.cantidadControl input[type="number"]:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 6px var(--primary-color);
+}
+
+/* Total a pagar */
+.compraSection p {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--primary-color);
+  min-width: 140px;
+  margin: 0;
+}
+
+/* Botones agregar/quitar */
+.botonAgregar,
+.botonQuitar {
+  padding: 0.55rem 1.8rem;
+  border: none;
+  border-radius: 1.2rem;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgb(0 0 0 / 0.15);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+  min-width: 150px;
+  user-select: none;
+}
+
+.botonAgregar {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.botonAgregar:hover {
+  background-color: var(--secondary-color);
+  box-shadow: 0 5px 15px var(--primary-color-dark);
+}
+
+.botonQuitar {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.botonQuitar:hover {
+  background-color: #c0392b;
+}
+
+/* Mensajes y errores */
+.errorMessage {
+  color: #d93025;
+  background-color: #fce8e6;
+  border: 1px solid #d93025;
+  border-radius: 0.7rem;
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  margin-top: 1rem;
+}

@@ -212,6 +212,16 @@ export const fetchVariantes = async () => {
   }
 };
 
+//src/services/api.js
+export const fetchVariantesBajoStock = async () => {
+  try {
+    const response = await axios.get(`${API_URL}/variante/stock-bajo`);
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo variantes');
+  }
+};
+
 export const fetchVarianteById = async (varianteId) => {
   try {
     const response = await axios.get(`${API_URL}/variante/${varianteId}`);

@@ -26,8 +26,6 @@ export default function Login() {
         headers: { Authorization: `Bearer ${accessToken}` }
       });
 
-      console.log("Datos del usuario:", perfilResponse.data);
-
       // 👇 Pasamos token + datos al AuthContext
       login(accessToken, refreshToken, perfilResponse.data);
 

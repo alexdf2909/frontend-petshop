@@ -17,6 +17,7 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
         pesoId: '',
         precioOriginal: '',
         precioOferta: '',
+        stockMinimo: '',
         imagenes: [],
         deleted: false,
         varianteId: null
@@ -78,6 +79,7 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
                 pesoId: initialData.peso?.pesoId || '',
                 precioOriginal: initialData.precioOriginal || '',
                 precioOferta: initialData.precioOferta || '',
+                stockMinimo: initialData.stockMinimo || '',
                 imagenes: initialData.imagenes || [],
                 deleted: !!initialData.deleted,
                 varianteId: initialData.varianteId
@@ -157,6 +159,7 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
                 pesoId: parseInt(variante.pesoId, 10),
                 precioOriginal: parseFloat(variante.precioOriginal),
                 precioOferta: parseFloat(variante.precioOferta),
+                stockMinimo: parseInt(variante.stockMinimo,10),
                 imagenes: imagenesUrl,
                 deleted: variante.deleted,
                 varianteId: variante.varianteId
@@ -208,7 +211,6 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
                                         value={variante.tallaId}
                                         onChange={handleChange}
                                         className='input'
-                                        required
                                     >
                                         <option value="">Selecciona una Talla</option>
                                         {tallas.map(c => (
@@ -231,7 +233,6 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
                                         value={variante.colorId}
                                         onChange={handleChange}
                                         className='input'
-                                        required
                                     >
                                         <option value="">Selecciona una Color</option>
                                         {colors.map(e => (
@@ -254,7 +255,6 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
                                         value={variante.pesoId}
                                         onChange={handleChange}
                                         className='input'
-                                        required
                                     >
                                         <option value="">Selecciona una Peso</option>
                                         {pesos.map(m => (
@@ -301,6 +301,24 @@ const VarianteFormModal = ({ initialData, onSave, onClose }) => {
                                         className='input'
                                         required
                                         min="0.01"
+                                    />
+                                </div>
+                            </label>
+                        </div>
+
+                        <div className='formGroup'>
+                            <label>
+                                <span>Stock mínimo</span>
+                                <div className='priceInput'>
+                                    <input
+                                        type="number"
+                                        step="1"
+                                        name="stockMinimo"
+                                        value={variante.stockMinimo}
+                                        onChange={handleChange}
+                                        className='input'
+                                        required
+                                        min="0"
                                     />
                                 </div>
                             </label>

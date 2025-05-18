@@ -152,7 +152,7 @@ export default function Home() {
               : 'Nuevos Productos'}
           </h2>
           <div className={styles.grillaNuevos}>
-            {(isLoggedIn ? productos : productos?.slice(0, 3))?.map((producto) => (
+            {(isLoggedIn ? productos : productos?.slice(0, 4))?.map((producto) => (
               <Link
                 key={producto.productoId}
                 to={`/producto/${producto.productoId}`}

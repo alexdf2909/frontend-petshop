@@ -12,17 +12,25 @@ export const CarritoProvider = ({ children }) => {
     localStorage.setItem('carrito', JSON.stringify(carrito));
   }, [carrito]);
 
+  useEffect(() => {
+  const handleLogout = () => {
+    setCarrito([]);
+    localStorage.removeItem('carrito');
+  };
+
+  window.addEventListener('logout', handleLogout);
+  return () => window.removeEventListener('logout', handleLogout);
+}, []);
+
   const agregarAlCarrito = (producto) => {
     setCarrito((prevCarrito) => [...prevCarrito, producto]);
   };
 
   const quitarDelCarrito = (varianteId) => {
-    setCarrito((prevCarrito) => {
-      const nuevoCarrito = prevCarrito.filter(item => item.varianteId !== varianteId);
-      localStorage.setItem('carrito', JSON.stringify(nuevoCarrito));
-      return nuevoCarrito;
-    });
-  };
+  setCarrito((prevCarrito) =>
+    prevCarrito.filter(item => item.varianteId !== varianteId)
+  );
+};
 
   return (
     <CarritoContext.Provider value={{ carrito, agregarAlCarrito, quitarDelCarrito }}>

@@ -34,6 +34,7 @@ import Carrito from './pages/public/Carrito';
 import Pago from './pages/client/Pago';
 import RazasPage from './pages/admin/RazasPage';
 import EditarPerfil from "./pages/client/EditarPerfil";
+import Panel from './pages/admin/Panel';
 
 
 function App() {
@@ -72,6 +73,7 @@ function App() {
             <Route element={<AdminRoute />}>
               <Route path="/dashboard" element={<Dashboard />}>
                 {/* Aquí las rutas secundarias del admin */}
+                <Route path="" element={<Panel />} />
                 <Route path="productos" element={<ProductosPage />} />
                 <Route path="categorias" element={<CategoriasPage />} />
                 <Route path="marcas" element={<MarcasPage />} />

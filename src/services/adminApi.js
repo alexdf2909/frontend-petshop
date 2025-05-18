@@ -304,7 +304,6 @@ export const createVariante = async (varianteData) => {
 
 export const updateVariante = async (varianteId, varianteData) => {
   try {
-    console.log(varianteData)
     const response = await axios.put(`${API_URL}/variante/${varianteId}`, varianteData);
     return response.data;
   } catch (error) {

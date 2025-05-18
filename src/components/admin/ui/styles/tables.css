@@ -167,3 +167,21 @@
     border-radius: 6px;
     width: 250px;
 }
+
+/* Fila resaltada para productos con stock crítico */
+.stock-critico-cell {
+  background-color: #ffe5e5; /* Rojo claro */
+  font-weight: bold;
+  color: #c0392b; /* Rojo oscuro */
+}
+
+/* Alerta visual arriba de la tabla */
+.alertaStockCritico {
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  padding: 15px;
+  border-radius: 6px;
+  color: #856404;
+  font-weight: bold;
+  margin-bottom: 20px;
+}

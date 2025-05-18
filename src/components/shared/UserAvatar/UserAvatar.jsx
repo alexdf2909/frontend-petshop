@@ -45,10 +45,11 @@ export default function UserAvatar() {
       {isOpen && (
         <div className={styles.dropdownMenu}>
           <Link to="/perfil">Mi Perfil</Link>
-          <Link to="/favoritos">Mis Favoritos</Link>
+          <Link to="/carrito">Mi Carrito</Link>
           <Link to="/pedido">Mis Pedidos</Link>
-          <Link to="/historial">Historial</Link>
           <Link to="/mascotas">Mis Mascotas</Link>
+          <Link to="/favoritos">Mis Favoritos</Link>
+          <Link to="/historial">Historial</Link>
           <button onClick={handleLogout}>Cerrar sesión</button>
         </div>
       )}
