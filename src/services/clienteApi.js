@@ -1,25 +1,38 @@
-// services/clienteApi.js
+// src/services/clienteApi.js
 
-const API_URL = 'http://localhost:8080'; // Cambia esto si usas otra URL
+const API_URL = 'http://localhost:8080';
+
+function getToken() {
+  return localStorage.getItem('accessToken');
+}
+
+function getHeaders() {
+  return {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${getToken()}`
+  };
+}
 
 export async function generarPreferencia(carrito) {
-  const token = localStorage.getItem('accessToken');
-
-  const response = await fetch(`${API_URL}/pago/preferencia`, {
+  const res = await fetch(`${API_URL}/pago/preferencia`, {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`,
-    },
+    headers: getHeaders(),
     body: JSON.stringify(carrito),
   });
 
-  if (!response.ok) {
-    throw new Error('Error al generar la preferencia de pago');
-  }
+  if (!res.ok) throw new Error('Error al generar preferencia');
 
-  const data = await response.text();
-
-  return data;  // El ID de la preferencia
+  return await res.text();
 }
 
+export async function completarPago(dto) {
+  const res = await fetch(`${API_URL}/pago/completar`, {
+    method: 'POST',
+    headers: getHeaders(),
+    body: JSON.stringify(dto),
+  });
+
+  if (!res.ok) throw new Error(await res.text());
+
+  return await res.text();
+}

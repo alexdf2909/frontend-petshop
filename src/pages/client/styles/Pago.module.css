@@ -1,0 +1,84 @@
+.pagoContainer {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+
+}
+
+.pagoContainer h2,
+.pagoContainer h3 {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.pagoContainer ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.pagoContainer li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ddd;
+  font-size: 16px;
+}
+
+.pagoContainer .total{
+    text-align: right;
+}
+
+.pagoContainer p {
+  font-size: 18px;
+  font-weight: bold;
+  
+  margin-bottom: 1rem;
+  color: #34495e;
+}
+
+.pagoContainer label {
+  display: block;
+  margin: 0.5rem 0;
+  font-size: 16px;
+}
+
+.pagoContainer input[type="radio"] {
+  margin-right: 8px;
+}
+
+.pagoContainer input[type="text"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.3rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+#paymentBrick_container {
+  margin-top: 2rem;
+
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .pagoContainer {
+    padding: 1rem;
+    margin: 1rem;
+  }
+
+  .pagoContainer li,
+  .pagoContainer p,
+  .pagoContainer label,
+  .pagoContainer input {
+    font-size: 14px;
+  }
+
+
+}
