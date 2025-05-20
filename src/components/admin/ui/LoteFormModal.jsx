@@ -124,7 +124,7 @@ const LoteFormModal = ({ initialData, onSave, onClose }) => {
                                     value={lote.compraId}
                                     onChange={handleChange}
                                     className='input'
-                                    disabled
+
                                 >
                                     <option value="">Selecciona una Compra</option>
                                     {compras.map(c => (

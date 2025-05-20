@@ -334,3 +334,16 @@ export const fetchRazasByEspecie = async (especieId, token) => {
   }
   return response.json();
 };
+
+export const fetchPedidos = async (token) => {
+  try {
+    const response = await axios.get(`${API_URL}/pedido`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error('Error obteniendo pedidos');
+  }
+};

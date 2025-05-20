@@ -20,6 +20,7 @@ import TallasPage from './pages/admin/TallasPage';
 import PesosPage from './pages/admin/PesosPage';
 import ColoresPage from './pages/admin/ColoresPage';
 import ServiciosPage from './pages/admin/ServiciosPage';
+import PedidosPage from './pages/admin/PedidosPage';
 import UsuariosPage from './pages/admin/UsuariosPage';
 import VariantesPage from './pages/admin/VariantesPage';
 import ComprasPage from './pages/admin/ComprasPage';
@@ -83,6 +84,7 @@ function App() {
                 <Route path="pesos" element={<PesosPage />} />
                 <Route path="colores" element={<ColoresPage />} />
                 <Route path="servicios" element={<ServiciosPage />} />
+                <Route path="pedidos" element={<PedidosPage />} />
                 <Route path="usuarios" element={<UsuariosPage />} />
                 <Route path="variantes" element={<VariantesPage />} />
                 <Route path="compras" element={<ComprasPage />} />

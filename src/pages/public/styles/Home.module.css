@@ -55,13 +55,13 @@ text-align: center;
 }
 
 .grillaNuevos{
-    display: flex;
-    gap: 4%;
-    width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
 }
 
 .grillaNuevos a{
-    width: 22%;
+    width: 100%;
 }
 
 .grillaNuevos a:hover{
