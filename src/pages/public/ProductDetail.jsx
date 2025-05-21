@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "../../context/AuthContext";
+import { createHistorial } from '../../services/adminApi';
 
 export default function ProductDetail() {
   const { isLoggedIn } = useAuth();
@@ -89,14 +90,15 @@ const { carrito, agregarAlCarrito, quitarDelCarrito } = useCarrito(); // Hook de
 
   const productoEnCarrito = carrito.find(item => item.varianteId === varianteActual?.varianteId);
 
-const handleAgregarAlCarrito = () => {
-    if (!isLoggedIn) {
-      toast.info('Debes iniciar sesión para agregar productos al carrito');
-      navigate('/login'); // Redirige al login
-      return;
-    }
+const handleAgregarAlCarrito = async () => {
+  if (!isLoggedIn) {
+    toast.info('Debes iniciar sesión para agregar productos al carrito');
+    navigate('/login');
+    return;
+  }
+
   if (varianteActual && cantidad > 0 && cantidad <= stockDisponible) {
-    if (!productoEnCarrito) {  // Solo agregar si no está en el carrito
+    if (!productoEnCarrito) {
       agregarAlCarrito({
         productoId: producto.productoId,
         varianteId: varianteActual.varianteId,
@@ -105,14 +107,27 @@ const handleAgregarAlCarrito = () => {
         precioUnitario: varianteActual.precioOferta,
         cantidad
       });
+
       toast.success(`Producto ${producto.nombre} agregado al carrito`);
+
+      // 👇 Registrar interacción tipo "CARRITO"
+      try {
+        await createHistorial({
+          productoId: producto.productoId,
+          tipoInteraccion: 'CARRITO'
+        });
+      } catch (error) {
+        console.error('Error al registrar interacción tipo CARRITO:', error.message);
+      }
+
     } else {
-      toast.info(`El producto"${producto.nombre} ya está en el carrito`);
+      toast.info(`El producto "${producto.nombre}" ya está en el carrito`);
     }
   } else {
     toast.error('Cantidad inválida o stock insuficiente');
   }
 };
+
 
 const handleQuitarDelCarrito = () => {
   if (varianteActual) {
@@ -156,6 +171,23 @@ useEffect(() => {
     isSeleccionInicializada.current = true;
   }
 }, [variantes, seleccion, varianteActual]);
+
+useEffect(() => {
+  const registrarVista = async () => {
+    if (isLoggedIn && productoId) {
+      try {
+        await createHistorial({
+          productoId: parseInt(productoId),
+          tipoInteraccion: 'VISTA'
+        });
+      } catch (error) {
+        console.error('Error al registrar interaccion:', error.message);
+      }
+    }
+  };
+
+  registrarVista();
+}, [isLoggedIn, productoId]);
 
 
   const stockDisponible = (lotes || [])
