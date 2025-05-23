@@ -417,7 +417,7 @@ export const deleteRaza = async (razaId) => {
 // ==================== MASCOTAS ====================
 export const createMascota = async (mascotaData, token) => {
   try {
-    console.log("Datos que se envían al backend:", mascotaData);
+
     const response = await axios.post(`${API_URL}/mascota`, mascotaData, {
       headers: {
         Authorization: `Bearer ${token}`,
@@ -425,7 +425,7 @@ export const createMascota = async (mascotaData, token) => {
     });
     return response.data;
   } catch (error) {
-    console.error('Error al crear la mascota:', error.response?.data || error.message);
+
     throw new Error('Error al crear la mascota');
   }
 };
@@ -486,3 +486,15 @@ export const productosRecomendados = async (idMascota) => {
     throw new Error('Error recomendados');
   }
 };
+
+
+//--------------------HISTORIAL INTERACCION--------------------
+export const createHistorial = async (historialData) => {
+  try {
+    const response = await axios.post(`${API_URL}/historial`, historialData);
+    return response.data;
+ } catch (error) {
+    throw new Error('Error al crear historial');
+  }
+};
+
