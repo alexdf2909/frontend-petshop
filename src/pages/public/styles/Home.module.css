@@ -55,24 +55,18 @@ text-align: center;
 }
 
 .grillaNuevos{
-<<<<<<< Updated upstream
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1rem;
-=======
     display: grid;
     gap: 4%;
     width: 100%;
     grid-template-columns: repeat(4, 1fr);
->>>>>>> Stashed changes
 }
 
 .grillaNuevos a{
     width: 100%;
-<<<<<<< Updated upstream
-=======
     text-decoration: none;
->>>>>>> Stashed changes
 }
 
 .grillaNuevos a:hover{
