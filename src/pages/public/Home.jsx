@@ -152,11 +152,18 @@ export default function Home() {
               : 'Nuevos Productos'}
           </h2>
           <div className={styles.grillaNuevos}>
+<<<<<<< Updated upstream
             {(isLoggedIn ? productos : productos?.slice(0, 4))?.map((producto) => (
               <Link
                 key={producto.productoId}
                 to={`/producto/${producto.productoId}`}
                 className="product-link"
+=======
+            {(isLoggedIn ? productos : productos?.slice(0, 3))?.map((producto) => (
+              <Link
+                key={producto.productoId}
+                to={`/producto/${producto.productoId}`}
+>>>>>>> Stashed changes
               >
                 <ProductoCard producto={producto} />
               </Link>
@@ -166,4 +173,8 @@ export default function Home() {
       </div>
     </div>
   );
+<<<<<<< Updated upstream
 }
+=======
+}
+>>>>>>> Stashed changes

@@ -47,7 +47,7 @@
   }
   
   .editBtn {
-    background-color: #4caf50;
+    background-color: var(--secondary-color);
     color: white;
   }
   
